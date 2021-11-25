@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-navigation-drawer floating="floating" v-model="drawer"
+        <v-navigation-drawer v-model="drawer"
                              :clipped="$vuetify.breakpoint.lgAndUp" app>
             <v-list dense>
                 <v-list-item-group color="primary">

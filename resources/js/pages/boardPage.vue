@@ -1,7 +1,9 @@
 <template>
     <div>
         <v-main >
-            yesss
+            <v-container>
+                hello
+            </v-container>
         </v-main>
     </div>
 </template>

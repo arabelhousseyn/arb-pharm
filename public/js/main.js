@@ -68,7 +68,17 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_c("v-main", [_vm._v("\n        yesss\n    ")])], 1)
+  return _c(
+    "div",
+    [
+      _c(
+        "v-main",
+        [_c("v-container", [_vm._v("\n            hello\n        ")])],
+        1
+      ),
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
