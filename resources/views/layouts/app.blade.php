@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @if (Auth::user())
-    <meta name="fullName" content="{{ Auth::user()->fullName }}">  
+    <meta name="fullName" content="{{ Auth::user()->fullName }}">
     @endif
 
     <title>{{ config('app.name', 'Laravel') }}</title>
@@ -19,7 +19,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    
+
 </head>
 <body>
     <div id="app">
