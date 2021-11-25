@@ -1,17 +1,16 @@
 <template>
     <div class="dashboard">
         <v-app>
-          <appbar-component />
-    <v-main style="margin-top:75px;" class="main">
-      <main-page />
-    </v-main>
+           <sidebar-component />
+            <router-view/>
+            <footer-component />
         </v-app>
     </div>
 </template>
 
 <script>
-import appbarComponent from '../components/appbarComponent.vue'
-import mainPage from './/mainPage.vue'
+import sidebarComponent from "../components/sidebarComponent"
+import footerComponent from "../components/footerComponent"
 export default {
   data : () => {
     return{
@@ -19,8 +18,8 @@ export default {
     }
   },
   components : {
-    appbarComponent,
-    mainPage
+      sidebarComponent,
+      footerComponent
   },
   created()
   {

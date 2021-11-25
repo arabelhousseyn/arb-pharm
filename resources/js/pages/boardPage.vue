@@ -1,5 +1,7 @@
 <template>
     <div>
-        baord
+        <v-main >
+            yesss
+        </v-main>
     </div>
 </template>
