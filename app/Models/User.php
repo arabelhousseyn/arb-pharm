@@ -31,6 +31,11 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'created_at',
+        'updated_at',
+        'deleted_at',
+        'email_verified_at',
+        'codeActivity'
     ];
 
     /**
@@ -41,6 +46,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    protected $appends = ['code_activity_user'];
 
     public function profile()
     {
@@ -55,6 +62,11 @@ class User extends Authenticatable
     public function payments()
     {
         return $this->hasMany(UserPayment::class);
+    }
+
+    public function getCodeActivityUserAttribute()
+    {
+        return $this->code_activity;
     }
 
 }

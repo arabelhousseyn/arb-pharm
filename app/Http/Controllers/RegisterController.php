@@ -84,6 +84,7 @@ class RegisterController extends Controller
 
             }
             $usr = User::find($user)->first();
+            $usr['success'] = true;
             return response($usr,200);
 
         }

@@ -4,7 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
     LoginController,
-    RegisterController
+    RegisterController,
+    UserProfileController
 };
 
 /*
@@ -24,4 +25,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 //// mobile api
+  /// register
 Route::post('/register',[RegisterController::class,'register']);
+  /// login
+Route::post('/login',[LoginController::class,'auth']);
+
+
+Route::group(['middleware' => 'auth:sanctum'],function(){
+    Route::get('/insertCode/{code?}',[UserProfileController::class,'insertCode']);
+    Route::apiResources([
+        'user'=>UserProfileController::class
+    ]);
+});

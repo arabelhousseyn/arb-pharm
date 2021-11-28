@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\UserProfile;
+use App\Models\{
+    UserProfile,
+    UserActivityCode
+};
 use Illuminate\Http\Request;
-
+use Auth,Validator;
 class UserProfileController extends Controller
 {
     /**
@@ -81,5 +84,19 @@ class UserProfileController extends Controller
     public function destroy(UserProfile $userProfile)
     {
         //
+    }
+
+    public function insertCode($code)
+    {
+        $code = UserActivityCode::create([
+            'user_id' => Auth::id(),
+            'code' => $code
+        ]);
+        if($code)
+        {
+            return response(['success' => true],200);
+        }else{
+            return response(['success' => false],200);
+        }
     }
 }
