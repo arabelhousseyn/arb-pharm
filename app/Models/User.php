@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var string[]
      */
     protected $fillable = [
-        'name',
+        'phone',
         'email',
         'password',
     ];
@@ -41,4 +41,20 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function profile()
+    {
+        return $this->belongsTo(UserProfile::class);
+    }
+
+    public function codeActivity()
+    {
+        return $this->hasOne(UserActivityCode::class);
+    }
+
+    public function payments()
+    {
+        return $this->hasMany(UserPayment::class);
+    }
+
 }

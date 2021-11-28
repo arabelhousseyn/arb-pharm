@@ -17,6 +17,7 @@ class CreateUserPaymentsTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->enum('type',['RECEIPT','RC','ACTIVITY_CODE','PRO_CARD']);
+            $table->string('path');
             $table->softDeletes();
             $table->timestamps();
         });
