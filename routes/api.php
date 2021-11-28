@@ -5,7 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
     LoginController,
     RegisterController,
-    UserProfileController
+    UserProfileController,
+    ProductController
 };
 
 /*
@@ -33,7 +34,9 @@ Route::post('/login',[LoginController::class,'auth']);
 
 Route::group(['middleware' => 'auth:sanctum'],function(){
     Route::get('/insertCode/{code?}',[UserProfileController::class,'insertCode']);
+    Route::get('/favoritesProducts',[UserProfileController::class,'favoritesProducts']);
     Route::apiResources([
-        'user'=>UserProfileController::class
+        'user'=>UserProfileController::class,
+        'product'=>ProductController::class
     ]);
 });

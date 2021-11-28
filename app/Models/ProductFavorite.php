@@ -5,17 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ProductImages extends Model
+class ProductFavorite extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'product_id',
-        'path'
-    ];
-
-    protected $hidden = [
-        'created_at',
-        'update_at'
+        'user_id'
     ];
 }

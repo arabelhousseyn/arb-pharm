@@ -4,7 +4,7 @@ namespace App\Traits;
 
 trait uploads{
 
-    public function ImageUpload($base64,$folder,$extension)
+    public function upload($base64,$folder,$extension)
     {
         $path = '';
         $folderPath = env('MAIN_PATH') . $folder . '/';

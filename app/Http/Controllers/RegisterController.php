@@ -20,7 +20,7 @@ class RegisterController extends Controller
             'phone' => 'required|digits:10|unique:users',
             'email' => 'required|unique:users|email:rfc,dns,filter',
             'password' => 'required',
-            'num_commercial' => 'required',
+            'commercial_name' => 'required',
             'num_rc' => 'required',
             'nif' => 'required',
             'nis' => 'required',
@@ -51,7 +51,7 @@ class RegisterController extends Controller
 
             UserProfile::insert([
                 'user_id' => $user->id,
-                'num_commercial' => $request->num_commercial,
+                'commercial_name' => $request->commercial_name,
                 'num_rc' => $request->num_rc,
                 'nif' => $request->nif,
                 'nis' => $request->nis,
@@ -62,15 +62,15 @@ class RegisterController extends Controller
 
             if($request->has_payment)
             {
-                $payment = $this->ImageUpload($request->payment,'payment','.jpg');
-                $rc = $this->ImageUpload($request->rc,'rc','.jpg');
-                $activity_code = $this->ImageUpload($request->activity_code,'activity_code','.jpg');
-                $pro_card = $this->ImageUpload($request->card_pro,'pro_card','.jpg');
+                $payment = $this->upload($request->payment,'payment','.jpg');
+                $rc = $this->upload($request->rc,'rc','.jpg');
+                $activity_code = $this->upload($request->activity_code,'activity_code','.jpg');
+                $pro_card = $this->upload($request->card_pro,'pro_card','.jpg');
                 $paths = [
-                    'RECEIPT' => $payment,
-                    'RC' => $rc,
-                    'ACTIVITY_CODE' => $activity_code,
-                    'PRO_CARD' => $pro_card
+                    'RECEIPT' => env('PATH_STORAGE') .'payment/'. $payment,
+                    'RC' => env('PATH_STORAGE') .'rc/'. $rc,
+                    'ACTIVITY_CODE' => env('PATH_STORAGE') .'activity_code/'. $activity_code,
+                    'PRO_CARD' => env('PATH_STORAGE') .'pro_card/'. $pro_card
                 ];
 
                 foreach ($paths as $key => $path)

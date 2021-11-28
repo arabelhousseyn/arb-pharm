@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
+use App\Models\{
+    Product,
+    ProductImages
+};
 use Illuminate\Http\Request;
-
+use App\Traits\uploads;
+use Auth,Validator;
 class ProductController extends Controller
 {
+    use uploads;
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +19,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $product = Product::select('id','description','user_id')
+            ->with('images:path,product_id','ratings:value,product_id','user.profile:id,commercial_name,user_id')->orderBy('created_at', 'desc')->paginate(7);
+        return response($product,200);
     }
 
     /**
@@ -35,7 +42,42 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = [
+            'description' => 'required',
+            'technical_sheet_pdf' => 'required',
+            'images' => 'required'
+        ];
+        $validator = Validator::make($request->all(),$rules);
+        if($validator->fails())
+        {
+            return response(['success' => false],200);
+        }
+
+        if($validator->validated())
+        {
+            $pdf = $this->upload($request->technical_sheet_pdf,'technical_sheet','.pdf');
+            $pdf = env('PATH_STORAGE') .'technical_sheet/'.$pdf;
+            $product = Product::create([
+                'user_id' => Auth::id(),
+                'description' => $request->description,
+                'technical_sheet_pdf' => $pdf
+            ]);
+            if($product)
+            {
+                $images = explode(';',$request->images);
+                foreach ($images as $image)
+                {
+                    $path = $this->upload($image,'product_image','.jpg');
+                    $path = env('PATH_STORAGE') .'product_image/'.$path;
+                    ProductImages::insert([
+                        'product_id' => $product->id,
+                        'path' => $path
+                    ]);
+                }
+                return response(['success' => true],200);
+            }
+            return response(['success' => false],200);
+        }
     }
 
     /**

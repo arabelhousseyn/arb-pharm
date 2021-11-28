@@ -51,7 +51,7 @@ class User extends Authenticatable
 
     public function profile()
     {
-        return $this->belongsTo(UserProfile::class);
+        return $this->hasOne(UserProfile::class);
     }
 
     public function codeActivity()
@@ -62,6 +62,11 @@ class User extends Authenticatable
     public function payments()
     {
         return $this->hasMany(UserPayment::class);
+    }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
     }
 
     public function getCodeActivityUserAttribute()

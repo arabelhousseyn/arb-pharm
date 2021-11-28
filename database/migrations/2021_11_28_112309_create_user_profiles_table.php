@@ -16,7 +16,7 @@ class CreateUserProfilesTable extends Migration
         Schema::create('user_profiles', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->string('num_commercial');
+            $table->string('commercial_name');
             $table->string('num_rc');
             $table->string('nif');
             $table->string('nis');

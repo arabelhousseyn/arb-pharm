@@ -17,6 +17,7 @@ class CreateProductRatingsTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('product_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->double('value');
             $table->timestamps();
         });
     }

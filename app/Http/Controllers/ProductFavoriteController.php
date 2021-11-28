@@ -2,14 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{
-    UserProfile,
-    UserActivityCode,
-    User
-};
+use App\Models\ProductFavorite;
 use Illuminate\Http\Request;
-use Auth,Validator;
-class UserProfileController extends Controller
+
+class ProductFavoriteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -45,10 +41,10 @@ class UserProfileController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\UserProfile  $userProfile
+     * @param  \App\Models\ProductFavorite  $productFavorite
      * @return \Illuminate\Http\Response
      */
-    public function show(UserProfile $userProfile)
+    public function show(ProductFavorite $productFavorite)
     {
         //
     }
@@ -56,10 +52,10 @@ class UserProfileController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\UserProfile  $userProfile
+     * @param  \App\Models\ProductFavorite  $productFavorite
      * @return \Illuminate\Http\Response
      */
-    public function edit(UserProfile $userProfile)
+    public function edit(ProductFavorite $productFavorite)
     {
         //
     }
@@ -68,10 +64,10 @@ class UserProfileController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\UserProfile  $userProfile
+     * @param  \App\Models\ProductFavorite  $productFavorite
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, UserProfile $userProfile)
+    public function update(Request $request, ProductFavorite $productFavorite)
     {
         //
     }
@@ -79,32 +75,11 @@ class UserProfileController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\UserProfile  $userProfile
+     * @param  \App\Models\ProductFavorite  $productFavorite
      * @return \Illuminate\Http\Response
      */
-    public function destroy(UserProfile $userProfile)
+    public function destroy(ProductFavorite $productFavorite)
     {
         //
-    }
-
-
-    public function insertCode($code)
-    {
-        $code = UserActivityCode::create([
-            'user_id' => Auth::id(),
-            'code' => $code
-        ]);
-        if($code)
-        {
-            return response(['success' => true],200);
-        }else{
-            return response(['success' => false],200);
-        }
-    }
-
-    public function favoritesProducts()
-    {
-        $data = User::with('products')->find(Auth::id())->first();
-        return response($data->products,200);
     }
 }
