@@ -39,7 +39,8 @@ class User extends Authenticatable
         'email_verified_at',
         'codeActivity',
         'activated_at',
-        'profile'
+        'profile',
+        'category'
     ];
 
     /**
@@ -51,7 +52,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    protected $appends = ['is_active','profile_name'];
+    protected $appends = ['is_active','profile_name','category_user_type'];
 
     public function profile()
     {
@@ -87,6 +88,17 @@ class User extends Authenticatable
     {
         return $this->hasMany(RequestEstimate::class);
     }
+
+    public function category()
+    {
+        return $this->hasOne(UserCategory::class);
+    }
+
+    public function getCategoryUserTypeAttribute()
+    {
+        return ($this->category == null) ? '' : $this->category->category;
+    }
+
 
     public function getIsActiveAttribute()
     {
