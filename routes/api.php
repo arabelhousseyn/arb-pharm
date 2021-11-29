@@ -30,7 +30,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 //// mobile api
-
 Route::prefix('mobile')->group(function(){
     Route::get('/version',[checkAppVersionController::class,'index']);
     /// register
@@ -51,5 +50,16 @@ Route::prefix('mobile')->group(function(){
             'product'=>ProductController::class,
             'request_estimate' => RequestEstimateController::class
         ]);
+    });
+});
+
+/// dasbhaord api
+
+Route::prefix('dashboard')->group(function(){
+
+
+    Route::group(['middleware' => 'auth:sanctum'],function(){
+        // create admin
+        Route::post('/register',[RegisterController::class,'createAdmin']);
     });
 });

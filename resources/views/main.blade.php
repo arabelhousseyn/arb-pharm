@@ -18,9 +18,9 @@
     </head>
     <body class="app">
         <div id="app">
-            @if (Auth::user())
+            @if (Auth::guard('admin')->user())
                 <script>
-                    window.location.href = '/accueil'
+                    window.location.href = '/acceuil'
                 </script>
             @endif
             <login-page />

@@ -11,7 +11,7 @@
                     <v-avatar size="38px" item class="mr-2">
                         <v-img src="../assets/profile.png"></v-img>
                     </v-avatar>
-                    {{$store.state.fullName}}
+                    {{$store.state.user.fname}}
                 </v-btn>
             </template>
 
@@ -25,7 +25,7 @@
                         </v-list-item-avatar>
 
                         <v-list-item-content>
-                            <v-list-item-title>{{$store.state.fullName}}</v-list-item-title>
+                            <v-list-item-title>{{$store.state.user.fname}}</v-list-item-title>
                             <v-list-item-subtitle>Admin</v-list-item-subtitle>
                         </v-list-item-content>                    </v-list-item>
                 </v-list>

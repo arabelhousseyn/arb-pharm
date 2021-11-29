@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
- <dashboard-page />
+ <dashboard-page :user="{{ Auth::guard('admin')->user()  }}" />
 </div>
 @endsection

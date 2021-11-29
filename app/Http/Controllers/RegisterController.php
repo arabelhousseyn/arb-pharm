@@ -7,7 +7,8 @@ use Auth,Hash;
 use App\Models\{
     User,
     UserProfile,
-    UserPayment
+    UserPayment,
+    Admin
 };
 use Validator;
 use Str;
@@ -92,5 +93,43 @@ class RegisterController extends Controller
 
         }
 
+    }
+
+    public function createAdmin(Request $request)
+    {
+        $rules = [
+            'phone' => 'required|digits:10|unique:admins',
+            'email' => 'required|unique:admins|email:rfc,dns,filter',
+            'password' => 'required',
+            'fname' => 'required',
+            'lname' => 'required'
+        ];
+
+        $validator = Validator::make($request->all(),$rules);
+        if($validator->fails())
+        {
+            return response(['success' => false],200);
+        }
+
+        if($validator->validated())
+        {
+            $username = $request->fname .'_'.$request->lname . uniqid();
+            $admin = Admin::create([
+                'fname' => $request->fname,
+                'lname' => $request->lname,
+                'phone' => $request->phone,
+                'username' => $username,
+                'email' => $request->email,
+                'password' => Hash::make($request->password)
+            ]);
+            $token = $admin->createToken('my-app-token')->plainTextToken;
+
+            Admin::whereId($admin->id)->update([
+                'token' => $token
+            ]);
+            $usr = Admin::find($admin)->first();
+            $usr['success'] = true;
+            return response($usr,200);
+        }
     }
 }

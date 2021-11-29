@@ -45,7 +45,7 @@ export default {
                 ],
                 passwordRules : [
                    v => !!v || 'mot de passe est requis',
-                   v => /.+\..+/.test(v) || 'le mot de passe doit être valide', 
+                   v => /.+\..+/.test(v) || 'le mot de passe doit être valide',
                 ]
             }
         }

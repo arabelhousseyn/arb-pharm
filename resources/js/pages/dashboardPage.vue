@@ -12,6 +12,7 @@
 import sidebarComponent from "../components/sidebarComponent"
 import footerComponent from "../components/footerComponent"
 export default {
+    props : ['user'],
   data : () => {
     return{
 
@@ -23,8 +24,7 @@ export default {
   },
   created()
   {
-    const name = document.head.querySelector('meta[name="fullName"]').content
-    this.$store.commit('setName',name)
+      this.$store.commit('setUser',this.user)
   }
 }
 </script>

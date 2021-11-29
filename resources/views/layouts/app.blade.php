@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @if (Auth::user())
-    <meta name="fullName" content="{{ Auth::user()->fullName }}">
+    <meta name="fullName" content="{{ Auth::user()->fname }}">
     @endif
 
     <title>{{ config('app.name', 'Laravel') }}</title>

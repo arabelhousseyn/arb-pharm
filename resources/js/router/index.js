@@ -5,7 +5,7 @@ Vue.use(VueRouter)
 //component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
 const routes = [
   {
-      path : '/accueil',
+      path : '/acceuil',
       component: () => import(/* webpackChunkName: "main" */ '../pages/boardPage.vue')
   }
 ]
