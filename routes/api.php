@@ -58,7 +58,8 @@ Route::prefix('mobile')->group(function(){
 Route::prefix('dashboard')->group(function(){
 
 
-    Route::group(['middleware' => 'auth:sanctum'],function(){
+    Route::group(['middleware' => 'auth:sanctum','guard' => 'admin'],function(){
+
         // create admin
         Route::post('/register',[RegisterController::class,'createAdmin']);
     });
