@@ -125,4 +125,40 @@ class UserProfileController extends Controller
             return response($subset,200);
         }
     }
+
+    public function getMyProducts($user_id)
+    {
+        if($user_id == 0)
+        {
+           $data = User::with('products')->where('id',Auth::id())->first();
+           $subset = $data->products->map(function($prod){
+               return $prod->only(['id','description','rating','image','published_by']);
+           });
+           return response($subset,200);
+        }else{
+            $data = User::with('products')->where('id',$user_id)->first();
+            $subset = $data->products->map(function($prod){
+                return $prod->only(['id','description','rating','image','published_by']);
+            });
+            return response($subset,200);
+        }
+    }
+
+    public function getMyRequest($user_id)
+    {
+        if($user_id == 0)
+        {
+            $data = User::with('requests')->where('id',Auth::id())->first();
+            $subset = $data->requests->map(function($req){
+                return $req->only(['id','product_name','amount','image','publishedBy']);
+            });
+            return response($subset,200);
+        }else{
+            $data = User::with('requests')->where('id',$user_id)->first();
+            $subset = $data->requests->map(function($req){
+                return $req->only(['id','product_name','amount','image','publishedBy']);
+            });
+            return response($subset,200);
+        }
+    }
 }

@@ -37,6 +37,8 @@ Route::group(['middleware' => 'auth:sanctum'],function(){
     Route::get('/insertCode/{code?}',[UserProfileController::class,'insertCode'])->whereNumber('code');
     Route::get('/favoritesProducts',[UserProfileController::class,'favoritesProducts']);
     Route::get('/profile/{user_id?}',[UserProfileController::class,'profile'])->whereNumber('user_id');
+    Route::get('/getMyProducts/{user_id?}',[UserProfileController::class,'getMyProducts'])->whereNumber('user_id');
+    Route::get('/getMyRequest/{user_id?}',[UserProfileController::class,'getMyRequest'])->whereNumber('user_id');
     Route::apiResources([
         'user'=>UserProfileController::class,
         'product'=>ProductController::class,
