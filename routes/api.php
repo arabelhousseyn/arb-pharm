@@ -6,7 +6,8 @@ use App\Http\Controllers\{
     LoginController,
     RegisterController,
     UserProfileController,
-    ProductController
+    ProductController,
+    RequestEstimateController
 };
 
 /*
@@ -37,6 +38,7 @@ Route::group(['middleware' => 'auth:sanctum'],function(){
     Route::get('/favoritesProducts',[UserProfileController::class,'favoritesProducts']);
     Route::apiResources([
         'user'=>UserProfileController::class,
-        'product'=>ProductController::class
+        'product'=>ProductController::class,
+        'request_estimate' => RequestEstimateController::class
     ]);
 });

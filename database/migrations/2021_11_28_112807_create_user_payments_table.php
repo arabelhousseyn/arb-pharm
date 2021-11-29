@@ -16,7 +16,7 @@ class CreateUserPaymentsTable extends Migration
         Schema::create('user_payments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->enum('type',['RECEIPT','RC','ACTIVITY_CODE','PRO_CARD']);
+            $table->enum('type',['RECEIPT','RC','ACTIVITY_CODE','PRO_CARD'])->nullable();
             $table->string('path');
             $table->softDeletes();
             $table->timestamps();

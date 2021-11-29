@@ -104,7 +104,11 @@ class UserProfileController extends Controller
 
     public function favoritesProducts()
     {
-        $data = User::with('products')->find(Auth::id())->first();
-        return response($data->products,200);
+        $data = User::with('favorites.product')->find(Auth::id())->first();
+        $products = $data->favorites;
+        $subset = $products->map(function($prod){
+            return $prod->product->only(['id','description','rating','image','published_by']);
+        });
+        return response($subset,200);
     }
 }

@@ -10,6 +10,7 @@ use App\Models\{
     UserPayment
 };
 use Validator;
+use Str;
 use App\Traits\uploads;
 class RegisterController extends Controller
 {
@@ -40,8 +41,7 @@ class RegisterController extends Controller
             $user = User::create([
                 'phone' => $request->phone,
                 'email' => $request->email,
-                'password' => Hash::make($request->password),
-                'token' => null
+                'password' => Hash::make($request->password)
             ]);
             $token = $user->createToken('my-app-token')->plainTextToken;
 
@@ -62,24 +62,27 @@ class RegisterController extends Controller
 
             if($request->has_payment)
             {
-                $payment = $this->upload($request->payment,'payment','.jpg');
-                $rc = $this->upload($request->rc,'rc','.jpg');
-                $activity_code = $this->upload($request->activity_code,'activity_code','.jpg');
-                $pro_card = $this->upload($request->card_pro,'pro_card','.jpg');
+                $payment = (Str::length($request->payment) != 0) ? $this->upload($request->payment,'payment','.jpg') : null;
+                $rc = (Str::length($request->rc) != 0) ? $this->upload($request->rc,'rc','.jpg') : null;
+                $activity_code = (Str::length($request->activity_code) != 0) ? $this->upload($request->activity_code,'activity_code','.jpg') : null;
+                $pro_card = (Str::length($request->card_pro) != 0) ? $this->upload($request->card_pro,'pro_card','.jpg') : null;
                 $paths = [
-                    'RECEIPT' => env('PATH_STORAGE') .'payment/'. $payment,
-                    'RC' => env('PATH_STORAGE') .'rc/'. $rc,
-                    'ACTIVITY_CODE' => env('PATH_STORAGE') .'activity_code/'. $activity_code,
-                    'PRO_CARD' => env('PATH_STORAGE') .'pro_card/'. $pro_card
+                    'RECEIPT' => ($payment == null) ? null : env('PATH_STORAGE') .'payment/'. $payment,
+                    'RC' => ($rc == null) ? null : env('PATH_STORAGE') .'rc/'. $rc,
+                    'ACTIVITY_CODE' => ($activity_code == null) ? null : env('PATH_STORAGE') .'activity_code/'. $activity_code,
+                    'PRO_CARD' => ($pro_card == null) ? null :env('PATH_STORAGE') .'pro_card/'. $pro_card
                 ];
 
                 foreach ($paths as $key => $path)
                 {
-                    UserPayment::insert([
-                        'user_id' => $user->id,
-                        'type' => $key,
-                        'path' => $path
-                    ]);
+                    if($path != null)
+                    {
+                        UserPayment::insert([
+                            'user_id' => $user->id,
+                            'type' => $key,
+                            'path' => $path
+                        ]);
+                    }
                 }
 
             }

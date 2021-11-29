@@ -23,8 +23,6 @@ class CreateUserProfilesTable extends Migration
             $table->string('num_ar');
             $table->string('pro_card');
             $table->string('adress');
-            $table->string('job')->nullable();
-            $table->longText('description')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

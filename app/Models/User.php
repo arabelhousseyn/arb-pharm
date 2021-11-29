@@ -21,6 +21,8 @@ class User extends Authenticatable
         'phone',
         'email',
         'password',
+        'token',
+        'activated_at'
     ];
 
     /**
@@ -35,7 +37,8 @@ class User extends Authenticatable
         'updated_at',
         'deleted_at',
         'email_verified_at',
-        'codeActivity'
+        'codeActivity',
+        'activated_at'
     ];
 
     /**
@@ -47,7 +50,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    protected $appends = ['code_activity_user'];
+    protected $appends = ['is_active'];
 
     public function profile()
     {
@@ -69,9 +72,14 @@ class User extends Authenticatable
         return $this->hasMany(Product::class);
     }
 
-    public function getCodeActivityUserAttribute()
+    public function favorites()
     {
-        return $this->code_activity;
+        return $this->belongsToMany(ProductUser::class,'product_user','user_id','product_id');
+    }
+
+    public function getIsActiveAttribute()
+    {
+        return ($this->activated_at == null) ? false : true;
     }
 
 }

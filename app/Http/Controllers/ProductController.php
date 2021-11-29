@@ -20,7 +20,12 @@ class ProductController extends Controller
     public function index()
     {
         $product = Product::select('id','description','user_id')
-            ->with('images:path,product_id','ratings:value,product_id','user.profile:id,commercial_name,user_id')->orderBy('created_at', 'desc')->paginate(7);
+            ->with('images:path,product_id','ratings:value,product_id','user.profile:id,commercial_name,user_id')
+            ->orderBy('created_at', 'desc')->paginate(7);
+        $subset = $product->map(function($prod){
+            return $prod->only(['id','description','rating','image','published_by']);
+        });
+        $product->setCollection($subset);
         return response($product,200);
     }
 
@@ -88,7 +93,9 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        $subset = $product->only(['id', 'description', 'technical_sheet_pdf','rating','published_by','product_images','is_favorits','phone']);
+
+        return response($subset,200);
     }
 
     /**
