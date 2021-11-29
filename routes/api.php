@@ -7,7 +7,8 @@ use App\Http\Controllers\{
     RegisterController,
     UserProfileController,
     ProductController,
-    RequestEstimateController
+    RequestEstimateController,
+    checkAppVersionController
 };
 
 /*
@@ -26,22 +27,29 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
+
+
 //// mobile api
-  /// register
-Route::post('/register',[RegisterController::class,'register']);
-  /// login
-Route::post('/login',[LoginController::class,'auth']);
+
+Route::prefix('mobile')->group(function(){
+    Route::get('/version',[checkAppVersionController::class,'index']);
+    /// register
+    Route::post('/register',[RegisterController::class,'register']);
+    /// login
+    Route::post('/login',[LoginController::class,'auth']);
 
 
-Route::group(['middleware' => 'auth:sanctum'],function(){
-    Route::get('/insertCode/{code?}',[UserProfileController::class,'insertCode'])->whereNumber('code');
-    Route::get('/favoritesProducts',[UserProfileController::class,'favoritesProducts']);
-    Route::get('/profile/{user_id?}',[UserProfileController::class,'profile'])->whereNumber('user_id');
-    Route::get('/getMyProducts/{user_id?}',[UserProfileController::class,'getMyProducts'])->whereNumber('user_id');
-    Route::get('/getMyRequest/{user_id?}',[UserProfileController::class,'getMyRequest'])->whereNumber('user_id');
-    Route::apiResources([
-        'user'=>UserProfileController::class,
-        'product'=>ProductController::class,
-        'request_estimate' => RequestEstimateController::class
-    ]);
+    Route::group(['middleware' => 'auth:sanctum'],function(){
+
+        Route::get('/insertCode/{code?}',[UserProfileController::class,'insertCode'])->whereNumber('code');
+        Route::get('/favoritesProducts',[UserProfileController::class,'favoritesProducts']);
+        Route::get('/profile/{user_id?}',[UserProfileController::class,'profile'])->whereNumber('user_id');
+        Route::get('/getMyProducts/{user_id?}',[UserProfileController::class,'getMyProducts'])->whereNumber('user_id');
+        Route::get('/getMyRequest/{user_id?}',[UserProfileController::class,'getMyRequest'])->whereNumber('user_id');
+        Route::apiResources([
+            'user'=>UserProfileController::class,
+            'product'=>ProductController::class,
+            'request_estimate' => RequestEstimateController::class
+        ]);
+    });
 });
