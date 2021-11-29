@@ -19,7 +19,12 @@ class RequestEstimateController extends Controller
      */
     public function index()
     {
-        //
+        $data = RequestEstimate::select('id','product_name','amount','user_id')->orderBy('created_at','desc')
+            ->get();
+        $subset = $data->map(function($req){
+            return $req->only(['id','product_name','amount','image','publishedBy']);
+        });
+        return response($subset,200);
     }
 
     /**

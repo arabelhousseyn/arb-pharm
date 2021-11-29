@@ -33,7 +33,7 @@ Route::post('/register',[RegisterController::class,'register']);
 Route::post('/login',[LoginController::class,'auth']);
 
 
-Route::group(['middleware' => 'auth:sanctum'],function(){
+Route::group(['middleware' => 'auth:sanctum','middleware' => 'activated'],function(){
     Route::get('/insertCode/{code?}',[UserProfileController::class,'insertCode']);
     Route::get('/favoritesProducts',[UserProfileController::class,'favoritesProducts']);
     Route::apiResources([

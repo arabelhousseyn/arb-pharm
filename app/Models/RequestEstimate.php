@@ -20,8 +20,28 @@ class RequestEstimate extends Model
     protected $hidden = [
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
+        'user',
+        'images',
+        'user_id'
+
     ];
+    protected $appends = ['image','publishedBy'];
+
+    public function getImagesRequestAttribute()
+    {
+        return $this->images;
+    }
+
+    public function getPublishedByAttribute()
+    {
+        return $this->user->profile->commercial_name;
+    }
+
+    public function getImageAttribute()
+    {
+        return (count($this->images) == 0) ? '' : $this->images[0]->path;
+    }
 
     public function user()
     {
