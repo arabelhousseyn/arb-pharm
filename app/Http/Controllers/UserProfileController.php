@@ -111,4 +111,18 @@ class UserProfileController extends Controller
         });
         return response($subset,200);
     }
+
+    public function profile($user_id)
+    {
+        if($user_id == 0)
+        {
+            $data = User::with('profile')->withCount('products','requests')->where('id',Auth::id())->first();
+            $subset =  $data->only(['id','phone','profile_name','products_count','requests_count']);
+            return response($subset,200);
+        }else{
+            $data = User::with('profile')->withCount('products','requests')->where('id',$user_id)->first();
+            $subset =  $data->only(['id','phone','profile_name','products_count','requests_count']);
+            return response($subset,200);
+        }
+    }
 }

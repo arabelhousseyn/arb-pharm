@@ -33,9 +33,10 @@ Route::post('/register',[RegisterController::class,'register']);
 Route::post('/login',[LoginController::class,'auth']);
 
 
-Route::group(['middleware' => 'auth:sanctum','middleware' => 'activated'],function(){
-    Route::get('/insertCode/{code?}',[UserProfileController::class,'insertCode']);
+Route::group(['middleware' => 'auth:sanctum'],function(){
+    Route::get('/insertCode/{code?}',[UserProfileController::class,'insertCode'])->whereNumber('code');
     Route::get('/favoritesProducts',[UserProfileController::class,'favoritesProducts']);
+    Route::get('/profile/{user_id?}',[UserProfileController::class,'profile'])->whereNumber('user_id');
     Route::apiResources([
         'user'=>UserProfileController::class,
         'product'=>ProductController::class,

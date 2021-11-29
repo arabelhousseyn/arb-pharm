@@ -17,8 +17,9 @@ class checkUserActivationMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        $user = User::where('token',explode('Bearer ',$request->headers->get('Authorization'))[1])->first();
-        if($user->activated_at == null)
+        $token = $request->headers->get('Authorization');
+        $user = User::where('token',explode('Bearer ',$token)[1])->first();
+        if($request->user())
         {
             return response(['success' => false],200);
         }

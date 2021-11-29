@@ -38,7 +38,8 @@ class User extends Authenticatable
         'deleted_at',
         'email_verified_at',
         'codeActivity',
-        'activated_at'
+        'activated_at',
+        'profile'
     ];
 
     /**
@@ -50,7 +51,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    protected $appends = ['is_active'];
+    protected $appends = ['is_active','profile_name'];
 
     public function profile()
     {
@@ -60,6 +61,11 @@ class User extends Authenticatable
     public function codeActivity()
     {
         return $this->hasOne(UserActivityCode::class);
+    }
+
+    public function getProfileNameAttribute()
+    {
+        return $this->profile->commercial_name;
     }
 
     public function payments()
@@ -75,6 +81,11 @@ class User extends Authenticatable
     public function favorites()
     {
         return $this->belongsToMany(ProductUser::class,'product_user','user_id','product_id');
+    }
+
+    public function requests()
+    {
+        return $this->hasMany(RequestEstimate::class);
     }
 
     public function getIsActiveAttribute()
