@@ -26,7 +26,7 @@
                          href: 'acceuil',
                      },
                      {
-                         text: 'admin',
+                         text: 'Administrateurs',
                          href: 'admin',
                      }
                  ]

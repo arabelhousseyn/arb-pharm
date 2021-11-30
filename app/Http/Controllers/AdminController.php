@@ -14,7 +14,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $data = Admin::orderBy('created_at','desc')->get();
+        $data = Admin::orderBy('id','desc')->get();
         return response($data,200);
     }
 
@@ -81,6 +81,7 @@ class AdminController extends Controller
      */
     public function destroy(Admin $admin)
     {
-        //
+        $delete = $admin->deleteOrFail();
+        response($delete,200);
     }
 }
