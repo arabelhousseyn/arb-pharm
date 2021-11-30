@@ -6,7 +6,7 @@
         <v-row align="center" justify="center" dense>
           <v-col cols="12" sm="8" md="4" lg="4">
             <v-card elevation="0">
-              <a href="#" name="Fedorae Education" title="Fedorae Education" target="_blank">
+              <a href="#" name="Eurl ARB PHARM" title="Eurl ARB PHARM" target="_blank">
                 <v-img src="assets/pharm.png" alt="Eurl ARB PHARM" contain height="100"></v-img>
               </a>
               <v-card-text>

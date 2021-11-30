@@ -8,6 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @if (Auth::user())
     <meta name="fullName" content="{{ Auth::user()->fname }}">
+        <meta name="bhr" content="{{ Auth::user()->token }}">
     @endif
 
     <title>{{ config('app.name', 'Laravel') }}</title>

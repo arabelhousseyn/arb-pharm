@@ -28,6 +28,8 @@
     },
     "dependencies": {
         "@growthbunker/vuedarkmode": "^0.5.56",
+        "chart.js": "^2.8.0",
+        "vue-chartjs": "^3.5.1",
         "vue-router": "^3.5.3",
         "vuetify": "^2.6.0",
         "vuex": "^3.6.2"

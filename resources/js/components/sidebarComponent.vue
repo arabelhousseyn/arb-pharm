@@ -2,15 +2,29 @@
     <div>
         <v-navigation-drawer v-model="drawer" :clipped="$vuetify.breakpoint.lgAndUp" app>
             <v-list dense nav>
-                <v-list-item link>
-                    <v-list-item-icon>
-                        <v-icon>mdi-view-dashboard</v-icon>
-                    </v-list-item-icon>
+                <router-link to="/acceuil">
+                    <v-list-item link>
+                        <v-list-item-icon>
+                            <v-icon>mdi-view-dashboard</v-icon>
+                        </v-list-item-icon>
 
-                    <v-list-item-content>
-                        <v-list-item-title>Acceuil</v-list-item-title>
-                    </v-list-item-content>
-                </v-list-item>
+                        <v-list-item-content>
+                            <v-list-item-title>Acceuil</v-list-item-title>
+                        </v-list-item-content>
+                    </v-list-item>
+                </router-link>
+
+                <router-link to="/admin">
+                    <v-list-item link>
+                        <v-list-item-icon>
+                            <v-icon>mdi-account</v-icon>
+                        </v-list-item-icon>
+
+                        <v-list-item-content>
+                            <v-list-item-title>Administrateurs</v-list-item-title>
+                        </v-list-item-content>
+                    </v-list-item>
+                </router-link>
             </v-list>
         </v-navigation-drawer>
         <appbar-component @toggle="toggle" />

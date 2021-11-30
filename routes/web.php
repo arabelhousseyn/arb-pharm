@@ -17,6 +17,9 @@ Route::get('/', function () {
     return view('main');
 });
 
+Route::get('/{slug}',[App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
 Auth::routes();
 
 Route::get('/acceuil', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

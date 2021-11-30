@@ -8,7 +8,9 @@ use App\Http\Controllers\{
     UserProfileController,
     ProductController,
     RequestEstimateController,
-    checkAppVersionController
+    checkAppVersionController,
+    AdminPanelApiController,
+    AdminController
 };
 
 /*
@@ -58,9 +60,16 @@ Route::prefix('mobile')->group(function(){
 Route::prefix('dashboard')->group(function(){
 
 
-    Route::group(['middleware' => 'auth:sanctum','guard' => 'admin'],function(){
+    Route::group(['middleware' => 'auth:sanctum'],function(){
 
         // create admin
         Route::post('/register',[RegisterController::class,'createAdmin']);
+        //
+        Route::get('/getInformations',[AdminPanelApiController::class,'getInformations']);
+        Route::get('/graph',[AdminPanelApiController::class,'graph']);
+
+        Route::apiResources([
+            'admin' => AdminController::class
+        ]);
     });
 });

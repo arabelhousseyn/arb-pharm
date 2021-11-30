@@ -7,7 +7,12 @@ const routes = [
   {
       path : '/acceuil',
       component: () => import(/* webpackChunkName: "main" */ '../pages/boardPage.vue')
-  }
+  },
+    {
+        path : '/admin',
+        component: () => import(/* webpackChunkName: "main" */ '../pages/adminPage.vue')
+    },
+
 ]
 
 const router = new VueRouter({

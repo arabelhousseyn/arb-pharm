@@ -1,7 +1,9 @@
 <template>
     <div>
-        <v-footer app inset color="white">
-            <small class="">&copy; Copyright {{ new Date().getFullYear() }} - <v-img src="../assets/pharm.png" width="60" /></small>
+        <v-footer absolute app inset>
+            <v-col class="text-center"  cols="12">
+                {{ new Date().getFullYear() }} — <strong>&copy ARB</strong>
+            </v-col>
         </v-footer>
     </div>
 </template>

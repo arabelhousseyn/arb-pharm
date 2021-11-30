@@ -14,7 +14,8 @@ class AdminController extends Controller
      */
     public function index()
     {
-        //
+        $data = Admin::orderBy('created_at','desc')->get();
+        return response($data,200);
     }
 
     /**
