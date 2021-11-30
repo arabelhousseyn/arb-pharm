@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Admin;
 use Illuminate\Http\Request;
-
+use App\Http\Requests\createAdminRequest;
+use Hash,Auth;
 class AdminController extends Controller
 {
     /**
@@ -14,7 +15,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $data = Admin::orderBy('id','desc')->get();
+        $data = Admin::orderBy('id','desc')->where('id','<>',Auth::id())->get();
         return response($data,200);
     }
 
@@ -34,9 +35,26 @@ class AdminController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(createAdminRequest $request)
     {
-        //
+        if($request->validated())
+        {
+            $username = $request->fname .'_'.$request->lname . uniqid();
+            $admin = Admin::create([
+                'fname' => $request->fname,
+                'lname' => $request->lname,
+                'phone' => $request->phone,
+                'username' => $username,
+                'email' => $request->email,
+                'password' => Hash::make($request->password)
+            ]);
+            $token = $admin->createToken('my-app-token')->plainTextToken;
+
+            Admin::whereId($admin->id)->update([
+                'token' => $token
+            ]);
+            return response(['success' => true],200);
+        }
     }
 
     /**

@@ -12,6 +12,14 @@ const routes = [
         path : '/admin',
         component: () => import(/* webpackChunkName: "main" */ '../pages/adminPage.vue')
     },
+    {
+        path : '/admin/update/:id',
+        component: () => import(/* webpackChunkName: "main" */ '../pages/adminProfilePage.vue')
+    },
+    {
+        path : '*',
+        component: () => import(/* webpackChunkName: "main" */ '../views/notfound.vue')
+    },
 
 ]
 

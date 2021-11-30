@@ -62,10 +62,12 @@ export default {
             }
 
             this.$emit('close',true)
+            this.isloading = false
         },
          handle2()
         {
             this.$emit('close',true)
+            this.isloading = false
         }
     }
 }

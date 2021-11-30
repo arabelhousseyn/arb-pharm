@@ -21,7 +21,7 @@
 
                        <v-tab-item>
                            <v-card flat>
-                               hello
+                               <form-admin />
                            </v-card>
                        </v-tab-item>
                    </v-tabs-items>
@@ -34,6 +34,7 @@
 <script>
 import breadCrumbs from '../components/breadcrumbs/breadcrumbs.vue'
 import adminTable from "../components/admin/admintable"
+import formAdmin from "../components/admin/formadmin";
 export default {
     data : () => {
         return{
@@ -43,6 +44,7 @@ export default {
     components : {
         breadCrumbs,
         adminTable,
+        formAdmin
     }
 }
 </script>

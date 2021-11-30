@@ -17,22 +17,42 @@
          items: [],
      }),
      created() {
-         switch (this.$route.path)
+
+         if(this.$route.path.includes('admin'))
          {
-             case '/admin' :
-                 let info = [
-                     {
-                         text: 'Admin panel',
-                         href: 'acceuil',
-                     },
-                     {
-                         text: 'Administrateurs',
-                         href: 'admin',
-                     }
-                 ]
-                 this.items = info
-                 break;
+             let info = [
+                 {
+                     text: 'Admin panel',
+                     href: 'acceuil',
+                 },
+                 {
+                     text: 'Administrateurs',
+                     href: 'admin',
+                 }
+             ]
+             this.items = info
          }
+
+         if(this.$route.path.includes('admin/update'))
+         {
+             let info = [
+                 {
+                     text: 'Admin panel',
+                     href: '/acceuil',
+                 },
+                 {
+                     text: 'Administrateurs',
+                     href: '/admin',
+                 },
+                 {
+                     text: 'Modifier administrateur',
+                     disabled : true,
+                     href: 'admin',
+                 }
+             ]
+             this.items = info
+         }
+
      }
  }
 </script>

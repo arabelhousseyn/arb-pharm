@@ -12,7 +12,7 @@
             </v-card-title>
             <v-spacer></v-spacer>
             <v-card-subtitle>
-                <v-btn :disabled="disabled" color="green"><span style="color: white;">Modifier </span> <v-icon color="white" >mdi-wrench</v-icon> </v-btn>
+                <v-btn :disabled="disabled" @click="update" color="green"><span style="color: white;">Modifier </span> <v-icon color="white" >mdi-wrench</v-icon> </v-btn>
                 <v-btn :disabled="disabled" @click="remove"  color="red"><span style="color: white;">Supprimer </span> <v-icon color="white" >mdi-delete</v-icon> </v-btn>
             </v-card-subtitle>
             <v-data-table
@@ -51,7 +51,7 @@ export default {
                     value: 'lname',
                 },
                 { text: 'Prénom', value: 'fname' },
-                { text: 'e-mail', value: 'email' },
+                { text: 'E-mail', value: 'email' },
                 { text: 'Téléphone', value: 'phone' },
                 { text: 'Nom d\'utilisateur', value: 'username' },
                 { text: 'crée', value: 'date_creation' },
@@ -62,6 +62,11 @@ export default {
         watch()
         {
             this.disabled = (this.selected.length == 0) ? false : true
+
+        },
+        update()
+        {
+          this.$router.push(`/admin/update/${this.selected[0].id}`)
         },
         remove()
         {

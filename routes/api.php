@@ -61,9 +61,6 @@ Route::prefix('dashboard')->group(function(){
 
 
     Route::group(['middleware' => 'auth:sanctum'],function(){
-
-        // create admin
-        Route::post('/register',[RegisterController::class,'createAdmin']);
         //
         Route::get('/getInformations',[AdminPanelApiController::class,'getInformations']);
         Route::get('/graph',[AdminPanelApiController::class,'graph']);
