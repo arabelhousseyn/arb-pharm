@@ -504,7 +504,7 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
       req.then(function (e) {
-        if (e.status == 200) {
+        if (e.status == 201) {
           _this.disable = false;
           _this.isLoading = false;
           _this.firstname = '';
@@ -514,6 +514,9 @@ __webpack_require__.r(__webpack_exports__);
           _this.password = '';
           _this.valid = true;
           _this.snackbar = true;
+          setTimeout(function () {
+            _this.snackbar = false;
+          }, 1000);
         }
       });
       req["catch"](function (err) {
@@ -532,11 +535,6 @@ __webpack_require__.r(__webpack_exports__);
 
           _this.disable = false;
           _this.isLoading = false;
-          _this.firstname = '';
-          _this.lastname = '';
-          _this.email = '';
-          _this.phone = '';
-          _this.password = '';
           _this.valid = false;
         }
       });
@@ -547,6 +545,362 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         this.disable = false;
       }
+    }
+  },
+  components: {
+    snackBar: _snackbar_snackbar__WEBPACK_IMPORTED_MODULE_0__["default"]
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/admin/updateAdminForm.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/admin/updateAdminForm.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _snackbar_snackbar__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../snackbar/snackbar */ "./resources/js/components/snackbar/snackbar.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      valid: false,
+      isLoading: false,
+      snackbar: false,
+      hiddenAlert: true,
+      errors: [],
+      data: {},
+      overlay: true
+    };
+  },
+  methods: {
+    hide: function hide() {
+      this.hiddenAlert = true;
+    },
+    handle: function handle() {
+      var _this = this;
+
+      this.disable = true;
+      this.isLoading = true;
+      var req = axios.put("/api/dashboard/admin/".concat(this.data.id), this.data, {
+        headers: {
+          'Authorization': 'Bearer ' + this.$store.state.token
+        }
+      });
+      req.then(function (e) {
+        if (e.status == 200) {
+          _this.isLoading = false;
+          _this.valid = true;
+          _this.snackbar = true;
+          setTimeout(function () {
+            _this.snackbar = false;
+          }, 1000);
+        }
+      });
+      req["catch"](function (err) {
+        if (err.response.status == 422) {
+          _this.errors = [];
+          _this.hiddenAlert = false;
+          var errors = err.response.data.errors;
+
+          for (var error in errors) {
+            var temp = errors[error];
+
+            for (var i = 0; i < temp.length; i++) {
+              _this.errors.push(temp[i]);
+            }
+          }
+
+          _this.isLoading = false;
+          _this.valid = false;
+        }
+      });
+    }
+  },
+  components: {
+    snackBar: _snackbar_snackbar__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  created: function created() {
+    var _this2 = this;
+
+    var req = axios.get("/api/dashboard/admin/".concat(this.$route.params.id), {
+      headers: {
+        'Authorization': 'Bearer ' + this.$store.state.token
+      }
+    });
+    req.then(function (e) {
+      _this2.data = e.data;
+      _this2.overlay = false;
+    });
+    req["catch"](function (err) {
+      console.log(err);
+    });
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/admin/updateAdminPassword.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/admin/updateAdminPassword.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _snackbar_snackbar__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../snackbar/snackbar */ "./resources/js/components/snackbar/snackbar.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      valid: false,
+      isLoading: false,
+      snackbar: false,
+      hiddenAlert: true,
+      errors: [],
+      data: {
+        old_password: '',
+        new_password: '',
+        re_new_password: ''
+      },
+      disable: true,
+      passwordRule: [function (v) {
+        return !!v || 'Champ requis';
+      }]
+    };
+  },
+  methods: {
+    hide: function hide() {
+      this.hiddenAlert = true;
+    },
+    check: function check() {
+      this.disable = this.data.old_password.length == 0 || this.data.new_password.length == 0 || this.data.re_new_password.length == 0 ? true : false;
+    },
+    handle: function handle() {
+      var _this = this;
+
+      this.disable = true;
+      this.isLoading = true;
+      var req = axios.put("/api/dashboard/changePassword/".concat(this.$route.params.id), this.data, {
+        headers: {
+          'Authorization': 'Bearer ' + this.$store.state.token
+        }
+      });
+      req.then(function (e) {
+        if (e.status == 200) {
+          _this.disable = false;
+          _this.isLoading = false;
+          _this.valid = true;
+          _this.snackbar = true;
+          _this.data.old_password = '';
+          _this.data.new_password = '';
+          _this.data.re_new_password = '';
+          setTimeout(function () {
+            _this.snackbar = false;
+          }, 1000);
+        }
+      });
+      req["catch"](function (err) {
+        if (err.response.status == 422) {
+          _this.errors = [];
+          _this.hiddenAlert = false;
+          var errors = err.response.data.errors;
+
+          for (var error in errors) {
+            var temp = errors[error];
+
+            for (var i = 0; i < temp.length; i++) {
+              _this.errors.push(temp[i]);
+            }
+          }
+
+          _this.disable = true;
+          _this.isLoading = false;
+          _this.data.old_password = '';
+          _this.data.new_password = '';
+          _this.data.re_new_password = '';
+          _this.valid = false;
+        }
+      });
     }
   },
   components: {
@@ -747,7 +1101,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       text: 'Information traitée avec succès',
-      timeout: 2000
+      timeout: 3000
     };
   }
 });
@@ -831,8 +1185,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _components_breadcrumbs_breadcrumbs_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/breadcrumbs/breadcrumbs.vue */ "./resources/js/components/breadcrumbs/breadcrumbs.vue");
-/* harmony import */ var _components_admin_admintable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/admin/admintable */ "./resources/js/components/admin/admintable.vue");
-/* harmony import */ var _components_admin_formadmin__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/admin/formadmin */ "./resources/js/components/admin/formadmin.vue");
+/* harmony import */ var _components_admin_updateAdminForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/admin/updateAdminForm */ "./resources/js/components/admin/updateAdminForm.vue");
+/* harmony import */ var _components_admin_updateAdminPassword__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/admin/updateAdminPassword */ "./resources/js/components/admin/updateAdminPassword.vue");
 //
 //
 //
@@ -850,6 +1204,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -860,15 +1231,17 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   components: {
+    UpdateAdminPassword: _components_admin_updateAdminPassword__WEBPACK_IMPORTED_MODULE_2__["default"],
     breadCrumbs: _components_breadcrumbs_breadcrumbs_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    adminTable: _components_admin_admintable__WEBPACK_IMPORTED_MODULE_1__["default"],
-    formAdmin: _components_admin_formadmin__WEBPACK_IMPORTED_MODULE_2__["default"]
+    updateAdminForm: _components_admin_updateAdminForm__WEBPACK_IMPORTED_MODULE_1__["default"],
+    updateAdminPassword: _components_admin_updateAdminPassword__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   methods: {
     back: function back() {
       this.$router.push('/admin');
     }
-  }
+  },
+  created: function created() {}
 });
 
 /***/ }),
@@ -38202,6 +38575,84 @@ component.options.__file = "resources/js/components/admin/formadmin.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/admin/updateAdminForm.vue":
+/*!***********************************************************!*\
+  !*** ./resources/js/components/admin/updateAdminForm.vue ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _updateAdminForm_vue_vue_type_template_id_2ae9f8ef___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./updateAdminForm.vue?vue&type=template&id=2ae9f8ef& */ "./resources/js/components/admin/updateAdminForm.vue?vue&type=template&id=2ae9f8ef&");
+/* harmony import */ var _updateAdminForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./updateAdminForm.vue?vue&type=script&lang=js& */ "./resources/js/components/admin/updateAdminForm.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _updateAdminForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _updateAdminForm_vue_vue_type_template_id_2ae9f8ef___WEBPACK_IMPORTED_MODULE_0__.render,
+  _updateAdminForm_vue_vue_type_template_id_2ae9f8ef___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/admin/updateAdminForm.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/updateAdminPassword.vue":
+/*!***************************************************************!*\
+  !*** ./resources/js/components/admin/updateAdminPassword.vue ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _updateAdminPassword_vue_vue_type_template_id_007ce1c6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./updateAdminPassword.vue?vue&type=template&id=007ce1c6& */ "./resources/js/components/admin/updateAdminPassword.vue?vue&type=template&id=007ce1c6&");
+/* harmony import */ var _updateAdminPassword_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./updateAdminPassword.vue?vue&type=script&lang=js& */ "./resources/js/components/admin/updateAdminPassword.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _updateAdminPassword_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _updateAdminPassword_vue_vue_type_template_id_007ce1c6___WEBPACK_IMPORTED_MODULE_0__.render,
+  _updateAdminPassword_vue_vue_type_template_id_007ce1c6___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/admin/updateAdminPassword.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/breadcrumbs/breadcrumbs.vue":
 /*!*************************************************************!*\
   !*** ./resources/js/components/breadcrumbs/breadcrumbs.vue ***!
@@ -38559,6 +39010,38 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/admin/updateAdminForm.vue?vue&type=script&lang=js&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/admin/updateAdminForm.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_updateAdminForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./updateAdminForm.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/admin/updateAdminForm.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_updateAdminForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/updateAdminPassword.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/components/admin/updateAdminPassword.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_updateAdminPassword_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./updateAdminPassword.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/admin/updateAdminPassword.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_updateAdminPassword_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/breadcrumbs/breadcrumbs.vue?vue&type=script&lang=js&":
 /*!**************************************************************************************!*\
   !*** ./resources/js/components/breadcrumbs/breadcrumbs.vue?vue&type=script&lang=js& ***!
@@ -38718,6 +39201,40 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_formadmin_vue_vue_type_template_id_85cead60___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_formadmin_vue_vue_type_template_id_85cead60___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./formadmin.vue?vue&type=template&id=85cead60& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/admin/formadmin.vue?vue&type=template&id=85cead60&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/updateAdminForm.vue?vue&type=template&id=2ae9f8ef&":
+/*!******************************************************************************************!*\
+  !*** ./resources/js/components/admin/updateAdminForm.vue?vue&type=template&id=2ae9f8ef& ***!
+  \******************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_updateAdminForm_vue_vue_type_template_id_2ae9f8ef___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_updateAdminForm_vue_vue_type_template_id_2ae9f8ef___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_updateAdminForm_vue_vue_type_template_id_2ae9f8ef___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./updateAdminForm.vue?vue&type=template&id=2ae9f8ef& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/admin/updateAdminForm.vue?vue&type=template&id=2ae9f8ef&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/updateAdminPassword.vue?vue&type=template&id=007ce1c6&":
+/*!**********************************************************************************************!*\
+  !*** ./resources/js/components/admin/updateAdminPassword.vue?vue&type=template&id=007ce1c6& ***!
+  \**********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_updateAdminPassword_vue_vue_type_template_id_007ce1c6___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_updateAdminPassword_vue_vue_type_template_id_007ce1c6___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_updateAdminPassword_vue_vue_type_template_id_007ce1c6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./updateAdminPassword.vue?vue&type=template&id=007ce1c6& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/admin/updateAdminPassword.vue?vue&type=template&id=007ce1c6&");
 
 
 /***/ }),
@@ -39300,6 +39817,399 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/admin/updateAdminForm.vue?vue&type=template&id=2ae9f8ef&":
+/*!*********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/admin/updateAdminForm.vue?vue&type=template&id=2ae9f8ef& ***!
+  \*********************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "form",
+    {
+      attrs: { method: "post" },
+      model: {
+        value: _vm.valid,
+        callback: function ($$v) {
+          _vm.valid = $$v
+        },
+        expression: "valid",
+      },
+    },
+    [
+      _c(
+        "v-container",
+        [
+          _c(
+            "v-row",
+            [
+              _c(
+                "v-col",
+                { attrs: { cols: "12", md: "6" } },
+                [
+                  _c("v-text-field", {
+                    attrs: { label: "Nom", required: "" },
+                    model: {
+                      value: _vm.data.fname,
+                      callback: function ($$v) {
+                        _vm.$set(_vm.data, "fname", $$v)
+                      },
+                      expression: "data.fname",
+                    },
+                  }),
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-col",
+                { attrs: { cols: "12", md: "6" } },
+                [
+                  _c("v-text-field", {
+                    attrs: { label: "Prénom", required: "" },
+                    model: {
+                      value: _vm.data.lname,
+                      callback: function ($$v) {
+                        _vm.$set(_vm.data, "lname", $$v)
+                      },
+                      expression: "data.lname",
+                    },
+                  }),
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-col",
+                { attrs: { cols: "12", md: "6" } },
+                [
+                  _c("v-text-field", {
+                    attrs: { label: "E-mail", type: "email", required: "" },
+                    model: {
+                      value: _vm.data.email,
+                      callback: function ($$v) {
+                        _vm.$set(_vm.data, "email", $$v)
+                      },
+                      expression: "data.email",
+                    },
+                  }),
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-col",
+                { attrs: { cols: "12", md: "6" } },
+                [
+                  _c("v-text-field", {
+                    attrs: { label: "Téléphone", type: "phone", required: "" },
+                    model: {
+                      value: _vm.data.phone,
+                      callback: function ($$v) {
+                        _vm.$set(_vm.data, "phone", $$v)
+                      },
+                      expression: "data.phone",
+                    },
+                  }),
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-col",
+                { attrs: { cols: "12", md: "6" } },
+                [
+                  _c("v-text-field", {
+                    attrs: { label: "Nom d'utilisateur", required: "" },
+                    model: {
+                      value: _vm.data.username,
+                      callback: function ($$v) {
+                        _vm.$set(_vm.data, "username", $$v)
+                      },
+                      expression: "data.username",
+                    },
+                  }),
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _vm.overlay
+                ? _c(
+                    "v-overlay",
+                    [
+                      _c("v-progress-circular", {
+                        attrs: { indeterminate: "", size: "64" },
+                      }),
+                    ],
+                    1
+                  )
+                : _vm._e(),
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-alert",
+            {
+              attrs: { hidden: _vm.hiddenAlert, prominent: "", type: "error" },
+            },
+            [
+              _c(
+                "v-row",
+                { attrs: { align: "center" } },
+                [
+                  _c("v-col", { staticClass: "grow" }, [
+                    _c(
+                      "ul",
+                      _vm._l(_vm.errors, function (error, index) {
+                        return _c("li", { key: index }, [
+                          _vm._v(
+                            "\n                            " +
+                              _vm._s(error) +
+                              "\n                        "
+                          ),
+                        ])
+                      }),
+                      0
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "v-col",
+                    { staticClass: "shrink" },
+                    [
+                      _c("v-btn", { on: { click: _vm.hide } }, [
+                        _vm._v("Fermer"),
+                      ]),
+                    ],
+                    1
+                  ),
+                ],
+                1
+              ),
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-btn",
+            { attrs: { color: "success" }, on: { click: _vm.handle } },
+            [
+              _vm._v("Modifier\n            "),
+              _vm.isLoading
+                ? _c("v-progress-circular", { attrs: { indeterminate: "" } })
+                : _c("v-icon", [_vm._v("mdi-wrench")]),
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("snack-bar", { attrs: { snackbar: _vm.snackbar } }),
+        ],
+        1
+      ),
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/admin/updateAdminPassword.vue?vue&type=template&id=007ce1c6&":
+/*!*************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/admin/updateAdminPassword.vue?vue&type=template&id=007ce1c6& ***!
+  \*************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "form",
+    {
+      attrs: { method: "post" },
+      model: {
+        value: _vm.valid,
+        callback: function ($$v) {
+          _vm.valid = $$v
+        },
+        expression: "valid",
+      },
+    },
+    [
+      _c(
+        "v-container",
+        [
+          _c(
+            "v-row",
+            [
+              _c(
+                "v-col",
+                { attrs: { cols: "12", md: "6" } },
+                [
+                  _c("v-text-field", {
+                    attrs: {
+                      label: "Ancien mote de passe",
+                      type: "password",
+                      rules: _vm.passwordRule,
+                      required: "",
+                    },
+                    on: { keypress: _vm.check },
+                    model: {
+                      value: _vm.data.old_password,
+                      callback: function ($$v) {
+                        _vm.$set(_vm.data, "old_password", $$v)
+                      },
+                      expression: "data.old_password",
+                    },
+                  }),
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-col",
+                { attrs: { cols: "12", md: "6" } },
+                [
+                  _c("v-text-field", {
+                    attrs: {
+                      label: "Nouveaux mote de passe",
+                      type: "password",
+                      rules: _vm.passwordRule,
+                      required: "",
+                    },
+                    on: { keypress: _vm.check },
+                    model: {
+                      value: _vm.data.new_password,
+                      callback: function ($$v) {
+                        _vm.$set(_vm.data, "new_password", $$v)
+                      },
+                      expression: "data.new_password",
+                    },
+                  }),
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-col",
+                { attrs: { cols: "12", md: "6" } },
+                [
+                  _c("v-text-field", {
+                    attrs: {
+                      label: "Entrez à nouveau mote de passe",
+                      type: "password",
+                      rules: _vm.passwordRule,
+                      required: "",
+                    },
+                    on: { keypress: _vm.check },
+                    model: {
+                      value: _vm.data.re_new_password,
+                      callback: function ($$v) {
+                        _vm.$set(_vm.data, "re_new_password", $$v)
+                      },
+                      expression: "data.re_new_password",
+                    },
+                  }),
+                ],
+                1
+              ),
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-alert",
+            {
+              attrs: { hidden: _vm.hiddenAlert, prominent: "", type: "error" },
+            },
+            [
+              _c(
+                "v-row",
+                { attrs: { align: "center" } },
+                [
+                  _c("v-col", { staticClass: "grow" }, [
+                    _c(
+                      "ul",
+                      _vm._l(_vm.errors, function (error, index) {
+                        return _c("li", { key: index }, [
+                          _vm._v(
+                            "\n                            " +
+                              _vm._s(error) +
+                              "\n                        "
+                          ),
+                        ])
+                      }),
+                      0
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "v-col",
+                    { staticClass: "shrink" },
+                    [
+                      _c("v-btn", { on: { click: _vm.hide } }, [
+                        _vm._v("Fermer"),
+                      ]),
+                    ],
+                    1
+                  ),
+                ],
+                1
+              ),
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-btn",
+            {
+              attrs: { color: "success", disabled: _vm.disable },
+              on: { click: _vm.handle },
+            },
+            [
+              _vm._v("Modifier\n            "),
+              _vm.isLoading
+                ? _c("v-progress-circular", { attrs: { indeterminate: "" } })
+                : _c("v-icon", [_vm._v("mdi-wrench")]),
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("snack-bar", { attrs: { snackbar: _vm.snackbar } }),
+        ],
+        1
+      ),
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/breadcrumbs/breadcrumbs.vue?vue&type=template&id=909245d4&":
 /*!***********************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/breadcrumbs/breadcrumbs.vue?vue&type=template&id=909245d4& ***!
@@ -39616,7 +40526,55 @@ var render = function () {
           _c(
             "div",
             { staticStyle: { "margin-top": "35px" } },
-            [_c("v-card", { attrs: { flat: "" } }, [_c("form-admin")], 1)],
+            [
+              _c(
+                "v-row",
+                [
+                  _c(
+                    "v-col",
+                    { attrs: { xl: "6", lg: "6", md: "6", sm: "12" } },
+                    [
+                      _c(
+                        "v-card",
+                        [
+                          _c("v-card-title", [
+                            _vm._v(
+                              "\n                          Informations générales\n                      "
+                            ),
+                          ]),
+                          _vm._v(" "),
+                          _c("update-admin-form"),
+                        ],
+                        1
+                      ),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-col",
+                    { attrs: { xl: "6", lg: "6", md: "6", sm: "12" } },
+                    [
+                      _c(
+                        "v-card",
+                        [
+                          _c("v-card-title", [
+                            _vm._v(
+                              "\n                           Sécurité\n                       "
+                            ),
+                          ]),
+                          _vm._v(" "),
+                          _c("update-admin-password"),
+                        ],
+                        1
+                      ),
+                    ],
+                    1
+                  ),
+                ],
+                1
+              ),
+            ],
             1
           ),
         ],

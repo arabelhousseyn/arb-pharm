@@ -6,9 +6,25 @@
                 <bread-crumbs />
             </div>
             <div style="margin-top: 35px;">
-                        <v-card flat>
-                            <form-admin />
-                        </v-card>
+               <v-row>
+                   <v-col xl="6" lg="6" md="6" sm="12">
+                      <v-card>
+                          <v-card-title>
+                              Informations générales
+                          </v-card-title>
+                          <update-admin-form />
+                      </v-card>
+                   </v-col>
+
+                   <v-col xl="6" lg="6" md="6" sm="12">
+                       <v-card>
+                           <v-card-title>
+                               Sécurité
+                           </v-card-title>
+                           <update-admin-password />
+                       </v-card>
+                   </v-col>
+               </v-row>
             </div>
 
         </v-container>
@@ -17,8 +33,9 @@
 
 <script>
 import breadCrumbs from '../components/breadcrumbs/breadcrumbs.vue'
-import adminTable from "../components/admin/admintable"
-import formAdmin from "../components/admin/formadmin";
+import updateAdminForm from '../components/admin/updateAdminForm'
+import updateAdminPassword from '../components/admin/updateAdminPassword'
+import UpdateAdminPassword from "../components/admin/updateAdminPassword";
 export default {
     data : () => {
         return{
@@ -26,15 +43,20 @@ export default {
         }
     },
     components : {
+        UpdateAdminPassword,
         breadCrumbs,
-        adminTable,
-        formAdmin
+        updateAdminForm,
+        updateAdminPassword
+
     },
     methods : {
         back()
         {
             this.$router.push('/admin')
         }
+    },
+    created() {
+
     }
 }
 </script>

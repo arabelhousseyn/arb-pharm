@@ -144,12 +144,15 @@ export default {
             }
             let req  = axios.post('/api/dashboard/admin',data,{headers : { 'Authorization' : 'Bearer ' + this.$store.state.token }})
             req.then(e=>{
-                if (e.status == 200) {
+                if (e.status == 201) {
                         this.disable = false
                         this.isLoading = false
                         this.firstname = ''; this.lastname = '';this.email = '';this.phone = '';this.password = '';
                         this.valid = true;
                         this.snackbar = true
+                    setTimeout(()=> {
+                        this.snackbar = false
+                    },1000)
                 }
             })
             req.catch(err => {
@@ -167,7 +170,6 @@ export default {
                     }
                     this.disable = false
                     this.isLoading = false
-                    this.firstname = ''; this.lastname = '';this.email = '';this.phone = '';this.password = '';
                     this.valid = false
                 }
             })

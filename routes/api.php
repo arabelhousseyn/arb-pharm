@@ -64,6 +64,8 @@ Route::prefix('dashboard')->group(function(){
         //
         Route::get('/getInformations',[AdminPanelApiController::class,'getInformations']);
         Route::get('/graph',[AdminPanelApiController::class,'graph']);
+        // change password admin
+        Route::put('/changePassword/{admin}',[AdminController::class,'changePassword']);
 
         Route::apiResources([
             'admin' => AdminController::class

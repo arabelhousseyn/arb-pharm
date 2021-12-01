@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Admin;
 use Illuminate\Http\Request;
-use App\Http\Requests\createAdminRequest;
+use App\Http\Requests\{
+    createAdminRequest,
+    UpdateAdminRequest,
+    ChangeAdminRequest
+};
 use Hash,Auth;
 class AdminController extends Controller
 {
@@ -53,7 +57,7 @@ class AdminController extends Controller
             Admin::whereId($admin->id)->update([
                 'token' => $token
             ]);
-            return response(['success' => true],200);
+            return response(['success' => true],201);
         }
     }
 
@@ -65,7 +69,7 @@ class AdminController extends Controller
      */
     public function show(Admin $admin)
     {
-        //
+        return response($admin->only('id','fname','lname','phone','email','username'),200);
     }
 
     /**
@@ -86,9 +90,20 @@ class AdminController extends Controller
      * @param  \App\Models\Admin  $admin
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Admin $admin)
+    public function update(UpdateAdminRequest $request, Admin $admin)
     {
-        //
+
+        if($request->validated())
+        {
+           $update = $admin->update([
+               'fname' => $request->fname,
+               'lname' => $request->lname,
+               'phone' => $request->phone,
+               'email' => $request->email,
+               'username' => $request->username,
+           ]);
+           return response(['success' => true],200);
+        }
     }
 
     /**
@@ -101,5 +116,38 @@ class AdminController extends Controller
     {
         $delete = $admin->deleteOrFail();
         response($delete,200);
+    }
+
+    public function changePassword(ChangeAdminRequest $request,Admin $admin)
+    {
+        if($request->validated())
+        {
+            $checkPassword = Hash::check($request->old_password,$admin->password);
+            if($checkPassword)
+            {
+                if($request->new_password == $request->re_new_password)
+                {
+                    $admin->update(['password' => Hash::make($request->re_new_password)]);
+                    return response(['success' => true],200);
+                }
+
+                $response = [
+                    'errors' => [
+                        'password' => [
+                            'Le mot de passe ne correspond pas'
+                        ]
+                    ]
+                ];
+                return response($response,422);
+            }
+            $response = [
+                    'errors' => [
+                        'password' => [
+                            'Ancien mot de passe erroné'
+                        ]
+                    ]
+            ];
+            return response($response,422);
+        }
     }
 }

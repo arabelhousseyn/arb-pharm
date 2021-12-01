@@ -13,7 +13,7 @@ export default {
     props : ['snackbar'],
     data: () => ({
         text: 'Information traitée avec succès',
-        timeout: 2000,
+        timeout: 3000,
     }),
 }
 </script>
