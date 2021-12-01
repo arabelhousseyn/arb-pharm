@@ -6,7 +6,7 @@
         >
             <v-card>
                 <v-card-title class="text-h5">
-                    Supprimer administrateur
+                    Suppression
                 </v-card-title>
 
                 <v-card-text>

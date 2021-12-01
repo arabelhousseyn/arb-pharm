@@ -10,7 +10,8 @@ use App\Http\Controllers\{
     RequestEstimateController,
     checkAppVersionController,
     AdminPanelApiController,
-    AdminController
+    AdminController,
+    UserController
 };
 
 /*
@@ -68,7 +69,8 @@ Route::prefix('dashboard')->group(function(){
         Route::put('/changePassword/{admin}',[AdminController::class,'changePassword']);
 
         Route::apiResources([
-            'admin' => AdminController::class
+            'admin' => AdminController::class,
+            'user' => UserController::class,
         ]);
     });
 });

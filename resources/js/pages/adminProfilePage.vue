@@ -34,7 +34,6 @@
 <script>
 import breadCrumbs from '../components/breadcrumbs/breadcrumbs.vue'
 import updateAdminForm from '../components/admin/updateAdminForm'
-import updateAdminPassword from '../components/admin/updateAdminPassword'
 import UpdateAdminPassword from "../components/admin/updateAdminPassword";
 export default {
     data : () => {
@@ -43,10 +42,9 @@ export default {
         }
     },
     components : {
-        UpdateAdminPassword,
         breadCrumbs,
         updateAdminForm,
-        updateAdminPassword
+        UpdateAdminPassword
 
     },
     methods : {

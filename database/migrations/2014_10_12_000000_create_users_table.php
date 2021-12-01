@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('token')->nullable();
             $table->timestamp('activated_at')->nullable();
+            $table->enum('days',['30'])->nullable();
             $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();

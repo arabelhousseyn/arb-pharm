@@ -54,7 +54,7 @@ export default {
                 { text: 'E-mail', value: 'email' },
                 { text: 'Téléphone', value: 'phone' },
                 { text: 'Nom d\'utilisateur', value: 'username' },
-                { text: 'crée', value: 'date_creation' },
+                { text: 'Crée', value: 'date_creation' },
             ],
         }
     },

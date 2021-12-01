@@ -25,6 +25,18 @@
                         </v-list-item-content>
                     </v-list-item>
                 </router-link>
+
+                <router-link to="/users">
+                    <v-list-item link>
+                        <v-list-item-icon>
+                            <v-icon>mdi-account</v-icon>
+                        </v-list-item-icon>
+
+                        <v-list-item-content>
+                            <v-list-item-title>Utilisateurs</v-list-item-title>
+                        </v-list-item-content>
+                    </v-list-item>
+                </router-link>
             </v-list>
         </v-navigation-drawer>
         <appbar-component @toggle="toggle" />

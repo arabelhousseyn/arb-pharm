@@ -19,7 +19,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $data = Admin::orderBy('id','desc')->where('id','<>',Auth::id())->get();
+        $data = Admin::orderByDesc('created_at')->where('id','<>',Auth::id())->get();
         return response($data,200);
     }
 

@@ -53,6 +53,23 @@
              this.items = info
          }
 
+         // users
+
+         if(this.$route.path.includes('users'))
+         {
+             let info = [
+                 {
+                     text: 'Admin panel',
+                     href: 'acceuil',
+                 },
+                 {
+                     text: 'Utilisateurs',
+                     href: 'users',
+                 }
+             ]
+             this.items = info
+         }
+
      }
  }
 </script>

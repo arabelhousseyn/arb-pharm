@@ -2,15 +2,17 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Database\Eloquent\SoftDeletes;
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable,HasRoles;
+    use HasApiTokens, HasFactory, Notifiable,HasRoles,SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -22,6 +24,7 @@ class User extends Authenticatable
         'email',
         'password',
         'token',
+        'days',
         'activated_at'
     ];
 
@@ -40,7 +43,9 @@ class User extends Authenticatable
         'codeActivity',
         'activated_at',
         'profile',
-        'category'
+        'category',
+        'activated_at',
+        'days'
     ];
 
     /**
@@ -52,7 +57,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    protected $appends = ['is_active','profile_name','category_user_type'];
+    protected $appends = ['is_active','profile_name','category_user_type','date_creation','activation'];
 
     public function profile()
     {
@@ -103,6 +108,29 @@ class User extends Authenticatable
     public function getIsActiveAttribute()
     {
         return ($this->activated_at == null) ? false : true;
+    }
+
+    public function getDateCreationAttribute()
+    {
+        return Carbon::parse($this->created_at)->toDateString();
+    }
+
+    public function getActivationAttribute()
+    {
+        if($this->activated_at == null)
+        {
+            return 'Non activé';
+        }else{
+            $now = Carbon::now();
+            $activation_date = Carbon::parse($this->activated_at);
+            $days = $now->diffInDays($activation_date);
+            if($days > $this->days)
+            {
+                return 'Utilisateur expiré';
+            }else{
+                return 'Activé';
+            }
+        }
     }
 
 }
