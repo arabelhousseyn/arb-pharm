@@ -42839,7 +42839,7 @@ var render = function () {
                     _c(
                       "span",
                       [
-                        _vm._v("Ajouter administrateur "),
+                        _vm._v("Ajouté administrateur "),
                         _c("v-icon", [_vm._v("mdi-plus")]),
                       ],
                       1
@@ -43251,7 +43251,7 @@ var render = function () {
                     _c(
                       "span",
                       [
-                        _vm._v("Ajouter utilisateur "),
+                        _vm._v("Ajouté utilisateur "),
                         _c("v-icon", [_vm._v("mdi-plus")]),
                       ],
                       1

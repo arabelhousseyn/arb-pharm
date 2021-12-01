@@ -1,4 +1,4 @@
-<template>
+ <template>
     <div>
         <v-menu
             v-model="menu"
@@ -36,6 +36,7 @@
                     <v-list-item>
                         <v-list-item-action>
                             <v-switch
+                                @change="toggle"
                                 v-model="hints"
                                 color="black"
                             ></v-switch>
@@ -70,7 +71,24 @@ export default {
             csrf : null
         }
     },
+    methods : {
+        toggle()
+        {
+            if(this.hints)
+            {
+                window.localStorage.setItem('darkMode',true)
+                this.$vuetify.theme.dark = true
+            }else{
+               window.localStorage.removeItem('darkMode')
+                this.$vuetify.theme.dark = false
+            }
+        }
+    },
     created() {
+        if(window.localStorage.getItem('darkMode') !== null)
+        {
+            this.hints = true
+        }
         this.csrf = document.head.querySelector('meta[name="csrf-token"]').content
     }
 }

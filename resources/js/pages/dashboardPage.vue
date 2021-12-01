@@ -1,6 +1,6 @@
 <template>
     <div class="dashboard">
-        <v-app  style="background-color: #edf0f3" >
+        <v-app>
            <sidebar-component />
             <v-main>
                 <router-view/>
