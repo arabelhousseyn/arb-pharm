@@ -9,7 +9,7 @@
                         <span>Acceuil <v-icon>mdi-home</v-icon> </span>
                     </v-tab>
                     <v-tab>
-                        <span>Ajouter utilisateur <v-icon>mdi-plus</v-icon> </span>
+                        <span>Ajouté utilisateur <v-icon>mdi-plus</v-icon> </span>
                     </v-tab>
                 </v-tabs>
                 <v-tabs-items v-model="tab">
