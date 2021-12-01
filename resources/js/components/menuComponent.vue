@@ -41,7 +41,7 @@
                                 color="black"
                             ></v-switch>
                         </v-list-item-action>
-                        <v-list-item-title>Dark mode</v-list-item-title>
+                        <v-list-item-title>Mode sombre</v-list-item-title>
                     </v-list-item>
                 </v-list>
 
