@@ -27,7 +27,7 @@
                  },
                  {
                      text: 'Administrateurs',
-                     href: 'admin',
+                     href: '/admin',
                  }
              ]
              this.items = info
@@ -47,7 +47,7 @@
                  {
                      text: 'Modifier administrateur',
                      disabled : true,
-                     href: 'admin',
+                     href: '/admin',
                  }
              ]
              this.items = info
@@ -64,7 +64,47 @@
                  },
                  {
                      text: 'Utilisateurs',
-                     href: 'users',
+                     href: '/users',
+                 }
+             ]
+             this.items = info
+         }
+
+         if(this.$route.path.includes('users/update'))
+         {
+             let info = [
+                 {
+                     text: 'Admin panel',
+                     href: 'acceuil',
+                 },
+                 {
+                     text: 'Utilisateurs',
+                     href: '/users',
+                 },
+                 {
+                     text: 'Modifier utilisateur',
+                     disabled : true,
+                     href: 'admin',
+                 }
+             ]
+             this.items = info
+         }
+
+         if(this.$route.path.includes('users/profile'))
+         {
+             let info = [
+                 {
+                     text: 'Admin panel',
+                     href: 'acceuil',
+                 },
+                 {
+                     text: 'Utilisateurs',
+                     href: '/users',
+                 },
+                 {
+                     text: 'Profile',
+                     disabled : true,
+                     href: 'admin',
                  }
              ]
              this.items = info

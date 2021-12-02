@@ -1,0 +1,37 @@
+<template>
+    <div>
+        <v-tabs
+            v-model="tab"
+            background-color="white"
+            centered
+            icons-and-text
+        >
+            <v-tabs-slider></v-tabs-slider>
+
+            <v-tab href="#tab-1">
+                Produits
+                <v-icon>mdi-package-variant</v-icon>
+            </v-tab>
+
+            <v-tab href="#tab-2">
+                Demandes de devis
+                <v-icon>mdi-hand-heart</v-icon>
+            </v-tab>
+        </v-tabs>
+
+        <v-tabs-items v-model="tab">
+            <v-tab-item value="tab-1">
+                hello
+            </v-tab-item>
+            <v-tab-item value="tab-2">
+                hello
+            </v-tab-item>
+        </v-tabs-items>
+    </div>
+</template>
+
+<script>
+export default {
+
+}
+</script>

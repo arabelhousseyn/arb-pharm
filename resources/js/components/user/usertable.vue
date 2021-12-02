@@ -16,7 +16,7 @@
                 <v-btn :disabled="disabled" @click="remove"  color="red"><span style="color: white;">Supprimer </span> <v-icon color="white" >mdi-delete</v-icon> </v-btn>
                 <v-btn :disabled="switch1" @click="openDiag" color="green"><span style="color: white;">Activé</span> <v-icon color="white" >mdi-power</v-icon> </v-btn>
                 <v-btn :disabled="switch2" @click="opendag" color="red"><span style="color: white;">désactivé</span> <v-icon color="white" >mdi-minus</v-icon> </v-btn>
-                <v-btn :disabled="disabled"  color="primary"><span style="color: white;">Profile</span> <v-icon color="white" >mdi-account</v-icon> </v-btn>
+                <v-btn :disabled="disabled" @click="redirect"  color="primary"><span style="color: white;">Profile</span> <v-icon color="white" >mdi-account</v-icon> </v-btn>
             </v-card-subtitle>
             <v-data-table
                 v-model="selected"
@@ -103,6 +103,10 @@ export default {
         opendag()
         {
             this.dag = true
+        },
+        redirect()
+        {
+          this.$router.push(`/users/profile/${this.selected[0].id}`)
         },
         close(val)
         {
