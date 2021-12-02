@@ -213,6 +213,7 @@ class UserController extends Controller
 
     public function profileInfo(User $user)
     {
-
+        $data = User::with('payments','products','requests','favorites','products.images')->whereId($user->id)->first();
+        return $data->only('profile_name','payments','get_profile','products','requests','favorites','code');
     }
 }

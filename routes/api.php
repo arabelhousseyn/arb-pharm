@@ -73,7 +73,7 @@ Route::prefix('dashboard')->group(function(){
             Route::put('/deactivateUser/{user}',[UserController::class,'deactivateUser']);
             Route::put('/changePassword/{user}',[UserController::class,'changePassword']);
             Route::put('/updateProfileUser/{user}',[UserController::class,'updateProfileUser']);
-            Route::put('/profileInfo/{user}',[UserController::class,'profileInfo']);
+            Route::get('/profileInfo/{user}',[UserController::class,'profileInfo']);
         });
         Route::apiResources([
             'admin' => AdminController::class,

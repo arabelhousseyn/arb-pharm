@@ -9,19 +9,28 @@
                 <v-row>
                     <v-col cols="12" md="4">
                         <v-card>
-                            <card-profile v-if="!overlay" />
+                            <card-profile :name="data.profile_name" v-if="!overlay" />
                         </v-card>
                     </v-col>
 
                     <v-col cols="12" md="8">
                         <v-card>
-                            <info-table-user v-if="!overlay" />
+                            <info-table-user :code="data.code" :info="data.get_profile" v-if="!overlay" />
+                        </v-card>
+                    </v-col>
+
+                    <v-col cols="12" md="12">
+                        <v-card>
+                            <v-card-title>
+                                Paiment
+                            </v-card-title>
+                            <payment-user :payments="data.payments" v-if="!overlay" />
                         </v-card>
                     </v-col>
 
                     <v-col cols="12" md="12">
                         <v-card elevation="0">
-                            <interaction-user v-if="!overlay" />
+                            <interaction-user :products="data.products" :favorites="data.favorites" :requests="data.requests" v-if="!overlay" />
                         </v-card>
                     </v-col>
                 </v-row>
@@ -41,6 +50,7 @@ import breadCrumbs from '../components/breadcrumbs/breadcrumbs.vue'
 import cardProfile from "../components/user/cardProfile"
 import infoTableUser from "../components/user/infotableUser"
 import interactionUser from "../components/user/interactionUser"
+import paymentUser from "../components/user/paymentUser"
 export default {
     data : () => {
         return{
@@ -53,7 +63,8 @@ export default {
         breadCrumbs,
         cardProfile,
         infoTableUser,
-        interactionUser
+        interactionUser,
+        paymentUser
     },
     methods : {
         back()
@@ -62,7 +73,7 @@ export default {
         }
     },
     created() {
-        let req = axios.get(`/api/dashboard/user/${this.$route.params.id}`,{headers : { 'Authorization' : 'Bearer ' + this.$store.state.token }})
+        let req = axios.get(`/api/dashboard/user/profileInfo/${this.$route.params.id}`,{headers : { 'Authorization' : 'Bearer ' + this.$store.state.token }})
         req.then(e=>{
             this.data = e.data
             this.overlay = false

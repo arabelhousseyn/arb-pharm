@@ -3,12 +3,37 @@
         <v-simple-table>
             <template v-slot:default>
                 <tbody>
-                <tr
-                    v-for="item in desserts"
-                    :key="item.name"
-                >
-                    <td>{{ item.name }}</td>
-                    <td>{{ item.calories }}</td>
+                <tr>
+                    <td>Nom commercial</td>
+                    <td>{{ info.commercial_name }}</td>
+                </tr>
+                <tr>
+                    <td>Nis</td>
+                    <td>{{ info.nis }}</td>
+                </tr>
+                <tr>
+                    <td>Nif</td>
+                    <td>{{ info.nif }}</td>
+                </tr>
+                <tr>
+                    <td>Numéro AR</td>
+                    <td>{{ info.num_ar }}</td>
+                </tr>
+                <tr>
+                    <td>Carte professionelle</td>
+                    <td>{{ info.pro_card }}</td>
+                </tr>
+                <tr>
+                    <td>Adresse</td>
+                    <td>{{ info.adress }}</td>
+                </tr>
+                <tr>
+                    <td>Code d'activité</td>
+                    <td>{{ code }}</td>
+                </tr>
+                <tr>
+                    <td>Numéro de RC</td>
+                    <td>{{ info.num_rc }}</td>
                 </tr>
                 </tbody>
             </template>
@@ -18,6 +43,7 @@
 
 <script>
 export default {
+    props : ['info','code'],
     data () {
         return {
             desserts: [

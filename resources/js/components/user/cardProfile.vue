@@ -9,7 +9,13 @@
          </v-avatar>
      </v-container>
      <v-container style="text-align: center;" fluid>
-         <h3>Sarl hocine</h3>
+         <h3>{{ name }}</h3>
      </v-container>
  </div>
 </template>
+
+<script>
+export default {
+    props : ['name']
+}
+</script>
