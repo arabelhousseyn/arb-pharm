@@ -9,7 +9,7 @@
                     <v-text-field
                         v-model="firstname"
                         :rules="nameRules"
-                        label="Nom"
+                        label="Nom *"
                         @keypress="check"
                         required
                     ></v-text-field>
@@ -22,7 +22,7 @@
                     <v-text-field
                         v-model="lastname"
                         :rules="nameRules"
-                        label="Prénom"
+                        label="Prénom *"
                         @keypress="check"
                         required
                     ></v-text-field>
@@ -35,7 +35,7 @@
                     <v-text-field
                         v-model="email"
                         :rules="emailRules"
-                        label="E-mail"
+                        label="E-mail *"
                         type="email"
                         @keypress="check"
                         required
@@ -48,7 +48,7 @@
                     <v-text-field
                         v-model="phone"
                         :rules="phoneRules"
-                        label="Téléphone"
+                        label="Téléphone *"
                         type="phone"
                         @keypress="check"
                         required
@@ -62,7 +62,7 @@
                     <v-text-field
                         v-model="password"
                         :rules="passwordRules"
-                        label="Mote de passe"
+                        label="Mote de passe *"
                         type="password"
                         @keypress="check"
                         required
@@ -152,6 +152,7 @@ export default {
                         this.snackbar = true
                     setTimeout(()=> {
                         this.snackbar = false
+                        location.reload()
                     },1000)
                 }
             })

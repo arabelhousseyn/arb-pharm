@@ -20,9 +20,7 @@
                     </v-tab-item>
 
                     <v-tab-item>
-                        <v-card flat>
                             <form-user />
-                        </v-card>
                     </v-tab-item>
                 </v-tabs-items>
             </div>

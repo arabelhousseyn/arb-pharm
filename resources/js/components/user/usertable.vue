@@ -16,6 +16,7 @@
                 <v-btn :disabled="disabled" @click="remove"  color="red"><span style="color: white;">Supprimer </span> <v-icon color="white" >mdi-delete</v-icon> </v-btn>
                 <v-btn :disabled="switch1" @click="openDiag" color="green"><span style="color: white;">Activé</span> <v-icon color="white" >mdi-power</v-icon> </v-btn>
                 <v-btn :disabled="switch2" @click="opendag" color="red"><span style="color: white;">désactivé</span> <v-icon color="white" >mdi-minus</v-icon> </v-btn>
+                <v-btn :disabled="disabled"  color="primary"><span style="color: white;">Profile</span> <v-icon color="white" >mdi-account</v-icon> </v-btn>
             </v-card-subtitle>
             <v-data-table
                 v-model="selected"
@@ -65,8 +66,10 @@ export default {
                     value: 'email'
                 },
                 { text: 'Téléphone', value: 'phone' },
-                { text: 'Crée', value: 'date_creation' },
                 { text: 'Activation', value: 'activation' },
+                { text: 'Date d\'activation', value: 'activation_date' },
+                { text: 'Type', value: 'type' },
+                { text: 'Crée', value: 'date_creation' },
             ],
         }
     },
@@ -135,6 +138,7 @@ export default {
                 {
                     dessert.activation = 'Activé'
                     dessert.is_active = true
+                    location.reload()
                 }
             }
             this.selected = []
@@ -151,6 +155,8 @@ export default {
                 if(dessert.id == this.selected[0].id)
                 {
                     dessert.activation = 'Non activé'
+                    dessert.activation_date = '/'
+                    dessert.type = ''
                     dessert.is_active = false
                 }
             }

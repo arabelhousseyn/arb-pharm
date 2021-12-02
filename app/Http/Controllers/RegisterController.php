@@ -61,32 +61,20 @@ class RegisterController extends Controller
                 'adress' => $request->adress
             ]);
 
-            if($request->has_payment)
+            $images = explode(';',$request->images);
+            foreach ($images as $image)
             {
-                $payment = (Str::length($request->payment) != 0) ? $this->upload($request->payment,'payment','.jpg') : null;
-                $rc = (Str::length($request->rc) != 0) ? $this->upload($request->rc,'rc','.jpg') : null;
-                $activity_code = (Str::length($request->activity_code) != 0) ? $this->upload($request->activity_code,'activity_code','.jpg') : null;
-                $pro_card = (Str::length($request->card_pro) != 0) ? $this->upload($request->card_pro,'pro_card','.jpg') : null;
-                $paths = [
-                    'RECEIPT' => ($payment == null) ? null : env('PATH_STORAGE') .'payment/'. $payment,
-                    'RC' => ($rc == null) ? null : env('PATH_STORAGE') .'rc/'. $rc,
-                    'ACTIVITY_CODE' => ($activity_code == null) ? null : env('PATH_STORAGE') .'activity_code/'. $activity_code,
-                    'PRO_CARD' => ($pro_card == null) ? null :env('PATH_STORAGE') .'pro_card/'. $pro_card
-                ];
 
-                foreach ($paths as $key => $path)
-                {
-                    if($path != null)
-                    {
-                        UserPayment::insert([
-                            'user_id' => $user->id,
-                            'type' => $key,
-                            'path' => $path
-                        ]);
-                    }
-                }
-
+                $temp = Str::substr($images,0,22,$image);
+                $path = $this->upload($temp,'payment','.jpg');
+                $path = env('PATH_STORAGE') .'payment/'. $path;
+                UserPayment::insert([
+                    'user_id' => $user->id,
+                    'path' => $path
+                ]);
             }
+
+
             $usr = User::find($user)->first();
             $usr['success'] = true;
             return response($usr,200);

@@ -25,6 +25,7 @@ class User extends Authenticatable
         'password',
         'token',
         'days',
+        'type',
         'activated_at'
     ];
 
@@ -57,7 +58,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    protected $appends = ['is_active','profile_name','category_user_type','date_creation','activation'];
+    protected $appends = ['is_active','profile_name','category_user_type','date_creation','activation','activation_date'];
 
     public function profile()
     {
@@ -144,6 +145,11 @@ class User extends Authenticatable
                 return 'Activé';
             }
         }
+    }
+
+    public function getActivationDateAttribute()
+    {
+        return ($this->activated_at == null) ? '/' : Carbon::parse($this->activated_at)->toDateString();
     }
 
 }

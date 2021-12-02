@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('token')->nullable();
             $table->timestamp('activated_at')->nullable();
             $table->enum('days',['30'])->nullable();
+            $table->enum('type',['A','R','B'])->nullable();
             $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();

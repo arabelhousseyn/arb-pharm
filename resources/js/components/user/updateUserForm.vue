@@ -148,7 +148,7 @@ export default {
         snackBar
     },
     created() {
-        let req = axios.get(`/api/dashboard/admin/${this.$route.params.id}`,{headers : { 'Authorization' : 'Bearer ' + this.$store.state.token }})
+        let req = axios.get(`/api/dashboard/user/${this.$route.params.id}`,{headers : { 'Authorization' : 'Bearer ' + this.$store.state.token }})
         req.then(e=>{
             this.data = e.data
             this.overlay = false

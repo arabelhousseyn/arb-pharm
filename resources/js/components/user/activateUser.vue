@@ -16,6 +16,14 @@
                     label="Sélectionné le nombre de jours"
                     item-value="text"
                 ></v-select>
+
+                <v-select
+                    @change="check"
+                    v-model="type"
+                    :items="select2"
+                    label="Type d'abonnement"
+                    item-value="text"
+                ></v-select>
             </v-card-text>
             <v-card-actions>
                 <v-btn
@@ -46,8 +54,14 @@ export default {
         return {
             disable : true,
             selection : null,
+            type : null,
             select: [
                 { text: 30 }
+            ],
+            select2: [
+                { text: 'A' },
+                { text: 'R' },
+                { text: 'B' },
             ],
         }
     },
@@ -63,7 +77,8 @@ export default {
         activate()
         {
             let data = {
-                days : this.selection
+                days : this.selection,
+                type : this.type
             }
             let req  = axios.put(`/api/dashboard/activateUser/${this.selected[0].id}`,data,{headers : { 'Authorization' : 'Bearer ' + this.$store.state.token }})
             req.then(e=>{

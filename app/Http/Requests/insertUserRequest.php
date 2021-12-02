@@ -33,7 +33,9 @@ class insertUserRequest extends FormRequest
             'nis' => 'required',
             'num_ar' => 'required',
             'pro_card' => 'required',
-            'adress' => 'required'
+            'adress' => 'required',
+            'activity_code' => 'required',
+            'images' => 'required'
         ];
     }
 
@@ -53,7 +55,9 @@ class insertUserRequest extends FormRequest
             'num_ar.required' => 'Numéro AR requis.',
             'pro_card.required' => 'Carte professionelle requis.',
             'adress.required' => 'Adresse requis.',
+            'activity_code.required' => 'Code d\'activité requis.',
             'num_rc.required' => 'Numéro de RC requis.',
+            'images.required' => 'Paiments images requis.',
         ];
     }
 }

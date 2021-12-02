@@ -520,6 +520,7 @@ __webpack_require__.r(__webpack_exports__);
           _this.snackbar = true;
           setTimeout(function () {
             _this.snackbar = false;
+            location.reload();
           }, 1000);
         }
       });
@@ -1176,14 +1177,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['dialog', 'selected'],
   data: function data() {
     return {
       disable: true,
       selection: null,
+      type: null,
       select: [{
         text: 30
+      }],
+      select2: [{
+        text: 'A'
+      }, {
+        text: 'R'
+      }, {
+        text: 'B'
       }]
     };
   },
@@ -1198,7 +1215,8 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var data = {
-        days: this.selection
+        days: this.selection,
+        type: this.type
       };
       var req = axios.put("/api/dashboard/activateUser/".concat(this.selected[0].id), data, {
         headers: {
@@ -1462,6 +1480,131 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _snackbar_snackbar__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../snackbar/snackbar */ "./resources/js/components/snackbar/snackbar.vue");
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -1569,27 +1712,58 @@ __webpack_require__.r(__webpack_exports__);
       valid: false,
       disable: true,
       isLoading: false,
-      firstname: '',
-      lastname: '',
       snackbar: false,
       hiddenAlert: true,
       errors: [],
-      nameRules: [function (v) {
-        return !!v || 'champ requis';
-      }],
-      email: '',
+      data: {
+        phone: '',
+        email: '',
+        password: '',
+        commercial_name: '',
+        nis: '',
+        nif: '',
+        num_ar: '',
+        pro_card: '',
+        adress: '',
+        activity_code: '',
+        num_rc: '',
+        tempimages: [],
+        images: []
+      },
       emailRules: [function (v) {
         return !!v || 'E-mail requis';
       }, function (v) {
         return /.+@.+/.test(v) || 'E-mail must be valid';
       }],
-      phone: '',
       phoneRules: [function (v) {
         return !!v || 'Téléphone requis';
       }],
-      password: '',
       passwordRules: [function (v) {
         return !!v || 'Mote de passe requis';
+      }],
+      commercialNameRules: [function (v) {
+        return !!v || 'Nom commercial requis';
+      }],
+      nisRules: [function (v) {
+        return !!v || 'Nis requis';
+      }],
+      nifRules: [function (v) {
+        return !!v || 'Nif requis';
+      }],
+      numArRules: [function (v) {
+        return !!v || 'Numéro AR requis';
+      }],
+      proCardRules: [function (v) {
+        return !!v || 'Carte professionelle requis';
+      }],
+      adressRules: [function (v) {
+        return !!v || 'Adresse requis';
+      }],
+      activityCodeRules: [function (v) {
+        return !!v || 'Code d\'activité requis';
+      }],
+      numRcRules: [function (v) {
+        return !!v || 'Numéro de RC requis';
       }]
     };
   },
@@ -1602,60 +1776,94 @@ __webpack_require__.r(__webpack_exports__);
 
       this.disable = true;
       this.isLoading = true;
-      var data = {
-        fname: this.firstname,
-        lname: this.lastname,
-        phone: this.phone,
-        email: this.email,
-        password: this.password
-      };
-      var req = axios.post('/api/dashboard/admin', data, {
-        headers: {
-          'Authorization': 'Bearer ' + this.$store.state.token
-        }
-      });
-      req.then(function (e) {
-        if (e.status == 201) {
-          _this.disable = false;
-          _this.isLoading = false;
-          _this.firstname = '';
-          _this.lastname = '';
-          _this.email = '';
-          _this.phone = '';
-          _this.password = '';
-          _this.valid = true;
-          _this.snackbar = true;
-          setTimeout(function () {
-            _this.snackbar = false;
-          }, 1000);
-        }
-      });
-      req["catch"](function (err) {
-        if (err.response.status == 422) {
-          _this.errors = [];
-          _this.hiddenAlert = false;
-          var errors = err.response.data.errors;
 
-          for (var error in errors) {
-            var temp = errors[error];
+      var _iterator = _createForOfIteratorHelper(this.data.tempimages),
+          _step;
 
-            for (var i = 0; i < temp.length; i++) {
-              _this.errors.push(temp[i]);
-            }
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var image = _step.value;
+          this.converter(image);
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+
+      setTimeout(function () {
+        console.log(_this.data.images);
+        _this.data.images = _this.data.images.join(';');
+        var req = axios.post('/api/dashboard/user', _this.data, {
+          headers: {
+            'Authorization': 'Bearer ' + _this.$store.state.token
           }
+        });
+        req.then(function (e) {
+          if (e.status == 201) {
+            _this.disable = false;
+            _this.isLoading = false;
+            _this.data.phone = '';
+            _this.data.activity_code = '';
+            _this.data.images = [];
+            _this.data.nif = '';
+            _this.data.nis = '';
+            _this.data.adress = '';
+            _this.data.commercial_name = '';
+            _this.data.email = '';
+            _this.data.num_ar = '';
+            _this.data.password = '';
+            _this.data.phone = '';
+            _this.data.pro_card = '';
+            _this.data.tempimages = [];
+            _this.data.num_rc = '';
+            _this.valid = true;
+            _this.snackbar = true;
+            setTimeout(function () {
+              _this.snackbar = false;
+              location.reload();
+            }, 1000);
+          }
+        });
+        req["catch"](function (err) {
+          if (err.response.status == 422) {
+            _this.errors = [];
+            _this.hiddenAlert = false;
+            var errors = err.response.data.errors;
 
-          _this.disable = false;
-          _this.isLoading = false;
-          _this.valid = false;
-        }
-      });
+            for (var error in errors) {
+              var temp = errors[error];
+
+              for (var i = 0; i < temp.length; i++) {
+                _this.errors.push(temp[i]);
+              }
+            }
+
+            _this.data.images = [];
+            _this.data.tempimages = [];
+            _this.disable = false;
+            _this.isLoading = false;
+            _this.valid = false;
+          }
+        });
+      }, 10000);
+    },
+    converter: function converter(image) {
+      var _this2 = this;
+
+      var reader = new FileReader();
+      var rawImg;
+
+      reader.onloadend = function (e) {
+        rawImg = e.target.result;
+
+        _this2.data.images.push(rawImg.replace(/^data:image\/(png|jpg|jpeg);base64,/, ''));
+      };
+
+      reader.readAsDataURL(image);
     },
     check: function check() {
-      if (this.firstname.length == 0 || this.lastname.length == 0 || this.email.length == 0 || this.phone.length == 0 || this.password.length == 0) {
-        this.disable = true;
-      } else {
-        this.disable = false;
-      }
+      this.disable = this.data.phone.length == 0 || this.data.activity_code.length == 0 || this.data.tempimages.length == 0 || this.data.nif.length == 0 || this.data.nis.length == 0 || this.data.adress.length == 0 || this.data.commercial_name.length == 0 || this.data.email.length == 0 || this.data.num_ar.length == 0 || this.data.password.length == 0 || this.data.phone.length == 0 || this.data.num_rc.length == 0 || this.data.pro_card.length == 0 ? true : false;
     }
   },
   components: {
@@ -1835,7 +2043,7 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this2 = this;
 
-    var req = axios.get("/api/dashboard/admin/".concat(this.$route.params.id), {
+    var req = axios.get("/api/dashboard/user/".concat(this.$route.params.id), {
       headers: {
         'Authorization': 'Bearer ' + this.$store.state.token
       }
@@ -2089,6 +2297,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
 
 
 
@@ -2117,11 +2326,17 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         text: 'Téléphone',
         value: 'phone'
       }, {
-        text: 'Crée',
-        value: 'date_creation'
-      }, {
         text: 'Activation',
         value: 'activation'
+      }, {
+        text: 'Date d\'activation',
+        value: 'activation_date'
+      }, {
+        text: 'Type',
+        value: 'type'
+      }, {
+        text: 'Crée',
+        value: 'date_creation'
       }]
     };
   },
@@ -2204,6 +2419,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
           if (dessert.id == this.selected[0].id) {
             dessert.activation = 'Activé';
             dessert.is_active = true;
+            location.reload();
           }
         }
       } catch (err) {
@@ -2233,6 +2449,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
           if (dessert.id == this.selected[0].id) {
             dessert.activation = 'Non activé';
+            dessert.activation_date = '/';
+            dessert.type = '';
             dessert.is_active = false;
           }
         }
@@ -2557,8 +2775,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_breadcrumbs_breadcrumbs_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/breadcrumbs/breadcrumbs.vue */ "./resources/js/components/breadcrumbs/breadcrumbs.vue");
 /* harmony import */ var _components_user_usertable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/user/usertable */ "./resources/js/components/user/usertable.vue");
 /* harmony import */ var _components_user_formuser__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/user/formuser */ "./resources/js/components/user/formuser.vue");
-//
-//
 //
 //
 //
@@ -41595,7 +41811,11 @@ var render = function () {
                 { attrs: { cols: "12", md: "4" } },
                 [
                   _c("v-text-field", {
-                    attrs: { rules: _vm.nameRules, label: "Nom", required: "" },
+                    attrs: {
+                      rules: _vm.nameRules,
+                      label: "Nom *",
+                      required: "",
+                    },
                     on: { keypress: _vm.check },
                     model: {
                       value: _vm.firstname,
@@ -41616,7 +41836,7 @@ var render = function () {
                   _c("v-text-field", {
                     attrs: {
                       rules: _vm.nameRules,
-                      label: "Prénom",
+                      label: "Prénom *",
                       required: "",
                     },
                     on: { keypress: _vm.check },
@@ -41639,7 +41859,7 @@ var render = function () {
                   _c("v-text-field", {
                     attrs: {
                       rules: _vm.emailRules,
-                      label: "E-mail",
+                      label: "E-mail *",
                       type: "email",
                       required: "",
                     },
@@ -41663,7 +41883,7 @@ var render = function () {
                   _c("v-text-field", {
                     attrs: {
                       rules: _vm.phoneRules,
-                      label: "Téléphone",
+                      label: "Téléphone *",
                       type: "phone",
                       required: "",
                     },
@@ -41687,7 +41907,7 @@ var render = function () {
                   _c("v-text-field", {
                     attrs: {
                       rules: _vm.passwordRules,
-                      label: "Mote de passe",
+                      label: "Mote de passe *",
                       type: "password",
                       required: "",
                     },
@@ -42374,6 +42594,22 @@ var render = function () {
                   expression: "selection",
                 },
               }),
+              _vm._v(" "),
+              _c("v-select", {
+                attrs: {
+                  items: _vm.select2,
+                  label: "Type d'abonnement",
+                  "item-value": "text",
+                },
+                on: { change: _vm.check },
+                model: {
+                  value: _vm.type,
+                  callback: function ($$v) {
+                    _vm.type = $$v
+                  },
+                  expression: "type",
+                },
+              }),
             ],
             1
           ),
@@ -42641,128 +42877,365 @@ var render = function () {
     },
     [
       _c(
-        "v-container",
+        "v-card",
+        { attrs: { elevation: "0" } },
         [
+          _c("v-card-title", [_vm._v("Informations générales")]),
+          _vm._v(" "),
           _c(
-            "v-row",
+            "v-container",
             [
               _c(
-                "v-col",
-                { attrs: { cols: "12", md: "4" } },
+                "v-row",
                 [
-                  _c("v-text-field", {
-                    attrs: { rules: _vm.nameRules, label: "Nom", required: "" },
-                    on: { keypress: _vm.check },
-                    model: {
-                      value: _vm.firstname,
-                      callback: function ($$v) {
-                        _vm.firstname = $$v
-                      },
-                      expression: "firstname",
-                    },
-                  }),
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-col",
-                { attrs: { cols: "12", md: "4" } },
-                [
-                  _c("v-text-field", {
-                    attrs: {
-                      rules: _vm.nameRules,
-                      label: "Prénom",
-                      required: "",
-                    },
-                    on: { keypress: _vm.check },
-                    model: {
-                      value: _vm.lastname,
-                      callback: function ($$v) {
-                        _vm.lastname = $$v
-                      },
-                      expression: "lastname",
-                    },
-                  }),
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-col",
-                { attrs: { cols: "12", md: "4" } },
-                [
-                  _c("v-text-field", {
-                    attrs: {
-                      rules: _vm.emailRules,
-                      label: "E-mail",
-                      type: "email",
-                      required: "",
-                    },
-                    on: { keypress: _vm.check },
-                    model: {
-                      value: _vm.email,
-                      callback: function ($$v) {
-                        _vm.email = $$v
-                      },
-                      expression: "email",
-                    },
-                  }),
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-col",
-                { attrs: { cols: "12", md: "4" } },
-                [
-                  _c("v-text-field", {
-                    attrs: {
-                      rules: _vm.phoneRules,
-                      label: "Téléphone",
-                      type: "phone",
-                      required: "",
-                    },
-                    on: { keypress: _vm.check },
-                    model: {
-                      value: _vm.phone,
-                      callback: function ($$v) {
-                        _vm.phone = $$v
-                      },
-                      expression: "phone",
-                    },
-                  }),
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-col",
-                { attrs: { cols: "12", md: "4" } },
-                [
-                  _c("v-text-field", {
-                    attrs: {
-                      rules: _vm.passwordRules,
-                      label: "Mote de passe",
-                      type: "password",
-                      required: "",
-                    },
-                    on: { keypress: _vm.check },
-                    model: {
-                      value: _vm.password,
-                      callback: function ($$v) {
-                        _vm.password = $$v
-                      },
-                      expression: "password",
-                    },
-                  }),
+                  _c(
+                    "v-col",
+                    { attrs: { cols: "12", md: "6" } },
+                    [
+                      _c("v-text-field", {
+                        attrs: {
+                          rules: _vm.emailRules,
+                          label: "E-mail *",
+                          type: "email",
+                          required: "",
+                        },
+                        on: { keypress: _vm.check },
+                        model: {
+                          value: _vm.data.email,
+                          callback: function ($$v) {
+                            _vm.$set(_vm.data, "email", $$v)
+                          },
+                          expression: "data.email",
+                        },
+                      }),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-col",
+                    { attrs: { cols: "12", md: "6" } },
+                    [
+                      _c("v-text-field", {
+                        attrs: {
+                          rules: _vm.phoneRules,
+                          label: "Téléphone *",
+                          type: "phone",
+                          required: "",
+                        },
+                        on: { keypress: _vm.check },
+                        model: {
+                          value: _vm.data.phone,
+                          callback: function ($$v) {
+                            _vm.$set(_vm.data, "phone", $$v)
+                          },
+                          expression: "data.phone",
+                        },
+                      }),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-col",
+                    { attrs: { cols: "12", md: "6" } },
+                    [
+                      _c("v-text-field", {
+                        attrs: {
+                          rules: _vm.passwordRules,
+                          label: "Mote de passe *",
+                          type: "password",
+                          required: "",
+                        },
+                        on: { keypress: _vm.check },
+                        model: {
+                          value: _vm.data.password,
+                          callback: function ($$v) {
+                            _vm.$set(_vm.data, "password", $$v)
+                          },
+                          expression: "data.password",
+                        },
+                      }),
+                    ],
+                    1
+                  ),
                 ],
                 1
               ),
             ],
             1
           ),
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("v-divider"),
+      _vm._v(" "),
+      _c(
+        "v-card",
+        { attrs: { elevation: "0" } },
+        [
+          _c("v-card-title", [_vm._v("Information personnelle")]),
           _vm._v(" "),
+          _c(
+            "v-container",
+            [
+              _c(
+                "v-row",
+                [
+                  _c(
+                    "v-col",
+                    { attrs: { cols: "12", md: "4" } },
+                    [
+                      _c("v-text-field", {
+                        attrs: {
+                          rules: _vm.commercialNameRules,
+                          label: "Nom commercial *",
+                          type: "email",
+                          required: "",
+                        },
+                        on: { keypress: _vm.check },
+                        model: {
+                          value: _vm.data.commercial_name,
+                          callback: function ($$v) {
+                            _vm.$set(_vm.data, "commercial_name", $$v)
+                          },
+                          expression: "data.commercial_name",
+                        },
+                      }),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-col",
+                    { attrs: { cols: "12", md: "4" } },
+                    [
+                      _c("v-text-field", {
+                        attrs: {
+                          rules: _vm.nifRules,
+                          label: "Nif *",
+                          type: "phone",
+                          required: "",
+                        },
+                        on: { keypress: _vm.check },
+                        model: {
+                          value: _vm.data.nif,
+                          callback: function ($$v) {
+                            _vm.$set(_vm.data, "nif", $$v)
+                          },
+                          expression: "data.nif",
+                        },
+                      }),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-col",
+                    { attrs: { cols: "12", md: "4" } },
+                    [
+                      _c("v-text-field", {
+                        attrs: {
+                          rules: _vm.nisRules,
+                          label: "Nis *",
+                          type: "phone",
+                          required: "",
+                        },
+                        on: { keypress: _vm.check },
+                        model: {
+                          value: _vm.data.nis,
+                          callback: function ($$v) {
+                            _vm.$set(_vm.data, "nis", $$v)
+                          },
+                          expression: "data.nis",
+                        },
+                      }),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-col",
+                    { attrs: { cols: "12", md: "4" } },
+                    [
+                      _c("v-text-field", {
+                        attrs: {
+                          rules: _vm.numArRules,
+                          label: "Numéro AR *",
+                          type: "phone",
+                          required: "",
+                        },
+                        on: { keypress: _vm.check },
+                        model: {
+                          value: _vm.data.num_ar,
+                          callback: function ($$v) {
+                            _vm.$set(_vm.data, "num_ar", $$v)
+                          },
+                          expression: "data.num_ar",
+                        },
+                      }),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-col",
+                    { attrs: { cols: "12", md: "4" } },
+                    [
+                      _c("v-text-field", {
+                        attrs: {
+                          rules: _vm.proCardRules,
+                          label: "Carte professionelle *",
+                          type: "phone",
+                          required: "",
+                        },
+                        on: { keypress: _vm.check },
+                        model: {
+                          value: _vm.data.pro_card,
+                          callback: function ($$v) {
+                            _vm.$set(_vm.data, "pro_card", $$v)
+                          },
+                          expression: "data.pro_card",
+                        },
+                      }),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-col",
+                    { attrs: { cols: "12", md: "4" } },
+                    [
+                      _c("v-text-field", {
+                        attrs: {
+                          rules: _vm.adressRules,
+                          label: "Adresse *",
+                          type: "phone",
+                          required: "",
+                        },
+                        on: { keypress: _vm.check },
+                        model: {
+                          value: _vm.data.adress,
+                          callback: function ($$v) {
+                            _vm.$set(_vm.data, "adress", $$v)
+                          },
+                          expression: "data.adress",
+                        },
+                      }),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-col",
+                    { attrs: { cols: "12", md: "4" } },
+                    [
+                      _c("v-text-field", {
+                        attrs: {
+                          rules: _vm.activityCodeRules,
+                          label: "Code d'activité *",
+                          type: "phone",
+                          required: "",
+                        },
+                        on: { keypress: _vm.check },
+                        model: {
+                          value: _vm.data.activity_code,
+                          callback: function ($$v) {
+                            _vm.$set(_vm.data, "activity_code", $$v)
+                          },
+                          expression: "data.activity_code",
+                        },
+                      }),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-col",
+                    { attrs: { cols: "12", md: "4" } },
+                    [
+                      _c("v-text-field", {
+                        attrs: {
+                          rules: _vm.numRcRules,
+                          label: "Numéro de RC *",
+                          type: "phone",
+                          required: "",
+                        },
+                        on: { keypress: _vm.check },
+                        model: {
+                          value: _vm.data.num_rc,
+                          callback: function ($$v) {
+                            _vm.$set(_vm.data, "num_rc", $$v)
+                          },
+                          expression: "data.num_rc",
+                        },
+                      }),
+                    ],
+                    1
+                  ),
+                ],
+                1
+              ),
+            ],
+            1
+          ),
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("v-divider"),
+      _vm._v(" "),
+      _c(
+        "v-card",
+        { attrs: { elevation: "0" } },
+        [
+          _c("v-card-title", [_vm._v("Paiment")]),
+          _vm._v(" "),
+          _c(
+            "v-container",
+            [
+              _c(
+                "v-row",
+                [
+                  _c(
+                    "v-col",
+                    { attrs: { cols: "12" } },
+                    [
+                      _c("v-file-input", {
+                        attrs: {
+                          accept: "image/png, image/jpeg, image/png",
+                          placeholder: "Choisissez une image",
+                          "prepend-icon": "mdi-camera",
+                          label: "Paiment",
+                          multiple: "",
+                        },
+                        on: { change: _vm.check },
+                        model: {
+                          value: _vm.data.tempimages,
+                          callback: function ($$v) {
+                            _vm.$set(_vm.data, "tempimages", $$v)
+                          },
+                          expression: "data.tempimages",
+                        },
+                      }),
+                    ],
+                    1
+                  ),
+                ],
+                1
+              ),
+            ],
+            1
+          ),
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-container",
+        { attrs: { fluid: "" } },
+        [
           _c(
             "v-alert",
             {
@@ -43349,6 +43822,21 @@ var render = function () {
                 ],
                 1
               ),
+              _vm._v(" "),
+              _c(
+                "v-btn",
+                { attrs: { disabled: _vm.disabled, color: "primary" } },
+                [
+                  _c("span", { staticStyle: { color: "white" } }, [
+                    _vm._v("Profile"),
+                  ]),
+                  _vm._v(" "),
+                  _c("v-icon", { attrs: { color: "white" } }, [
+                    _vm._v("mdi-account"),
+                  ]),
+                ],
+                1
+              ),
             ],
             1
           ),
@@ -43906,18 +44394,7 @@ var render = function () {
                     1
                   ),
                   _vm._v(" "),
-                  _c(
-                    "v-tab-item",
-                    [
-                      _c(
-                        "v-card",
-                        { attrs: { flat: "" } },
-                        [_c("form-user")],
-                        1
-                      ),
-                    ],
-                    1
-                  ),
+                  _c("v-tab-item", [_c("form-user")], 1),
                 ],
                 1
               ),
