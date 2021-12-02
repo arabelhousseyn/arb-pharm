@@ -2,6 +2,7 @@
     <v-row justify="center">
         <v-dialog
             v-model="dialog"
+            persistent
             max-width="290"
         >
             <v-card>
@@ -66,7 +67,7 @@ export default {
         },
         handle2()
         {
-            this.$emit('close',true)
+            this.$emit('close2',true)
             this.isloading = false
         }
     }

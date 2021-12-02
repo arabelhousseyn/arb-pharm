@@ -107,7 +107,20 @@ class User extends Authenticatable
 
     public function getIsActiveAttribute()
     {
-        return ($this->activated_at == null) ? false : true;
+        if($this->activated_at == null)
+        {
+            return false;
+        }else{
+            $now = Carbon::now();
+            $activation_date = Carbon::parse($this->activated_at);
+            $days = $now->diffInDays($activation_date);
+            if($days > $this->days)
+            {
+                return false;
+            }else{
+                return true;
+            }
+        }
     }
 
     public function getDateCreationAttribute()
@@ -126,7 +139,7 @@ class User extends Authenticatable
             $days = $now->diffInDays($activation_date);
             if($days > $this->days)
             {
-                return 'Utilisateur expiré';
+                return 'Expiré';
             }else{
                 return 'Activé';
             }

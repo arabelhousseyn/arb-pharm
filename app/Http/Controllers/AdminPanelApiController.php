@@ -9,12 +9,12 @@ use App\Models\{
 };
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-
+use Auth;
 class AdminPanelApiController extends Controller
 {
     public function getInformations()
     {
-        $count_admins = Admin::count();
+        $count_admins = Admin::where('id','<>',Auth::id())->count();
         $count_users = User::count();
         $products = Product::count();
         $request_estimate = RequestEstimate::count();

@@ -26,7 +26,7 @@
                 show-select
                 @item-selected="watch"
             ></v-data-table>
-            <dialog-comp :dialog="open" :selected="selected" v-on:close="close" />
+            <dialog-comp :dialog="open" :selected="selected" v-on:close="close" v-on:close2="close2" />
         </v-card>
     </div>
 </template>
@@ -59,9 +59,9 @@ export default {
         }
     },
     methods: {
-        watch()
+        watch(item)
         {
-            this.disabled = (this.selected.length == 0) ? false : true
+            this.disabled = (item.value) ? false : true
 
         },
         update()
@@ -83,6 +83,10 @@ export default {
                 this.open = false
                 this.disabled = true
             }
+        },
+        close2()
+        {
+                this.open = false
         }
     },
     components : {
