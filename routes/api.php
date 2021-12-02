@@ -67,11 +67,14 @@ Route::prefix('dashboard')->group(function(){
         Route::get('/graph',[AdminPanelApiController::class,'graph']);
         // change password admin
         Route::put('/changePassword/{admin}',[AdminController::class,'changePassword']);
-        // activate or deactivate user
-        Route::put('/activateUser/{user}',[UserController::class,'activateUser']);
-        Route::put('/deactivateUser/{user}',[UserController::class,'deactivateUser']);
-        Route::put('/user/changePassword/{user}',[UserController::class,'changePassword']);
-        Route::put('/user/updateProfileUser/{user}',[UserController::class,'updateProfileUser']);
+        // user
+        Route::prefix('/user')->group(function() {
+            Route::put('/activateUser/{user}',[UserController::class,'activateUser']);
+            Route::put('/deactivateUser/{user}',[UserController::class,'deactivateUser']);
+            Route::put('/changePassword/{user}',[UserController::class,'changePassword']);
+            Route::put('/updateProfileUser/{user}',[UserController::class,'updateProfileUser']);
+            Route::put('/profileInfo/{user}',[UserController::class,'profileInfo']);
+        });
         Route::apiResources([
             'admin' => AdminController::class,
             'user' => UserController::class,

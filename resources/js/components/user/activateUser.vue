@@ -80,7 +80,7 @@ export default {
                 days : this.selection,
                 type : this.type
             }
-            let req  = axios.put(`/api/dashboard/activateUser/${this.selected[0].id}`,data,{headers : { 'Authorization' : 'Bearer ' + this.$store.state.token }})
+            let req  = axios.put(`/api/dashboard/user/activateUser/${this.selected[0].id}`,data,{headers : { 'Authorization' : 'Bearer ' + this.$store.state.token }})
             req.then(e=>{
                 this.$emit('active',true)
                 this.disable = true

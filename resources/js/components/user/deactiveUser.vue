@@ -48,7 +48,7 @@ export default {
         deactivate()
         {
             let data = {}
-            let req  = axios.put(`/api/dashboard/deactivateUser/${this.selected[0].id}`,data,{headers : { 'Authorization' : 'Bearer ' + this.$store.state.token }})
+            let req  = axios.put(`/api/dashboard/user/deactivateUser/${this.selected[0].id}`,data,{headers : { 'Authorization' : 'Bearer ' + this.$store.state.token }})
             req.then(e=>{
                 this.$emit('deactive',true)
             })
