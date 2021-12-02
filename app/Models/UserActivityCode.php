@@ -13,4 +13,9 @@ class UserActivityCode extends Model
         'user_id',
         'code'
     ];
+
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
 }

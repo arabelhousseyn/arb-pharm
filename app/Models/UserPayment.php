@@ -13,4 +13,9 @@ class UserPayment extends Model
         'user_id',
         'path'
     ];
+
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
 }

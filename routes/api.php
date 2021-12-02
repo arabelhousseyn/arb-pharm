@@ -70,6 +70,8 @@ Route::prefix('dashboard')->group(function(){
         // activate or deactivate user
         Route::put('/activateUser/{user}',[UserController::class,'activateUser']);
         Route::put('/deactivateUser/{user}',[UserController::class,'deactivateUser']);
+        Route::put('/user/changePassword/{user}',[UserController::class,'changePassword']);
+        Route::put('/user/updateProfileUser/{user}',[UserController::class,'updateProfileUser']);
         Route::apiResources([
             'admin' => AdminController::class,
             'user' => UserController::class,

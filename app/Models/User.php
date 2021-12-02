@@ -44,9 +44,8 @@ class User extends Authenticatable
         'codeActivity',
         'activated_at',
         'profile',
-        'category',
         'activated_at',
-        'days'
+        'days',
     ];
 
     /**
@@ -58,7 +57,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    protected $appends = ['is_active','profile_name','category_user_type','date_creation','activation','activation_date'];
+    protected $appends = ['is_active','profile_name','date_creation','activation','activation_date','get_profile','code'];
 
     public function profile()
     {
@@ -95,15 +94,7 @@ class User extends Authenticatable
         return $this->hasMany(RequestEstimate::class);
     }
 
-    public function category()
-    {
-        return $this->hasOne(UserCategory::class);
-    }
 
-    public function getCategoryUserTypeAttribute()
-    {
-        return ($this->category == null) ? '' : $this->category->category;
-    }
 
 
     public function getIsActiveAttribute()
@@ -150,6 +141,16 @@ class User extends Authenticatable
     public function getActivationDateAttribute()
     {
         return ($this->activated_at == null) ? '/' : Carbon::parse($this->activated_at)->toDateString();
+    }
+
+    public function getGetProfileAttribute()
+    {
+        return $this->profile;
+    }
+
+    public function getCodeAttribute()
+    {
+        return $this->codeActivity->code;
     }
 
 }

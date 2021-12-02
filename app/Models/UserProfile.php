@@ -18,7 +18,10 @@ class UserProfile extends Model
         'num_ar',
         'pro_card',
         'adress',
-        'job',
-        'description'
+    ];
+
+    protected $hidden = [
+        'created_at',
+        'updated_at',
     ];
 }

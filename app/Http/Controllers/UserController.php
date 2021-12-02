@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Str,Hash;
 use App\Traits\uploads;
-use App\Http\Requests\insertUserRequest;
+use App\Http\Requests\{insertUserRequest,ChangePasswordUserRequest,UpdateUserRequest,UpdateProfileUserRequest};
 class UserController extends Controller
 {
     use uploads;
@@ -87,7 +87,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return $user->with('profile');
+        return $user;
     }
 
     /**
@@ -97,9 +97,16 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(UpdateUserRequest $request, User $user)
     {
-        //
+        if($request->validated())
+        {
+            $user->update([
+                'email' => $request->email,
+                'phone' => $request->phone
+            ]);
+            return response(['success' => true],200);
+        }
     }
 
     /**
@@ -149,5 +156,63 @@ class UserController extends Controller
             'type' => null,
         ]);
         return response(['success' => true],200);
+    }
+
+    public function changePassword(ChangePasswordUserRequest $request,User $user)
+    {
+        if($request->validated())
+        {
+            $checkPassword = Hash::check($request->old_password,$user->password);
+            if($checkPassword)
+            {
+                if($request->new_password == $request->re_new_password)
+                {
+                    $user->update(['password' => Hash::make($request->re_new_password)]);
+                    return response(['success' => true],200);
+                }
+
+                $response = [
+                    'errors' => [
+                        'password' => [
+                            'Le mot de passe ne correspond pas'
+                        ]
+                    ]
+                ];
+                return response($response,422);
+            }
+            $response = [
+                'errors' => [
+                    'password' => [
+                        'Ancien mot de passe erroné'
+                    ]
+                ]
+            ];
+            return response($response,422);
+        }
+    }
+
+    public function updateProfileUser(UpdateProfileUserRequest $request,User $user)
+    {
+        if($request->validated())
+        {
+            UserProfile::whereUserId($user->id)->update([
+                'commercial_name' => $request->commercial_name,
+                'num_rc' => $request->num_rc,
+                'nif' => $request->nif,
+                'nis' => $request->nis,
+                'num_ar' => $request->num_ar,
+                'pro_card' => $request->pro_card,
+                'adress' => $request->adress
+            ]);
+            UserActivityCode::whereUserId($user->id)->update([
+                'code' => $request->activity_code
+            ]);
+            return response(['success' => true],200);
+        }
+    }
+
+    public function profileInfo(User $user)
+    {
+
     }
 }

@@ -7,28 +7,6 @@
                     md="6"
                 >
                     <v-text-field
-                        v-model="data.fname"
-                        label="Nom"
-                        required
-                    ></v-text-field>
-                </v-col>
-
-                <v-col
-                    cols="12"
-                    md="6"
-                >
-                    <v-text-field
-                        v-model="data.lname"
-                        label="Prénom"
-                        required
-                    ></v-text-field>
-                </v-col>
-
-                <v-col
-                    cols="12"
-                    md="6"
-                >
-                    <v-text-field
                         v-model="data.email"
                         label="E-mail"
                         type="email"
@@ -51,18 +29,7 @@
                     cols="12"
                     md="6"
                 >
-                    <v-text-field
-                        v-model="data.username"
-                        label="Nom d'utilisateur"
-                        required
-                    ></v-text-field>
                 </v-col>
-                <v-overlay v-if="overlay">
-                    <v-progress-circular
-                        indeterminate
-                        size="64"
-                    ></v-progress-circular>
-                </v-overlay>
             </v-row>
 
             <v-alert
@@ -96,14 +63,13 @@
 <script>
 import snackBar from "../snackbar/snackbar";
 export default {
+    props : ['data'],
     data: () => ({
         valid: false,
         isLoading : false,
         snackbar : false,
         hiddenAlert : true,
         errors : [],
-        data : {},
-        overlay : true
     }),
     methods : {
         hide(){
@@ -113,7 +79,7 @@ export default {
         {
             this.disable = true
             this.isLoading = true
-            let req  = axios.put(`/api/dashboard/admin/${this.data.id}`,this.data,{headers : { 'Authorization' : 'Bearer ' + this.$store.state.token }})
+            let req  = axios.put(`/api/dashboard/user/${this.data.id}`,this.data,{headers : { 'Authorization' : 'Bearer ' + this.$store.state.token }})
             req.then(e=>{
                 if (e.status == 200) {
                     this.isLoading = false
@@ -148,14 +114,6 @@ export default {
         snackBar
     },
     created() {
-        let req = axios.get(`/api/dashboard/user/${this.$route.params.id}`,{headers : { 'Authorization' : 'Bearer ' + this.$store.state.token }})
-        req.then(e=>{
-            this.data = e.data
-            this.overlay = false
-        })
-        req.catch(err =>{
-            console.log(err)
-        })
     }
 }
 </script>
