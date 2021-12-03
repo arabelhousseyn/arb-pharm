@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\{
     RequestEstimate,
-    RequestEstimateImage
+    RequestEstimateImage,
+    User
 };
 use Illuminate\Http\Request;
 use Auth,Validator;
@@ -131,5 +132,15 @@ class RequestEstimateController extends Controller
     public function destroy(RequestEstimate $requestEstimate)
     {
         //
+    }
+
+    public function getRequestEstimateByUser(User $user)
+    {
+        $data = RequestEstimate::with('images')->latest()->whereuserId($user->id)->paginate(9);
+        $subset = $data->map(function($value){
+            return $value->only('id','amount','images_request','is_available','mark','product_name','creation_date');
+        });
+        $data->setCollection($subset);
+        return response($data,200);
     }
 }

@@ -105,7 +105,7 @@ export default {
         {
             this.disable = true
             this.isLoading = true
-            let req  = axios.put(`/api/dashboard/changePassword/${this.$route.params.id}`,this.data,{headers : { 'Authorization' : 'Bearer ' + this.$store.state.token }})
+            let req  = axios.put(`/api/dashboard/admin/changePassword/${this.$route.params.id}`,this.data,{headers : { 'Authorization' : 'Bearer ' + this.$store.state.token }})
             req.then(e=>{
                 if (e.status == 200) {
                     this.disable = false

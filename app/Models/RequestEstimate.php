@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Carbon\Carbon;
 class RequestEstimate extends Model
 {
     use HasFactory;
@@ -26,11 +26,16 @@ class RequestEstimate extends Model
         'user_id'
 
     ];
-    protected $appends = ['image','publishedBy'];
+    protected $appends = ['image','publishedBy','images_request','creation_date'];
 
     public function getImagesRequestAttribute()
     {
         return $this->images;
+    }
+
+    public function getCreationDateAttribute()
+    {
+        return Carbon::parse($this->created_at)->toDateTimeString();
     }
 
     public function getPublishedByAttribute()

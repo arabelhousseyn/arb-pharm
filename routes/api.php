@@ -65,8 +65,10 @@ Route::prefix('dashboard')->group(function(){
         //
         Route::get('/getInformations',[AdminPanelApiController::class,'getInformations']);
         Route::get('/graph',[AdminPanelApiController::class,'graph']);
-        // change password admin
-        Route::put('/changePassword/{admin}',[AdminController::class,'changePassword']);
+        // admin
+        Route::prefix('/admin')->group(function(){
+            Route::put('/changePassword/{admin}',[AdminController::class,'changePassword']);
+        });
         // user
         Route::prefix('/user')->group(function() {
             Route::put('/activateUser/{user}',[UserController::class,'activateUser']);
@@ -74,6 +76,14 @@ Route::prefix('dashboard')->group(function(){
             Route::put('/changePassword/{user}',[UserController::class,'changePassword']);
             Route::put('/updateProfileUser/{user}',[UserController::class,'updateProfileUser']);
             Route::get('/profileInfo/{user}',[UserController::class,'profileInfo']);
+        });
+        // product
+        Route::prefix('/product')->group(function(){
+            Route::get('/getProductsByUser/{user}',[ProductController::class,'getProductsByUser']);
+        });
+        // request estimate
+        Route::prefix('/request')->group(function(){
+            Route::get('/getRequestEstimateByUser/{user}',[RequestEstimateController::class,'getRequestEstimateByUser']);
         });
         Route::apiResources([
             'admin' => AdminController::class,

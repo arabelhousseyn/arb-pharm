@@ -33,7 +33,6 @@ class UserController extends Controller
      */
     public function store(insertUserRequest $request)
     {
-
         if($request->validated())
         {
             $user = User::create([
@@ -213,7 +212,7 @@ class UserController extends Controller
 
     public function profileInfo(User $user)
     {
-        $data = User::with('payments','products','requests','favorites','products.images')->whereId($user->id)->first();
-        return $data->only('profile_name','payments','get_profile','products','requests','favorites','code');
+        $data = User::with('payments')->whereId($user->id)->first();
+        return response($data->only('profile_name','payments','get_profile','code'),200);
     }
 }

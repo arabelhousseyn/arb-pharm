@@ -2,10 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{
-    Product,
-    ProductImages
-};
+use App\Models\{Product, ProductImages, User};
 use Illuminate\Http\Request;
 use App\Traits\uploads;
 use Auth,Validator;
@@ -130,5 +127,15 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         //
+    }
+
+    public function getProductsByUser(User $user)
+    {
+        $data = Product::select('id','description','user_id','created_at','technical_sheet_pdf')->with('images')->latest()->whereUserId($user->id)->paginate(9);
+        $subset = $data->map(function($value){
+            return $value->only('id','description','images','technical_sheet_pdf','creation_date');
+        });
+        $data->setCollection($subset);
+        return response($data,200);
     }
 }

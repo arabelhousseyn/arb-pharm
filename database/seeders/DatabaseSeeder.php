@@ -3,7 +3,13 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-
+use App\Models\{
+    User,
+    Product,
+    ProductImages,
+    RequestEstimate,
+    RequestEstimateImage
+};
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -13,6 +19,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+//        User::factory(10)->create();
+        Product::factory(10)->create();
+        ProductImages::factory(30)->create();
+        RequestEstimate::factory(30)->create();
+        RequestEstimateImage::factory(30)->create();
     }
 }

@@ -21,10 +21,10 @@
 
         <v-tabs-items v-model="tab">
             <v-tab-item value="tab-1">
-                <product-list-user :products="products" />
+                <product-list-user  />
             </v-tab-item>
             <v-tab-item value="tab-2">
-                <request-list-user :requests="requests" />
+                <request-list-user />
             </v-tab-item>
         </v-tabs-items>
     </div>
@@ -34,7 +34,6 @@
 import productListUser from './productListUser'
 import requestListUser from './requestListUser'
 export default {
-    props : ['products','favorites','requests'],
    data : () => {
        return{
            tab : null

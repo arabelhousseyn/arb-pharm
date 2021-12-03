@@ -30,7 +30,7 @@
 
                     <v-col cols="12" md="12">
                         <v-card elevation="0">
-                            <interaction-user :products="data.products" :favorites="data.favorites" :requests="data.requests" v-if="!overlay" />
+                            <interaction-user  v-if="!overlay" />
                         </v-card>
                     </v-col>
                 </v-row>

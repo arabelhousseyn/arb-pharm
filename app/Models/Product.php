@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Auth;
+use Carbon\Carbon;
 class Product extends Model
 {
     use HasFactory;
@@ -25,7 +26,7 @@ class Product extends Model
         'favorites'
     ];
 
-    protected $appends = ['rating','image','published_by','product_images','is_favorits','phone','my_favorits'];
+    protected $appends = ['rating','image','published_by','product_images','is_favorits','phone','my_favorits','creation_date'];
 
     public function images()
     {
@@ -93,5 +94,10 @@ class Product extends Model
             }
         }
         return $bool;
+    }
+
+    public function getCreationDateAttribute()
+    {
+        return Carbon::parse($this->created_at)->toDateTimeString();
     }
 }
