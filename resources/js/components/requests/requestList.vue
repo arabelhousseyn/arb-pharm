@@ -20,6 +20,7 @@
                         <v-card-text>
                             <p><span style="font-weight: bold;">Marque : </span> {{request.mark}} </p>
                             <p><span style="font-weight: bold;">Date creation : </span> {{request.creation_date}} </p>
+                            <p><span style="font-weight: bold;" >Crée par</span> : {{request.publishedBy}}</p>
                             <p> <v-chip v-if="request.is_available" color="success" >Disponible</v-chip>
                                 <v-chip v-if="!request.is_available" color="red" ><span style="color: white">Pas Disponible</span> </v-chip>
                             </p>

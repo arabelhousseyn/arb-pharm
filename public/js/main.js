@@ -1046,6 +1046,17 @@ __webpack_require__.r(__webpack_exports__);
       }];
       this.items = _info5;
     }
+
+    if (this.$route.path.includes('requests')) {
+      var _info6 = [{
+        text: 'Admin panel',
+        href: 'acceuil'
+      }, {
+        text: 'Demandes de devis',
+        href: '/requests'
+      }];
+      this.items = _info6;
+    }
   }
 });
 
@@ -1529,6 +1540,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _dialog__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./dialog */ "./resources/js/components/requests/dialog.vue");
+//
 //
 //
 //
@@ -45768,6 +45780,15 @@ var render = function () {
                             [_vm._v("Date creation : ")]
                           ),
                           _vm._v(" " + _vm._s(request.creation_date) + " "),
+                        ]),
+                        _vm._v(" "),
+                        _c("p", [
+                          _c(
+                            "span",
+                            { staticStyle: { "font-weight": "bold" } },
+                            [_vm._v("Crée par")]
+                          ),
+                          _vm._v(" : " + _vm._s(request.publishedBy)),
                         ]),
                         _vm._v(" "),
                         _c(

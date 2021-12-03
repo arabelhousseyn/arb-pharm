@@ -150,7 +150,12 @@ class User extends Authenticatable
 
     public function getCodeAttribute()
     {
-        return $this->codeActivity->code;
+        if($this->codeActivity)
+        {
+            return $this->codeActivity->code;
+        }else{
+            return '';
+        }
     }
 
 }

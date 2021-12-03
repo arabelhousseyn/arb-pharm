@@ -125,6 +125,21 @@
              this.items = info
          }
 
+         if(this.$route.path.includes('requests'))
+         {
+             let info = [
+                 {
+                     text: 'Admin panel',
+                     href: 'acceuil',
+                 },
+                 {
+                     text: 'Demandes de devis',
+                     href: '/requests',
+                 }
+             ]
+             this.items = info
+         }
+
      }
  }
 </script>

@@ -7,5 +7,10 @@
     </div>
 </template>
 <script>
-
+ export default {
+     created() {
+         Echo.channel('events')
+             .listen('UserRegistration', (e) => console.log('UserRegistration: ' + e.message));
+     }
+ }
 </script>
