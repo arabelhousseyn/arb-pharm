@@ -37,6 +37,30 @@
                         </v-list-item-content>
                     </v-list-item>
                 </router-link>
+
+                <router-link to="/products">
+                    <v-list-item link>
+                        <v-list-item-icon>
+                            <v-icon>mdi-package-variant</v-icon>
+                        </v-list-item-icon>
+
+                        <v-list-item-content>
+                            <v-list-item-title>Produits</v-list-item-title>
+                        </v-list-item-content>
+                    </v-list-item>
+                </router-link>
+
+                <router-link to="/requests">
+                    <v-list-item link>
+                        <v-list-item-icon>
+                            <v-icon>mdi-hand-heart</v-icon>
+                        </v-list-item-icon>
+
+                        <v-list-item-content>
+                            <v-list-item-title>Demandes de devis</v-list-item-title>
+                        </v-list-item-content>
+                    </v-list-item>
+                </router-link>
             </v-list>
         </v-navigation-drawer>
         <appbar-component @toggle="toggle" />

@@ -17,17 +17,19 @@
 
             <v-card>
                 <v-list>
-                    <v-list-item>
-                        <v-list-item-avatar>
-                            <v-img
-                                src="../assets/profile.png"
-                            ></v-img>
-                        </v-list-item-avatar>
-
-                        <v-list-item-content>
-                            <v-list-item-title>{{$store.state.user.fname}}</v-list-item-title>
-                            <v-list-item-subtitle>Admin</v-list-item-subtitle>
-                        </v-list-item-content>                    </v-list-item>
+                        <v-list-item>
+                                <v-list-item-avatar>
+                                    <v-img
+                                        src="../assets/profile.png"
+                                    ></v-img>
+                                </v-list-item-avatar>
+                            <router-link to="/profile">
+                                <v-list-item-content>
+                                    <v-list-item-title>{{$store.state.user.fname}}</v-list-item-title>
+                                    <v-list-item-subtitle>Admin</v-list-item-subtitle>
+                                </v-list-item-content>
+                            </router-link>
+                        </v-list-item>
                 </v-list>
 
                 <v-divider></v-divider>

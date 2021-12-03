@@ -11,7 +11,7 @@
                 </v-card-title>
 
                 <v-card-text>
-                    si vous êtes sûr de supprimer appuyer sur <span style="font-weight: bold">accepter</span> sinon <span style="font-weight: bold">annuler</span>
+                    si vous êtes sûr de supprimé appuyer sur <span style="font-weight: bold">accepté</span> sinon <span style="font-weight: bold">annulé</span>
                 </v-card-text>
 
                 <v-card-actions>
@@ -23,7 +23,7 @@
                         @click="handle2"
                         :disabled="isloading"
                     >
-                        Annuler
+                        Annulé
                     </v-btn>
 
                     <v-btn
@@ -32,7 +32,7 @@
                         @click="handle"
                     >
                         <v-progress-circular indeterminate color="primary" v-if="isloading"></v-progress-circular>
-                        <span v-else>Accepter</span>
+                        <span v-else>Accepté</span>
                     </v-btn>
                 </v-card-actions>
             </v-card>

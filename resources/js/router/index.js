@@ -29,6 +29,18 @@ const routes = [
         component: () => import(/* webpackChunkName: "main" */ '../pages/userProfilePage.vue')
     },
     {
+        path : '/products',
+        component: () => import(/* webpackChunkName: "main" */ '../pages/productPage.vue')
+    },
+    {
+        path : '/requests',
+        component: () => import(/* webpackChunkName: "main" */ '../pages/RequestPage.vue')
+    },
+    {
+        path : '/profile',
+        component: () => import(/* webpackChunkName: "main" */ '../pages/profileAdmin.vue')
+    },
+    {
         path : '*',
         component: () => import(/* webpackChunkName: "main" */ '../views/notfound.vue')
     },

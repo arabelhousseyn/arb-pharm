@@ -33,7 +33,7 @@
              this.items = info
          }
 
-         if(this.$route.path.includes('admin/update'))
+         if(this.$route.path.includes('admin/update') || this.$route.path.includes('profile'))
          {
              let info = [
                  {
@@ -105,6 +105,21 @@
                      text: 'Profile',
                      disabled : true,
                      href: 'admin',
+                 }
+             ]
+             this.items = info
+         }
+
+         if(this.$route.path.includes('products'))
+         {
+             let info = [
+                 {
+                     text: 'Admin panel',
+                     href: 'acceuil',
+                 },
+                 {
+                     text: 'Produits',
+                     href: '/products',
                  }
              ]
              this.items = info

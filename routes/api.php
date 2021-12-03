@@ -81,14 +81,18 @@ Route::prefix('dashboard')->group(function(){
         Route::prefix('/product')->group(function(){
             Route::get('/getProductsByUser/{user}',[ProductController::class,'getProductsByUser']);
             Route::get('/getFavoritsProductsUser/{user}',[ProductController::class,'getFavoritsProductsUser']);
+            Route::get('/getAllProducts',[ProductController::class,'getAllProducts']);
         });
         // request estimate
         Route::prefix('/request')->group(function(){
             Route::get('/getRequestEstimateByUser/{user}',[RequestEstimateController::class,'getRequestEstimateByUser']);
+            Route::get('/getAllRequestsEstimate',[RequestEstimateController::class,'getAllRequestsEstimate']);
         });
         Route::apiResources([
             'admin' => AdminController::class,
             'user' => UserController::class,
+            'product' => ProductController::class,
+            'request' => RequestEstimateController::class,
         ]);
     });
 });

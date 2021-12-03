@@ -148,14 +148,21 @@ export default {
         snackBar
     },
     created() {
-        let req = axios.get(`/api/dashboard/admin/${this.$route.params.id}`,{headers : { 'Authorization' : 'Bearer ' + this.$store.state.token }})
-        req.then(e=>{
-            this.data = e.data
-            this.overlay = false
-        })
-        req.catch(err =>{
-            console.log(err)
-        })
+        let req;
+        if(this.$route.path.includes('profile'))
+        {
+             req = axios.get(`/api/dashboard/admin/${this.$store.state.user.id}`,{headers : { 'Authorization' : 'Bearer ' + this.$store.state.token }})
+        }else{
+             req = axios.get(`/api/dashboard/admin/${this.$route.params.id}`,{headers : { 'Authorization' : 'Bearer ' + this.$store.state.token }})
+        }
+            req.then(e=>{
+                this.data = e.data
+                this.overlay = false
+            })
+            req.catch(err =>{
+                console.log(err)
+            })
+
     }
 }
 </script>

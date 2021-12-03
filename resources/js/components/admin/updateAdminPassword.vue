@@ -105,7 +105,15 @@ export default {
         {
             this.disable = true
             this.isLoading = true
-            let req  = axios.put(`/api/dashboard/admin/changePassword/${this.$route.params.id}`,this.data,{headers : { 'Authorization' : 'Bearer ' + this.$store.state.token }})
+
+            let req;
+            if(this.$route.path.includes('profile'))
+            {
+                req = axios.put(`/api/dashboard/admin/changePassword/${this.$store.state.user.id}`,this.data,{headers : { 'Authorization' : 'Bearer ' + this.$store.state.token }})
+
+            }else{
+                req = axios.put(`/api/dashboard/admin/changePassword/${this.$route.params.id}`,this.data,{headers : { 'Authorization' : 'Bearer ' + this.$store.state.token }})
+            }
             req.then(e=>{
                 if (e.status == 200) {
                     this.disable = false

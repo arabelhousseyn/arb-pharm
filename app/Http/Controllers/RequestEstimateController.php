@@ -28,15 +28,6 @@ class RequestEstimateController extends Controller
         return response($subset,200);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -100,16 +91,6 @@ class RequestEstimateController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\RequestEstimate  $requestEstimate
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(RequestEstimate $requestEstimate)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -129,18 +110,26 @@ class RequestEstimateController extends Controller
      * @param  \App\Models\RequestEstimate  $requestEstimate
      * @return \Illuminate\Http\Response
      */
-    public function destroy(RequestEstimate $requestEstimate)
+    public function destroy($request_estimate_id)
     {
-        //
+       RequestEstimate::whereId($request_estimate_id)->delete();
+       return response(['success' => true],200);
     }
 
     public function getRequestEstimateByUser(User $user)
     {
-        $data = RequestEstimate::with('images')->latest()->whereuserId($user->id)->paginate(9);
+        $data = RequestEstimate::with('images')->latest()->whereUserId($user->id)->paginate(9);
         $subset = $data->map(function($value){
             return $value->only('id','amount','images_request','is_available','mark','product_name','creation_date');
         });
         $data->setCollection($subset);
         return response($data,200);
     }
+
+    public function getAllRequestsEstimate()
+    {
+        $data = RequestEstimate::with('images')->latest('id')->paginate(9);
+        return response($data,200);
+    }
+
 }
