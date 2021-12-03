@@ -6,18 +6,10 @@
                     <v-card class="mx-auto" max-width="344">
                         <v-carousel hide-delimiters>
                             <v-carousel-item
-                                v-if="product.image != ''"
                                 v-for="(image,i) in product.images"
                                 :key="i"
                                 :src="image.path"
                             >
-                            </v-carousel-item>
-
-                            <v-carousel-item
-                                 v-else
-                                src="https://via.placeholder.com/300"
-                            >
-                                hi
                             </v-carousel-item>
                         </v-carousel>
 
@@ -54,6 +46,12 @@
                 ></v-pagination>
             </div>
         </v-container>
+        <v-overlay v-if="overlay">
+            <v-progress-circular
+                indeterminate
+                size="64"
+            ></v-progress-circular>
+        </v-overlay>
     </div>
 </template>
 
@@ -61,6 +59,7 @@
  export default {
      data : () => {
          return {
+             overlay : true,
              page : 1,
              products : [],
              numberPage : 0,
@@ -87,6 +86,7 @@
          req.then(e=>{
              this.products = e.data.data
              this.numberPage = e.data.last_page
+             this.overlay = false
          })
          req.catch(err => {
              console.log(err)

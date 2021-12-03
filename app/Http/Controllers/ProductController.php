@@ -138,4 +138,17 @@ class ProductController extends Controller
         $data->setCollection($subset);
         return response($data,200);
     }
+
+    public function getFavoritsProductsUser(User $user)
+    {
+        $data = User::with('favorites.product','favorites.product.images','favorites')->whereId($user->id)->first();
+        $fav = $data->favorites;
+        $fav = $fav->map(function($value){
+            return $value->only('creation_date','product');
+        });
+
+        return response($fav,200);
+    }
+
+
 }

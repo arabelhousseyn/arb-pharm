@@ -17,6 +17,11 @@
                 Demandes de devis
                 <v-icon>mdi-hand-heart</v-icon>
             </v-tab>
+
+            <v-tab href="#tab-3">
+                Produits favoris
+                <v-icon>mdi-heart</v-icon>
+            </v-tab>
         </v-tabs>
 
         <v-tabs-items v-model="tab">
@@ -26,6 +31,10 @@
             <v-tab-item value="tab-2">
                 <request-list-user />
             </v-tab-item>
+
+            <v-tab-item value="tab-3">
+                <favorit-products />
+            </v-tab-item>
         </v-tabs-items>
     </div>
 </template>
@@ -33,6 +42,7 @@
 <script>
 import productListUser from './productListUser'
 import requestListUser from './requestListUser'
+import favoritProducts from "./favoritProducts"
 export default {
    data : () => {
        return{
@@ -41,7 +51,8 @@ export default {
    },
     components : {
         productListUser,
-        requestListUser
+        requestListUser,
+        favoritProducts
     }
 
 }

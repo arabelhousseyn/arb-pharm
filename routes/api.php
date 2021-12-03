@@ -80,6 +80,7 @@ Route::prefix('dashboard')->group(function(){
         // product
         Route::prefix('/product')->group(function(){
             Route::get('/getProductsByUser/{user}',[ProductController::class,'getProductsByUser']);
+            Route::get('/getFavoritsProductsUser/{user}',[ProductController::class,'getFavoritsProductsUser']);
         });
         // request estimate
         Route::prefix('/request')->group(function(){

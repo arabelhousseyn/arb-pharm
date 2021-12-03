@@ -8,7 +8,8 @@ use App\Models\{
     Product,
     ProductImages,
     RequestEstimate,
-    RequestEstimateImage
+    RequestEstimateImage,
+    ProductUser
 };
 class DatabaseSeeder extends Seeder
 {
@@ -24,5 +25,6 @@ class DatabaseSeeder extends Seeder
         ProductImages::factory(30)->create();
         RequestEstimate::factory(30)->create();
         RequestEstimateImage::factory(30)->create();
+        ProductUser::factory(30)->create();
     }
 }
