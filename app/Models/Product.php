@@ -67,7 +67,7 @@ class Product extends Model
 
     public function getPublishedByAttribute()
     {
-        return ($this->user->profile) ? $this->user->profile->commercial_name : '';
+        return ($this->user->profile != null) ? $this->user->profile->commercial_name : '';
     }
 
     public function getPhoneAttribute()

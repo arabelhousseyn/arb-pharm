@@ -94,6 +94,37 @@ class User extends Authenticatable
         return $this->hasMany(RequestEstimate::class);
     }
 
+    public static function boot() {
+        parent::boot();
+        self::deleting(function($user) {
+            $user->profile()->each(function($profile) {
+                $profile->delete();
+            });
+
+            $user->codeActivity()->each(function($codeActivity) {
+                $codeActivity->delete();
+            });
+
+            $user->payments()->each(function($payment) {
+                $payment->delete();
+            });
+
+            $user->products()->each(function($product) {
+                $product->delete();
+            });
+
+            $user->favorites()->each(function($favorite) {
+                $favorite->delete();
+            });
+
+            $user->requests()->each(function($request) {
+                $request->delete();
+            });
+
+
+        });
+    }
+
 
 
 

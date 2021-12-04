@@ -2034,9 +2034,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   }
                 });
                 _context.next = 9;
-                return req.then(function (e) {
-                  _this.$store.commit('SET_INFOS', e.data);
-                });
+                return req.then(function (e) {});
 
               case 9:
                 req["catch"](function (err) {
@@ -3744,6 +3742,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         this.selected = [];
         this.open = false;
         this.disabled = true;
+        this.switch1 = true;
+        this.switch2 = true;
       }
     },
     close2: function close2() {

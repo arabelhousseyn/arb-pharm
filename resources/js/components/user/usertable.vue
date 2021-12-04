@@ -118,6 +118,8 @@ export default {
                 this.selected = []
                 this.open = false
                 this.disabled = true
+                this.switch1 = true
+                this.switch2 = true
             }
         },
         close2()

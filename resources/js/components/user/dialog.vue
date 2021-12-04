@@ -55,7 +55,7 @@ export default {
             for (let selected of this.selected) {
                 let req  = axios.delete(`/api/dashboard/user/${selected.id}`,{headers : { 'Authorization' : 'Bearer ' + this.$store.state.token }})
                 await req.then(e=>{
-                    this.$store.commit('SET_INFOS',e.data)
+
                 })
                 req.catch(err => {
                     console.log(err)
