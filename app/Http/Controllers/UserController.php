@@ -71,7 +71,7 @@ class UserController extends Controller
                     'path' => $path
                 ]);
             }
-            $usr = User::find($user)->first();
+            $usr = User::find($user->id)->first();
             $usr['success'] = true;
             return response(['success' => true],201);
 
