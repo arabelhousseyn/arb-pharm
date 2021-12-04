@@ -1,5 +1,6 @@
 <template>
-    <div>
+<div>
+    <div v-if="products.length > 0">
         <v-container fluid>
             <v-row>
                 <v-col v-for="(product,index) in products" :key="index" cols="12" md="4">
@@ -23,13 +24,13 @@
                         </v-card-text>
 
                         <v-card-actions>
-                                    <v-btn  @click="download(product.technical_sheet_pdf)" color="#F40F02">
-                                        <v-icon color="white">mdi-file-download</v-icon>
-                                    </v-btn>
+                            <v-btn  @click="download(product.technical_sheet_pdf)" color="#F40F02">
+                                <v-icon color="white">mdi-file-download</v-icon>
+                            </v-btn>
 
-                                    <v-btn @click="remove(product.id)" color="red">
-                                        <v-icon color="white">mdi-minus</v-icon>
-                                    </v-btn>
+                            <v-btn @click="remove(product.id)" color="red">
+                                <v-icon color="white">mdi-minus</v-icon>
+                            </v-btn>
                         </v-card-actions>
                     </v-card>
                 </v-col>
@@ -54,10 +55,16 @@
         </v-overlay>
         <dialogComp :dialog="open" :id="id" v-on:close="close" v-on:close2="close2" />
     </div>
+    <div v-else>
+        <not-data/>
+    </div>
+</div>
 </template>
 
 <script>
 import dialogComp from "./dialog"
+import noData from '../notData'
+import NotData from "../notData";
 export default {
     data : () => {
         return {
@@ -69,7 +76,7 @@ export default {
             numberPage : 0,
         }
     },
-    components : {dialogComp},
+    components : {NotData, dialogComp},
     methods : {
         paginate()
         {

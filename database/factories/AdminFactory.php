@@ -19,7 +19,7 @@ class AdminFactory extends Factory
             'email' => $this->faker->email,
             'username' => $this->faker->userName,
             'phone' => $this->faker->phoneNumber,
-            'password' => Hash::make('password')
+            'password' => Hash::make('hocine.12')
         ];
     }
 }

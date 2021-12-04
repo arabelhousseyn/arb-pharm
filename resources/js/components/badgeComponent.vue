@@ -21,7 +21,7 @@ import io from 'socket.io-client'
         }
     },
      created() {
-        this.socket = io('http://arbpharm.com/arbnode/')
+        this.socket = io('https://arbpharm.com/arbnode/')
          let req  = axios.get('/api/dashboard/admin/notification',{headers : { 'Authorization' : 'Bearer ' + this.$store.state.token }})
          req.then(e=>{
              this.notifications = e.data.notifications

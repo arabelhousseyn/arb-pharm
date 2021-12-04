@@ -44,10 +44,10 @@ export default {
       let token = document.head.querySelector("meta[name='bhr']").content
       this.$store.commit('SET_TOKEN',token)
       this.$store.commit('SET_USER',this.user)
-
-      if(this.$route.path.includes('login'))
+      console.log(window.location.href)
+      if(window.location.href.includes('/login'))
       {
-          location.href = '/acceuil'
+          window.location.href = '/acceuil'
       }
 
       let req  = axios.get('/api/dashboard/getInformations',{headers : { 'Authorization' : 'Bearer ' + this.$store.state.token }})
