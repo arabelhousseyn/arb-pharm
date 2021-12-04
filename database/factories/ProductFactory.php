@@ -14,7 +14,7 @@ class ProductFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => 11,
+            'user_id' => $this->faker->numberBetween(1,10),
             'description' => $this->faker->realText,
             'technical_sheet_pdf' => 'https://arb.arbpharm.com/storage/app/public/technical_sheet/61a4a80a84cf7.pdf'
         ];

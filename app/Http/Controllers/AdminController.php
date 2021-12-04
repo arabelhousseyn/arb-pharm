@@ -150,4 +150,12 @@ class AdminController extends Controller
             return response($response,422);
         }
     }
+
+    public function notification()
+    {
+        $admin = Admin::whereId(Auth::id())->first();
+        $notifications = $admin->notifications;
+        return response(['notifications' => $notifications,'count' => count($notifications)],200);
+    }
+
 }

@@ -45,6 +45,11 @@ export default {
       this.$store.commit('SET_TOKEN',token)
       this.$store.commit('SET_USER',this.user)
 
+      if(this.$route.path.includes('login'))
+      {
+          location.href = '/acceuil'
+      }
+
       let req  = axios.get('/api/dashboard/getInformations',{headers : { 'Authorization' : 'Bearer ' + this.$store.state.token }})
        req.then(e=>{
           this.$store.commit('SET_INFOS',e.data)

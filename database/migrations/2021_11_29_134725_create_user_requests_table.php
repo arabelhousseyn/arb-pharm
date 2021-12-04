@@ -21,6 +21,7 @@ class CreateUserRequestsTable extends Migration
             $table->integer('amount');
             $table->string('mark');
             $table->double('price');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

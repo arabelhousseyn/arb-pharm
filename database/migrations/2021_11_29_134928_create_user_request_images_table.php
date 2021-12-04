@@ -17,6 +17,7 @@ class CreateUserRequestImagesTable extends Migration
             $table->id();
             $table->foreignId('user_request_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->string('path');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -68,6 +68,7 @@ Route::prefix('dashboard')->group(function(){
         // admin
         Route::prefix('/admin')->group(function(){
             Route::put('/changePassword/{admin}',[AdminController::class,'changePassword']);
+            Route::get('/notification',[AdminController::class,'notification']);
         });
         // user
         Route::prefix('/user')->group(function() {

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Admin;
 use Auth;
 use Validator;
 class LoginController extends Controller
@@ -43,17 +44,5 @@ class LoginController extends Controller
              }
 
          }
-    }
-
-    public function login(Request $request)
-    {
-        $rules = [
-            'email' => 'required|email:rfc,dns,filter',
-            'password' => 'required'
-        ];
-        $credinalts = $request->validate($rules);
-
-
-        return (Auth::guard('admin')->attempt($credinalts)) ? response(Auth::guard('admin')->user(),200) : response(['success' => false],200);
     }
 }

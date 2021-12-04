@@ -14,7 +14,7 @@ class RequestEstimateFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => 11,
+            'user_id' => $this->faker->numberBetween(1,10),
             'product_name' => $this->faker->text,
             'amount' => $this->faker->numberBetween(10,50),
             'mark' => $this->faker->text,
