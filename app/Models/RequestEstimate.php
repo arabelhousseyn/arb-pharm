@@ -42,12 +42,7 @@ class RequestEstimate extends Model
 
     public function getPublishedByAttribute()
     {
-        if($this->user)
-        {
-            return $this->user->profile->commercial_name;
-        }else{
-            return '';
-        }
+        return ($this->user->profile) ? $this->user->profile->commercial_name : '';
     }
 
     public function getImageAttribute()
