@@ -3,7 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\{Admin, User, Product, ProductImages, RequestEstimate, RequestEstimateImage, ProductUser, UserProfile};
+use App\Models\{Admin, User, Product, ProductImages, RequestEstimate, RequestEstimateImage, ProductUser, UserProfile,
+ProductRating,UserActivityCode,UserPayment};
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -21,5 +22,8 @@ class DatabaseSeeder extends Seeder
         RequestEstimate::factory(30)->create();
         RequestEstimateImage::factory(30)->create();
         ProductUser::factory(10)->create();
+        ProductRating::factory(10)->create();
+        UserActivityCode::factory(10)->create();
+        UserPayment::factory(10)->create();
     }
 }
