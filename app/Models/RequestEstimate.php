@@ -30,6 +30,19 @@ class RequestEstimate extends Model
     ];
     protected $appends = ['image','publishedBy','images_request','creation_date'];
 
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function images()
+    {
+        return $this->hasMany(RequestEstimateImage::class);
+    }
+
+
+
     public function getImagesRequestAttribute()
     {
         return $this->images;
@@ -50,13 +63,12 @@ class RequestEstimate extends Model
         return (count($this->images) == 0) ? '' : $this->images[0]->path;
     }
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    public function images()
-    {
-        return $this->hasMany(RequestEstimateImage::class);
+    public static function boot() {
+        parent::boot();
+        self::deleting(function($RequestEstimate) {
+            $RequestEstimate->images()->each(function($image) {
+                $image->delete();
+            });
+        });
     }
 }
