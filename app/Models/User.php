@@ -120,8 +120,6 @@ class User extends Authenticatable
             $user->requests()->each(function($request) {
                 $request->delete();
             });
-
-
         });
     }
 

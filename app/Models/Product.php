@@ -50,6 +50,22 @@ class Product extends Model
         return $this->hasMany(ProductUser::class);
     }
 
+
+    public static function boot() {
+        parent::boot();
+        self::deleting(function($product) {
+            $product->images()->each(function($image) {
+                $image->delete();
+            });
+            $product->ratings()->each(function($rating) {
+                $rating->delete();
+            });
+            $product->favorites()->each(function($favorite) {
+                $favorite->delete();
+            });
+        });
+    }
+
     public function getMyFavoritsAttribute()
     {
         return $this->favorites;
