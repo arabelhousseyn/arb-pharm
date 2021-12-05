@@ -15,7 +15,7 @@ class CreateUserActivityCodesTable extends Migration
     {
         Schema::create('user_activity_codes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('user_id')->unique()->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->string('code');
             $table->softDeletes();
             $table->timestamps();
