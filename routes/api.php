@@ -34,7 +34,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 //// mobile api
 Route::prefix('mobile')->group(function(){
-    Route::get('/version',[checkAppVersionController::class,'index']);
+    Route::get('/version',[checkAppVersionController::class,'mobile']);
     /// register
     Route::post('/register',[RegisterController::class,'register']);
     /// login
@@ -59,7 +59,6 @@ Route::prefix('mobile')->group(function(){
 /// dasbhaord api
 
 Route::prefix('dashboard')->group(function(){
-
 
     Route::group(['middleware' => 'auth:sanctum'],function(){
         //

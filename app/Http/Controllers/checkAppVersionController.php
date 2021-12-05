@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 use DB;
 class checkAppVersionController extends Controller
 {
-    public function index()
+    public function mobile()
     {
-       $data = DB::table('useful_data')->where('idname','app1_v')->first();
-       return response((array)$data,200);
+
+       return response(['mobile_version' => env('APP_VERSION_MOBILE')],200);
     }
 }
