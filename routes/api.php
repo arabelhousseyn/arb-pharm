@@ -30,6 +30,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
+Route::get('/testbroadcast',function(){
+    event(new \App\Events\NewUser('test'));
+    return 'yes';
+});
+
 
 
 //// mobile api
