@@ -14,7 +14,7 @@ class UserProfileFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => $this->faker->numberBetween(1,10),
+            'user_id' => $this->faker->unique()->numberBetween(1,10),
             'commercial_name' => $this->faker->name,
             'num_rc' => $this->faker->numberBetween(100,1000),
             'nif' => $this->faker->text(5),
