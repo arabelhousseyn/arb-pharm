@@ -15,7 +15,7 @@ class RequestEstimateImageFactory extends Factory
     {
         return [
             'request_estimate_id' => $this->faker->numberBetween(1,30),
-            'path' => $this->faker->image
+            'path' => 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg'
         ];
     }
 }

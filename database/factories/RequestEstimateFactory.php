@@ -15,9 +15,9 @@ class RequestEstimateFactory extends Factory
     {
         return [
             'user_id' => $this->faker->numberBetween(1,10),
-            'product_name' => $this->faker->text,
+            'product_name' => $this->faker->name,
             'amount' => $this->faker->numberBetween(10,50),
-            'mark' => $this->faker->text,
+            'mark' => 'none',
             'is_available' => $this->faker->boolean
         ];
     }
