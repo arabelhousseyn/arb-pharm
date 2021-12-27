@@ -26,7 +26,8 @@ class User extends Authenticatable
         'token',
         'days',
         'type',
-        'activated_at'
+        'activated_at',
+        'expired_at'
     ];
 
     /**
@@ -45,7 +46,7 @@ class User extends Authenticatable
         'activated_at',
         'profile',
         'activated_at',
-        'days',
+        'expired_at',
     ];
 
     /**
