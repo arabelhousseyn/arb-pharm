@@ -9,19 +9,38 @@
                 Activation
             </v-card-title>
             <v-card-text>
-                <v-select
-                    @change="check"
-                    v-model="selection"
-                    :items="select"
-                    label="Sélectionné le nombre de jours"
-                    item-value="text"
-                ></v-select>
+
+                <v-menu
+                    v-model="menu2"
+                    :close-on-content-click="false"
+                    :nudge-right="40"
+                    transition="scale-transition"
+                    offset-y
+                    min-width="auto"
+                >
+                    <template v-slot:activator="{ on, attrs }">
+                        <v-text-field
+                            v-model="date"
+                            label="Date d'expiration"
+                            prepend-icon="mdi-calendar"
+                            readonly
+                            v-bind="attrs"
+                            v-on="on"
+                        ></v-text-field>
+                    </template>
+                    <v-date-picker
+                        :min="min"
+                        v-model="date"
+                        @input="menu2 = false"
+                    ></v-date-picker>
+                </v-menu>
 
                 <v-select
+                    prepend-icon="mdi-form-select"
                     @change="check"
                     v-model="type"
                     :items="select2"
-                    label="Type d'abonnement"
+                    label="Catégorie"
                     item-value="text"
                 ></v-select>
             </v-card-text>
@@ -53,16 +72,15 @@ export default {
     data () {
         return {
             disable : true,
-            selection : null,
             type : null,
-            select: [
-                { text: 30 }
-            ],
+            date: (new Date()).toISOString().substr(0, 10),
+            menu2: false,
             select2: [
                 { text: 'A' },
                 { text: 'R' },
                 { text: 'B' },
             ],
+            min : (new Date()).toISOString().substr(0, 10),
         }
     },
     methods : {
@@ -77,7 +95,7 @@ export default {
         activate()
         {
             let data = {
-                days : this.selection,
+                date : this.date,
                 type : this.type
             }
             let req  = axios.put(`/api/dashboard/user/activateUser/${this.selected[0].id}`,data,{headers : { 'Authorization' : 'Bearer ' + this.$store.state.token }})

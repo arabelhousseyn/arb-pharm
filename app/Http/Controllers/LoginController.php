@@ -22,7 +22,7 @@ class LoginController extends Controller
 
          if($valiadator->validated())
          {
-             if($request->has_phone == true)
+             if($request->has_phone)
              {
                  $rules = [
                      'phone' => 'required|digits:10',

@@ -1770,23 +1770,41 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['dialog', 'selected'],
   data: function data() {
     return {
       disable: true,
-      selection: null,
       type: null,
-      select: [{
-        text: 30
-      }],
+      date: new Date().toISOString().substr(0, 10),
+      menu2: false,
       select2: [{
         text: 'A'
       }, {
         text: 'R'
       }, {
         text: 'B'
-      }]
+      }],
+      min: new Date().toISOString().substr(0, 10)
     };
   },
   methods: {
@@ -1800,7 +1818,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var data = {
-        days: this.selection,
+        date: this.date,
         type: this.type
       };
       var req = axios.put("/api/dashboard/user/activateUser/".concat(this.selected[0].id), data, {
@@ -46119,26 +46137,86 @@ var render = function () {
           _c(
             "v-card-text",
             [
-              _c("v-select", {
-                attrs: {
-                  items: _vm.select,
-                  label: "Sélectionné le nombre de jours",
-                  "item-value": "text",
-                },
-                on: { change: _vm.check },
-                model: {
-                  value: _vm.selection,
-                  callback: function ($$v) {
-                    _vm.selection = $$v
+              _c(
+                "v-menu",
+                {
+                  attrs: {
+                    "close-on-content-click": false,
+                    "nudge-right": 40,
+                    transition: "scale-transition",
+                    "offset-y": "",
+                    "min-width": "auto",
                   },
-                  expression: "selection",
+                  scopedSlots: _vm._u([
+                    {
+                      key: "activator",
+                      fn: function (ref) {
+                        var on = ref.on
+                        var attrs = ref.attrs
+                        return [
+                          _c(
+                            "v-text-field",
+                            _vm._g(
+                              _vm._b(
+                                {
+                                  attrs: {
+                                    label: "Date d'expiration",
+                                    "prepend-icon": "mdi-calendar",
+                                    readonly: "",
+                                  },
+                                  model: {
+                                    value: _vm.date,
+                                    callback: function ($$v) {
+                                      _vm.date = $$v
+                                    },
+                                    expression: "date",
+                                  },
+                                },
+                                "v-text-field",
+                                attrs,
+                                false
+                              ),
+                              on
+                            )
+                          ),
+                        ]
+                      },
+                    },
+                  ]),
+                  model: {
+                    value: _vm.menu2,
+                    callback: function ($$v) {
+                      _vm.menu2 = $$v
+                    },
+                    expression: "menu2",
+                  },
                 },
-              }),
+                [
+                  _vm._v(" "),
+                  _c("v-date-picker", {
+                    attrs: { min: _vm.min },
+                    on: {
+                      input: function ($event) {
+                        _vm.menu2 = false
+                      },
+                    },
+                    model: {
+                      value: _vm.date,
+                      callback: function ($$v) {
+                        _vm.date = $$v
+                      },
+                      expression: "date",
+                    },
+                  }),
+                ],
+                1
+              ),
               _vm._v(" "),
               _c("v-select", {
                 attrs: {
+                  "prepend-icon": "mdi-form-select",
                   items: _vm.select2,
-                  label: "Type d'abonnement",
+                  label: "Catégorie",
                   "item-value": "text",
                 },
                 on: { change: _vm.check },

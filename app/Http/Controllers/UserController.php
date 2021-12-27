@@ -123,7 +123,7 @@ class UserController extends Controller
     public function activateUser(Request $request,User $user)
     {
         $rules = [
-            'days' => 'required',
+            'date' => 'required',
             'type' => 'required'
         ];
         $validation = $request->validate($rules);
@@ -131,7 +131,7 @@ class UserController extends Controller
         {
             $user->update([
                 'activated_at' => Carbon::now(),
-                'days' => strval($request->days),
+                'expired_at' => $request->date,
                 'type' => strval($request->type)
             ]);
             return response(['success' => true],200);
