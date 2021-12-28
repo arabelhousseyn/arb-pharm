@@ -43,10 +43,8 @@ class User extends Authenticatable
         'deleted_at',
         'email_verified_at',
         'codeActivity',
-        'activated_at',
         'profile',
-        'activated_at',
-        'expired_at',
+        'activated_at'
     ];
 
     /**
@@ -95,6 +93,11 @@ class User extends Authenticatable
         return $this->hasMany(RequestEstimate::class);
     }
 
+    public function subscribeHistory()
+    {
+        return $this->hasMany(UserSubscribe::class);
+    }
+
     public static function boot() {
         parent::boot();
         self::deleting(function($user) {
@@ -129,14 +132,13 @@ class User extends Authenticatable
 
     public function getIsActiveAttribute()
     {
-        if($this->activated_at == null)
+        if($this->activated_at == null && $this->expired_at == null)
         {
             return false;
         }else{
             $now = Carbon::now();
             $activation_date = Carbon::parse($this->activated_at);
-            $days = $now->diffInDays($activation_date);
-            if($days > $this->days)
+            if($activation_date > $this->expired_at)
             {
                 return false;
             }else{
@@ -152,14 +154,14 @@ class User extends Authenticatable
 
     public function getActivationAttribute()
     {
-        if($this->activated_at == null)
+
+        if($this->activated_at == null && $this->expired_at == null)
         {
             return 'Non activé';
         }else{
             $now = Carbon::now();
             $activation_date = Carbon::parse($this->activated_at);
-            $days = $now->diffInDays($activation_date);
-            if($days > $this->days)
+            if($activation_date > $this->expired_at)
             {
                 return 'Expiré';
             }else{
@@ -170,7 +172,7 @@ class User extends Authenticatable
 
     public function getActivationDateAttribute()
     {
-        return ($this->activated_at == null) ? '/' : Carbon::parse($this->activated_at)->toDateString();
+        return ($this->activated_at == null) ? '' : Carbon::parse($this->activated_at)->toDateString();
     }
 
     public function getGetProfileAttribute()

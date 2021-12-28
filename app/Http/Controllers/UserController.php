@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{User, UserPayment, UserProfile,UserActivityCode};
+use App\Models\{User, UserPayment, UserProfile,UserActivityCode,UserSubscribe};
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Str,Hash;
@@ -20,7 +20,7 @@ class UserController extends Controller
     {
         $data = User::orderByDesc('created_at')->get();
         $data = $data->map(function($value){
-            return $value->only('id','phone','email','date_creation','activation','is_active','type','activation_date');
+            return $value->only('id','phone','email','date_creation','activation','is_active','type','activation_date','expired_at');
         });
         return response($data,200);
     }
@@ -86,7 +86,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return $user;
+        return response($user,200);
     }
 
     /**
@@ -134,6 +134,13 @@ class UserController extends Controller
                 'expired_at' => $request->date,
                 'type' => strval($request->type)
             ]);
+
+            UserSubscribe::insert([
+                'user_id' => $user->id,
+                'activated_at' => Carbon::now(),
+                'expired_at' => $request->date,
+            ]);
+
             return response(['success' => true],200);
         }
 
@@ -214,5 +221,11 @@ class UserController extends Controller
     {
         $data = User::with('payments')->whereId($user->id)->first();
         return response($data->only('profile_name','payments','get_profile','code'),200);
+    }
+
+    public function subscribeHistory(User $user)
+    {
+        $history = User::with('subscribeHistory')->whereId($user->id)->first();
+        return response($history->subscribeHistory,200);
     }
 }

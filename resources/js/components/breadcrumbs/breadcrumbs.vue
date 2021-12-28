@@ -104,7 +104,27 @@
                  {
                      text: 'Profile',
                      disabled : true,
-                     href: 'admin',
+                     href: '/users',
+                 }
+             ]
+             this.items = info
+         }
+
+         if(this.$route.path.includes('users/history'))
+         {
+             let info = [
+                 {
+                     text: 'Admin panel',
+                     href: 'acceuil',
+                 },
+                 {
+                     text: 'Utilisateurs',
+                     href: '/users',
+                 },
+                 {
+                     text: 'Historique d\'abonnement',
+                     disabled : true,
+                     href: '/users',
                  }
              ]
              this.items = info

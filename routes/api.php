@@ -75,6 +75,7 @@ Route::prefix('dashboard')->group(function(){
             Route::put('/changePassword/{user}',[UserController::class,'changePassword']);
             Route::put('/updateProfileUser/{user}',[UserController::class,'updateProfileUser']);
             Route::get('/profileInfo/{user}',[UserController::class,'profileInfo']);
+            Route::get('/subscribe-history/{user}',[UserController::class,'subscribeHistory']);
         });
         // product
         Route::prefix('/product')->group(function(){

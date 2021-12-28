@@ -17,6 +17,7 @@
                 <v-btn :disabled="switch1" @click="openDiag" color="green"><span style="color: white;">Activé</span> <v-icon color="white" >mdi-power</v-icon> </v-btn>
                 <v-btn :disabled="switch2" @click="opendag" color="red"><span style="color: white;">désactivé</span> <v-icon color="white" >mdi-minus</v-icon> </v-btn>
                 <v-btn :disabled="disabled" @click="redirect"  color="primary"><span style="color: white;">Profile</span> <v-icon color="white" >mdi-account</v-icon> </v-btn>
+                <v-btn :disabled="disabled" @click="redirect1"  color="success"><span style="color: white;">Historique d'abonnement</span> <v-icon color="white" >mdi-history</v-icon> </v-btn>
             </v-card-subtitle>
             <v-data-table
                 v-model="selected"
@@ -68,6 +69,7 @@ export default {
                 { text: 'Téléphone', value: 'phone' },
                 { text: 'Activation', value: 'activation' },
                 { text: 'Date d\'activation', value: 'activation_date' },
+                { text: 'Date d\'expiration', value: 'expired_at' },
                 { text: 'Type', value: 'type' },
                 { text: 'Crée', value: 'date_creation' },
             ],
@@ -79,6 +81,7 @@ export default {
             this.disabled = (item.value) ? false : true
             this.switch1 = (item.value) ? false : true
             this.switch2 = (item.value) ? false : true
+
 
                 if(item.item.is_active)
                 {
@@ -107,6 +110,10 @@ export default {
         redirect()
         {
           this.$router.push(`/users/profile/${this.selected[0].id}`)
+        },
+        redirect1()
+        {
+            this.$router.push(`/users/history/${this.selected[0].id}`)
         },
         close(val)
         {
@@ -161,7 +168,7 @@ export default {
                 if(dessert.id == this.selected[0].id)
                 {
                     dessert.activation = 'Non activé'
-                    dessert.activation_date = '/'
+                    dessert.activation_date = ''
                     dessert.type = ''
                     dessert.is_active = false
                 }

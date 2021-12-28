@@ -29,6 +29,10 @@ const routes = [
         component: () => import(/* webpackChunkName: "main" */ '../pages/userProfilePage.vue')
     },
     {
+        path : '/users/history/:id',
+        component: () => import(/* webpackChunkName: "main" */ '../pages/historyPage.vue')
+    },
+    {
         path : '/products',
         component: () => import(/* webpackChunkName: "main" */ '../pages/productPage.vue')
     },

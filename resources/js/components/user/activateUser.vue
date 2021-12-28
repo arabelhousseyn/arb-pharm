@@ -98,6 +98,7 @@ export default {
                 date : this.date,
                 type : this.type
             }
+            console.log(data)
             let req  = axios.put(`/api/dashboard/user/activateUser/${this.selected[0].id}`,data,{headers : { 'Authorization' : 'Bearer ' + this.$store.state.token }})
             req.then(e=>{
                 this.$emit('active',true)
