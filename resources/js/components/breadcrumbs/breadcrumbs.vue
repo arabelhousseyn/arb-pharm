@@ -160,6 +160,21 @@
              this.items = info
          }
 
+         if(this.$route.path.includes('general'))
+         {
+             let info = [
+                 {
+                     text: 'Admin panel',
+                     href: 'acceuil',
+                 },
+                 {
+                     text: 'Information général',
+                     href: '/general',
+                 }
+             ]
+             this.items = info
+         }
+
      }
  }
 </script>

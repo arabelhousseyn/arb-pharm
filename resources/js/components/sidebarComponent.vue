@@ -61,6 +61,18 @@
                         </v-list-item-content>
                     </v-list-item>
                 </router-link>
+
+                <router-link to="/general">
+                    <v-list-item link>
+                        <v-list-item-icon>
+                            <v-icon>mdi-earth</v-icon>
+                        </v-list-item-icon>
+
+                        <v-list-item-content>
+                            <v-list-item-title>Information général</v-list-item-title>
+                        </v-list-item-content>
+                    </v-list-item>
+                </router-link>
             </v-list>
         </v-navigation-drawer>
         <appbar-component @toggle="toggle" />

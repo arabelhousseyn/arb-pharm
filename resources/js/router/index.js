@@ -45,6 +45,10 @@ const routes = [
         component: () => import(/* webpackChunkName: "main" */ '../pages/profileAdmin.vue')
     },
     {
+        path : '/general',
+        component: () => import(/* webpackChunkName: "main" */ '../pages/generalPage.vue')
+    },
+    {
         path : '*',
         component: () => import(/* webpackChunkName: "main" */ '../views/notfound.vue')
     },
