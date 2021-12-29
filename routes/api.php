@@ -11,7 +11,8 @@ use App\Http\Controllers\{
     checkAppVersionController,
     AdminPanelApiController,
     AdminController,
-    UserController
+    UserController,
+    CheckbookController
 };
 
 /*
@@ -38,6 +39,8 @@ Route::prefix('mobile')->group(function(){
     Route::post('/register',[RegisterController::class,'register']);
     /// login
     Route::post('/login',[LoginController::class,'auth']);
+
+    Route::apiResource('checkbook',CheckbookController::class);
 
 
     Route::group(['middleware' => 'auth:sanctum'],function(){
@@ -93,6 +96,7 @@ Route::prefix('dashboard')->group(function(){
             'user' => UserController::class,
             'product' => ProductController::class,
             'request' => RequestEstimateController::class,
+            'checkbook' => CheckbookController::class,
         ]);
     });
 });

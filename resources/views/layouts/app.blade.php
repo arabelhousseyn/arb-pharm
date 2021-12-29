@@ -11,7 +11,7 @@
         <meta name="bhr" content="{{ Auth::user()->token }}">
     @endif
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Laravel') }}-ADMIN PANEL</title>
 
     <!-- Scripts -->
 

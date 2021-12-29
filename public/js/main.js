@@ -49214,7 +49214,7 @@ var render = function () {
     "div",
     [
       _c("v-breadcrumbs", { staticStyle: { "font-weight": "bold" } }, [
-        _c("h2", [_vm._v("Admin panel")]),
+        _c("h2", [_vm._v("Tableau de bord")]),
       ]),
       _vm._v(" "),
       _c(

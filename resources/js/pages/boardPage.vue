@@ -2,7 +2,7 @@
     <div>
         <v-breadcrumbs
             style="font-weight: bold;"
-        ><h2>Admin panel</h2></v-breadcrumbs>
+        ><h2>Tableau de bord</h2></v-breadcrumbs>
         <v-container fluid>
             <v-row>
                 <v-col v-for="(card,index) in $store.state.cards" :key="index"  lg="3" cols="12" md="3">

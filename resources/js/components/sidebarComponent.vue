@@ -9,7 +9,7 @@
                         </v-list-item-icon>
 
                         <v-list-item-content>
-                            <v-list-item-title>Acceuil</v-list-item-title>
+                            <v-list-item-title>Tableau de bord</v-list-item-title>
                         </v-list-item-content>
                     </v-list-item>
                 </router-link>
