@@ -64,7 +64,7 @@ class RequestEstimateController extends Controller
                     foreach ($images as $image)
                     {
                         $path  = $this->upload($image,'request_estimate','.jpg');
-                        $path = env('path_storage') . 'request_estimate/' . $path;
+                        $path = env('PATH_STORAGE') . 'request_estimate/' . $path;
                         RequestEstimateImage::insert([
                             'request_estimate_id' => $estimate->id,
                             'path' => $path
