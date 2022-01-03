@@ -24,7 +24,7 @@
                         </v-card-text>
 
                         <v-card-actions>
-                            <v-btn  @click="download(product.technical_sheet_pdf)" color="#F40F02">
+                            <v-btn v-if="product.technical_sheet_pdf !== null"  @click="download(product.technical_sheet_pdf)" color="#F40F02">
                                 <v-icon color="white">mdi-file-download</v-icon>
                             </v-btn>
 
