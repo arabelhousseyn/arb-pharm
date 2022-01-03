@@ -12,7 +12,9 @@ use App\Http\Controllers\{
     AdminPanelApiController,
     AdminController,
     UserController,
-    CheckbookController
+    CheckbookController,
+    RatingController,
+    SearchController
 };
 
 /*
@@ -44,6 +46,12 @@ Route::prefix('mobile')->group(function(){
 
 
     Route::group(['middleware' => 'auth:sanctum'],function(){
+
+        Route::prefix('product')->group(function(){
+            Route::post('rate',RatingController::class);
+        });
+
+        Route::get('search',SearchController::class);
 
         Route::get('/insertCode/{code?}',[UserProfileController::class,'insertCode'])->whereNumber('code');
         Route::get('/favoritesProducts',[UserProfileController::class,'favoritesProducts']);

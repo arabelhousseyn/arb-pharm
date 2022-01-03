@@ -23,11 +23,20 @@ class RatingController extends Controller
         $validate = $request->validate($rules);
         if($validate)
         {
-            $rate = ProductRating::insert([
-                'user_id' => Auth::id(),
-                'product_id' => $request->product_id,
-                'value' => $request->value
-            ]);
+            $rate = false;
+            $check = ProductRating::whereUserId(Auth::id())->whereProductId($request->product_id)->first();
+            if($check)
+            {
+                $rate = ProductRating::whereId($check->id)->update([
+                    'value' => $request->value
+                ]);
+            }else{
+                $rate = ProductRating::insert([
+                    'user_id' => Auth::id(),
+                    'product_id' => $request->product_id,
+                    'value' => $request->value
+                ]);
+            }
             if($rate)
             {
                 return response(['success' => true],200);
