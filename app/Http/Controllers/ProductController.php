@@ -37,7 +37,6 @@ class ProductController extends Controller
     {
         $rules = [
             'description' => 'required',
-            'technical_sheet_pdf' => 'required',
             'images' => 'required'
         ];
         $validator = Validator::make($request->all(),$rules);
@@ -48,8 +47,13 @@ class ProductController extends Controller
 
         if($validator->validated())
         {
-            $pdf = $this->upload($request->technical_sheet_pdf,'technical_sheet','.pdf');
-            $pdf = env('PATH_STORAGE') .'technical_sheet/'.$pdf;
+            $pdf = null;
+            if($request->has('technical_sheet_pdf'))
+            {
+                $pdf = $this->upload($request->technical_sheet_pdf,'technical_sheet','.pdf');
+                $pdf = env('PATH_STORAGE') .'technical_sheet/'.$pdf;
+            }
+
             $product = Product::create([
                 'user_id' => Auth::id(),
                 'description' => $request->description,

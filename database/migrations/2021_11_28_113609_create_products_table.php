@@ -17,7 +17,7 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->longText('description');
-            $table->string('technical_sheet_pdf');
+            $table->string('technical_sheet_pdf')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
