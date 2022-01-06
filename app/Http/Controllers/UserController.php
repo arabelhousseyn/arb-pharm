@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\{User, UserPayment, UserProfile,UserActivityCode,UserSubscribe};
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-use Str,Hash;
+use Str,Hash,Auth;
 use App\Traits\uploads;
 use App\Http\Requests\{insertUserRequest,ChangePasswordUserRequest,UpdateUserRequest,UpdateProfileUserRequest};
 class UserController extends Controller
@@ -229,9 +229,9 @@ class UserController extends Controller
         return response($history->subscribeHistory,200);
     }
 
-    public function notifications($user_id)
+    public function notifications()
     {
-        $data = User::with('notifications')->find($user_id);
+        $data = User::with('notifications')->find(Auth::id());
         return response($data->notifications,200);
     }
 }

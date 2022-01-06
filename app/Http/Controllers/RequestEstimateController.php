@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{
-    RequestEstimate,
-    RequestEstimateImage,
-    User
-};
+use App\Models\{Product, RequestEstimate, RequestEstimateImage, User};
 use Illuminate\Http\Request;
-use Auth,Validator;
+use Auth,Validator,Notification;
 use App\Traits\uploads;
+use App\Notifications\NoReplayNotification;
 class RequestEstimateController extends Controller
 {
     use uploads;
@@ -74,7 +71,29 @@ class RequestEstimateController extends Controller
                 {
                     return response(['success' => false],200);
                 }
-                return response(['success' => true],200);
+
+                $chunks = explode(' ',$request->product_name);
+                foreach ($chunks as $chunk)
+                {
+                    $user_id_products = Product::where('description','LIKE',"%$chunk%")->pluck('user_id');
+                    foreach ($user_id_products as $user_id_product)
+                    {
+                        $user = User::find($user_id_product);
+                        $request_estimate = RequestEstimate::find($estimate->id);
+
+                        $data = [
+                            'name' => 'Nouvelle demande devis',
+                            'body' => 'Découvrir les nouvelles demandes de devis qui s\'affichent pour votre produits',
+                            'thanks' => 'Merci',
+                            'data' => $request_estimate,
+                        ];
+
+                        Notification::send($user,new NoReplayNotification($data));
+                    }
+                }
+
+
+                return response(['success' => true,'notified_ids' => $user_id_products],200);
             }
             return response(['success' => false],200);
         }

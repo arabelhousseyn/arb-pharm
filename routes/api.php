@@ -47,6 +47,10 @@ Route::prefix('mobile')->group(function(){
 
     Route::group(['middleware' => 'auth:sanctum'],function(){
 
+        Route::prefix('user')->group(function(){
+            Route::get('notification',[UserController::class,'notifications']);
+        });
+
         Route::prefix('product')->group(function(){
             Route::post('rate',RatingController::class);
         });

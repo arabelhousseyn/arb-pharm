@@ -88,7 +88,7 @@ class ProductController extends Controller
 
                         $data = [
                             'name' => 'Nouvelle demande devis',
-                            'body' => 'Découvrir les nouvelles demandes de devis qui s\'affichent pour votre produit',
+                            'body' => 'Découvrir les nouvelles produits qui s\'affichent pour votre demandes de devis',
                             'thanks' => 'Merci',
                             'data' => $product,
                         ];
