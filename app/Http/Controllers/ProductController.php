@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{Product, ProductImages, User};
+use App\Models\{Product, ProductImages, User,RequestEstimate};
 use Illuminate\Http\Request;
 use App\Traits\uploads;
-use Auth,Validator;
+use Auth,Validator,Notification;
+use App\Notifications\UserNotification;
 class ProductController extends Controller
 {
     use uploads;
@@ -35,6 +36,10 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+
+        $user_id_requests = RequestEstimate::where('product_name','LIKE',"%$request->description%")->get();
+        return $user_id_requests;
+
         $rules = [
             'description' => 'required',
             'images' => 'required'
@@ -71,7 +76,19 @@ class ProductController extends Controller
                         'path' => $path
                     ]);
                 }
-                return response(['success' => true],200);
+
+                $user_id_requests = RequestEstimate::where('product_name','LIKE',"%$request->description%")->get();
+                return $user_id_requests;
+                foreach ($user_id_requests as $user_id_request)
+                {
+                   $user = User::find($user_id_request);
+                   $product = Product::find($product->id)
+                       ->only(['id', 'description', 'technical_sheet_pdf','rating','published_by','product_images','is_favorits','phone']);
+
+                   Notification::send($user,new UserNotification($product));
+                }
+
+                return response(['success' => true,'notified_ids' => $user_id_requests],200);
             }
             return response(['success' => false],200);
         }
