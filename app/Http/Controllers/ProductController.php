@@ -6,7 +6,7 @@ use App\Models\{Product, ProductImages, User,RequestEstimate};
 use Illuminate\Http\Request;
 use App\Traits\uploads;
 use Auth,Validator,Notification;
-use App\Notifications\UserNotification;
+use App\Notifications\NoReplayNotification;
 class ProductController extends Controller
 {
     use uploads;
@@ -36,9 +36,8 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-
-        $user_id_requests = RequestEstimate::where('product_name','LIKE',"%$request->description%")->get();
-        return $user_id_requests;
+//        $user_id_requests = RequestEstimate::search('$request->description')->get();
+//        return $user_id_requests;
 
         $rules = [
             'description' => 'required',
@@ -77,15 +76,25 @@ class ProductController extends Controller
                     ]);
                 }
 
-                $user_id_requests = RequestEstimate::where('product_name','LIKE',"%$request->description%")->get();
-                return $user_id_requests;
-                foreach ($user_id_requests as $user_id_request)
+                $chunks = explode(' ',$request->description);
+                foreach ($chunks as $chunk)
                 {
-                   $user = User::find($user_id_request);
-                   $product = Product::find($product->id)
-                       ->only(['id', 'description', 'technical_sheet_pdf','rating','published_by','product_images','is_favorits','phone']);
+                    $user_id_requests = RequestEstimate::where('product_name','LIKE',"%$chunk%")->pluck('user_id');
+                    foreach ($user_id_requests as $user_id_request)
+                    {
+                        $user = User::find($user_id_request);
+                        $product = Product::find($product->id)
+                            ->only(['id', 'description', 'technical_sheet_pdf','rating','published_by','product_images','is_favorits','phone']);
 
-                   Notification::send($user,new UserNotification($product));
+                        $data = [
+                            'name' => 'Nouvelle demande devis',
+                            'body' => 'Découvrir les nouvelles demandes de devis qui s\'affichent pour votre produit',
+                            'thanks' => 'Merci',
+                            'data' => $product,
+                        ];
+
+                        Notification::send($user,new NoReplayNotification($data));
+                    }
                 }
 
                 return response(['success' => true,'notified_ids' => $user_id_requests],200);

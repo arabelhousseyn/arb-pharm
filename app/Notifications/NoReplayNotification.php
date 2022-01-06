@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class UserNotification extends Notification
+class NoReplayNotification extends Notification
 {
     use Queueable;
     private $data;
@@ -41,9 +41,9 @@ class UserNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+            ->greeting('Salut !')
+            ->line($this->data['body'])
+            ->line($this->data['thanks']);
     }
 
     /**
@@ -55,7 +55,7 @@ class UserNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            'data' => $this->data
+            'data' => $this->data['data']
         ];
     }
 }

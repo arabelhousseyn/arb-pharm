@@ -228,4 +228,10 @@ class UserController extends Controller
         $history = User::with('subscribeHistory')->whereId($user->id)->first();
         return response($history->subscribeHistory,200);
     }
+
+    public function notifications($user_id)
+    {
+        $data = User::with('notifications')->find($user_id);
+        return response($data->notifications,200);
+    }
 }

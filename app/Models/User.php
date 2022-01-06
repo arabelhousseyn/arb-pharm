@@ -12,7 +12,7 @@ use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\SoftDeletes;
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, HasRoles,SoftDeletes;
+    use HasApiTokens, HasFactory, HasRoles,SoftDeletes,Notifiable;
 
     /**
      * The attributes that are mass assignable.
