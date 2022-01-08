@@ -74,11 +74,13 @@ class ProductController extends Controller
                 }
 
                 $chunks = explode(' ',$request->description);
+                $ids = [];
                 foreach ($chunks as $chunk)
                 {
                     $user_id_requests = RequestEstimate::where('product_name','LIKE',"%$chunk%")->pluck('user_id');
                     foreach ($user_id_requests as $user_id_request)
                     {
+                        $ids[] = $user_id_request;
                         $user = User::find($user_id_request);
                         $product = Product::find($product->id)
                             ->only(['id', 'description', 'technical_sheet_pdf','rating','published_by','product_images','is_favorits','phone']);
@@ -94,7 +96,7 @@ class ProductController extends Controller
                     }
                 }
 
-                return response(['success' => true,'notified_ids' => $user_id_requests],200);
+                return response(['success' => true,'notified_ids' => $ids],200);
             }
             return response(['success' => false],200);
         }

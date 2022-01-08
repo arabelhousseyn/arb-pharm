@@ -73,11 +73,13 @@ class RequestEstimateController extends Controller
                 }
 
                 $chunks = explode(' ',$request->product_name);
+                $ids = [];
                 foreach ($chunks as $chunk)
                 {
                     $user_id_products = Product::where('description','LIKE',"%$chunk%")->pluck('user_id');
                     foreach ($user_id_products as $user_id_product)
                     {
+                        $ids[] = $user_id_product;
                         $user = User::find($user_id_product);
                         $request_estimate = RequestEstimate::find($estimate->id);
 
@@ -93,7 +95,7 @@ class RequestEstimateController extends Controller
                 }
 
 
-                return response(['success' => true,'notified_ids' => $user_id_products],200);
+                return response(['success' => true,'notified_ids' => $ids],200);
             }
             return response(['success' => false],200);
         }
