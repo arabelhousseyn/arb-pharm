@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
+//use Laravel\Scout\Searchable;
 class RequestEstimate extends Model
 {
     use HasFactory,SoftDeletes;
@@ -29,7 +30,16 @@ class RequestEstimate extends Model
     ];
     protected $appends = ['image','publishedBy','images_request','creation_date'];
 
-
+//    public function searchableAs()
+//    {
+//        return 'request_estimates_index';
+//    }
+//
+//    public function toSearchableArray()
+//    {
+//        $array = $this->toArray();
+//        return $array;
+//    }
 
     public function user()
     {

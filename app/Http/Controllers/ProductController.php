@@ -36,9 +36,6 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-//        $user_id_requests = RequestEstimate::search('$request->description')->get();
-//        return $user_id_requests;
-
         $rules = [
             'description' => 'required',
             'images' => 'required'
