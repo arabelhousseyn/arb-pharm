@@ -49,6 +49,7 @@ Route::prefix('mobile')->group(function(){
 
         Route::prefix('user')->group(function(){
             Route::get('notification',[UserController::class,'notifications']);
+            Route::get('count_notification',[UserController::class,'count_notification']);
         });
 
         Route::prefix('product')->group(function(){

@@ -234,4 +234,10 @@ class UserController extends Controller
         $data = User::with('notifications')->find(Auth::id());
         return response($data->notifications,200);
     }
+
+    public function count_notification()
+    {
+        $data = User::with('notifications')->find(Auth::id());
+        return response(count($data->notifications),200);
+    }
 }
