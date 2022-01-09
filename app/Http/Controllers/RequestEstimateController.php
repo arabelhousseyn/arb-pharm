@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\InsertRequestEstimateRequest;
 use App\Models\{Product, RequestEstimate, RequestEstimateImage, User};
 use Illuminate\Http\Request;
 use Auth,Validator,Notification;
@@ -32,21 +33,10 @@ class RequestEstimateController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(InsertRequestEstimateRequest $request)
     {
-        $rules = [
-            'product_name' => 'required',
-            'amount' => 'required',
-            'mark' => 'required',
-            'images' => 'required'
-        ];
-        $validator = Validator::make($request->all(),$rules);
-        if($validator->fails())
-        {
-            return response(['success' => false],403);
-        }
 
-        if($validator->validated())
+        if($request->validated())
         {
             $estimate = RequestEstimate::create([
                 'user_id' => Auth::id(),
