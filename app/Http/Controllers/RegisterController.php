@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RegisterUserRequest;
 use Illuminate\Http\Request;
 use Auth,Hash;
 use App\Models\{
@@ -17,28 +18,11 @@ use App\Traits\uploads;
 class RegisterController extends Controller
 {
     use uploads;
-    public function register(Request $request)
+    public function register(RegisterUserRequest $request)
     {
-        $rules = [
-            'phone' => 'required|digits:10|unique:users',
-            'email' => 'required|unique:users|email:rfc,dns,filter',
-            'password' => 'required',
-            'commercial_name' => 'required',
-            'num_rc' => 'required',
-            'nif' => 'required',
-            'nis' => 'required',
-            'num_ar' => 'required',
-            'pro_card' => 'required',
-            'adress' => 'required'
-        ];
 
-        $validator = Validator::make($request->all(),$rules);
-        if($validator->fails())
-        {
-            return response(['success' => false],403);
-        }
 
-        if($validator->validated())
+        if($request->validated())
         {
             $user = User::create([
                 'phone' => $request->phone,
