@@ -35,7 +35,7 @@ class RegisterController extends Controller
         $validator = Validator::make($request->all(),$rules);
         if($validator->fails())
         {
-            return response(['success' => false],200);
+            return response(['success' => false],403);
         }
 
         if($validator->validated())

@@ -43,7 +43,7 @@ class ProductController extends Controller
         $validator = Validator::make($request->all(),$rules);
         if($validator->fails())
         {
-            return response(['success' => false],200);
+            return response(['success' => false],403);
         }
 
         if($validator->validated())
@@ -98,7 +98,7 @@ class ProductController extends Controller
 
                 return response(['success' => true,'notified_ids' => $ids],200);
             }
-            return response(['success' => false],200);
+            return response(['success' => false],403);
         }
     }
 

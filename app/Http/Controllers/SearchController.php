@@ -40,7 +40,7 @@ class SearchController extends Controller
             $result = $users->merge($products);
             return response($result,200);
         }else{
-            return response(['success' => false],200);
+            return response(['success' => false],403);
         }
     }
 }

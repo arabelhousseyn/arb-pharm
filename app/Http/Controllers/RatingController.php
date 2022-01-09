@@ -41,10 +41,10 @@ class RatingController extends Controller
             {
                 return response(['success' => true],200);
             }else{
-                return response(['success' => false],200);
+                return response(['success' => false],403);
             }
         }else{
-            return response(['success' => false],200);
+            return response(['success' => false],403);
         }
     }
 }
