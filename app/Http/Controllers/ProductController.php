@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\InsertProductRequest;
 use App\Models\{Product, ProductImages, User,RequestEstimate};
 use Illuminate\Http\Request;
 use App\Traits\uploads;
@@ -34,19 +35,10 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(InsertProductRequest $request)
     {
-        $rules = [
-            'description' => 'required',
-            'images' => 'required'
-        ];
-        $validator = Validator::make($request->all(),$rules);
-        if($validator->fails())
-        {
-            return response(['success' => false],403);
-        }
 
-        if($validator->validated())
+        if($request->validated())
         {
             $pdf = null;
             if($request->has('technical_sheet_pdf'))
