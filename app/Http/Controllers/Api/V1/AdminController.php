@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
+use App\Http\Controllers\Controller;
+use App\Http\Requests\{ChangeAdminRequest, createAdminRequest, UpdateAdminRequest};
 use App\Models\Admin;
-use Illuminate\Http\Request;
-use App\Http\Requests\{
-    createAdminRequest,
-    UpdateAdminRequest,
-    ChangeAdminRequest
-};
-use Hash,Auth;
+use Auth;
+use Hash;
+use function response;
+
 class AdminController extends Controller
 {
     /**

@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
-use App\Models\{
-    UserProfile,
-    UserActivityCode,
-    User
-};
-use Illuminate\Http\Request;
-use Auth,Validator;
+use App\Http\Controllers\Controller;
+use App\Models\{User, UserActivityCode};
+use Auth;
+use Validator;
+use function response;
+
 class UserProfileController extends Controller
 {
     public function insertCode($code)

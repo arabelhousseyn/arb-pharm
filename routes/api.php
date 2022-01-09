@@ -1,21 +1,19 @@
 <?php
 
+use App\Http\Controllers\{Api\V1\AdminController,
+    Api\V1\AdminPanelApiController,
+    Api\V1\checkAppVersionController,
+    Api\V1\CheckbookController,
+    Api\V1\LoginController,
+    Api\V1\ProductController,
+    Api\V1\RatingController,
+    Api\V1\RegisterController,
+    Api\V1\RequestEstimateController,
+    Api\V1\SearchController,
+    Api\V1\UserController,
+    Api\V1\UserProfileController};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{
-    LoginController,
-    RegisterController,
-    UserProfileController,
-    ProductController,
-    RequestEstimateController,
-    checkAppVersionController,
-    AdminPanelApiController,
-    AdminController,
-    UserController,
-    CheckbookController,
-    RatingController,
-    SearchController
-};
 
 /*
 |--------------------------------------------------------------------------

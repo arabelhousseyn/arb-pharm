@@ -1,13 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
-use App\Models\{User, UserPayment, UserProfile,UserActivityCode,UserSubscribe};
-use Illuminate\Http\Request;
-use Carbon\Carbon;
-use Str,Hash,Auth;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\{ChangePasswordUserRequest, insertUserRequest, UpdateProfileUserRequest, UpdateUserRequest};
+use App\Models\{User, UserActivityCode, UserPayment, UserProfile, UserSubscribe};
 use App\Traits\uploads;
-use App\Http\Requests\{insertUserRequest,ChangePasswordUserRequest,UpdateUserRequest,UpdateProfileUserRequest};
+use Auth;
+use Carbon\Carbon;
+use Hash;
+use Illuminate\Http\Request;
+use Str;
+use function env;
+use function response;
+
 class UserController extends Controller
 {
     use uploads;

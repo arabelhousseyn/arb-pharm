@@ -17,9 +17,9 @@ Route::get('/', function () {
     return view('main');
 });
 
-Route::get('{any}',[App\Http\Controllers\HomeController::class, 'index'])->where('any', '.*')->name('home');
+Route::get('{any}',[\App\Http\Controllers\Api\V1\HomeController::class, 'index'])->where('any', '.*')->name('home');
 
 
 Auth::routes();
 App::setLocale('fr');
-Route::get('/acceuil', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/acceuil', [\App\Http\Controllers\Api\V1\HomeController::class, 'index'])->name('home');

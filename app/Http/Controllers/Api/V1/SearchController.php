@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
+use App\Http\Controllers\Controller;
+use App\Models\{Product, UserProfile};
 use Illuminate\Http\Request;
-use Illuminate\Support\Collection;
-use App\Models\{
-    UserProfile,
-    Product
-};
+use function response;
+
 class SearchController extends Controller
 {
     /**

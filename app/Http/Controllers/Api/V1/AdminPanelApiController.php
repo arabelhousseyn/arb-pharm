@@ -1,15 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
-use App\Models\{
-    User,
-    Admin,
-    Product,
-    RequestEstimate
-};
-use Carbon\Carbon;
-use Illuminate\Http\Request;
+namespace App\Http\Controllers\Api\V1;
+use App\Http\Controllers\Controller;
+use App\Models\{Admin, Product, RequestEstimate, User};
 use Auth;
+use Carbon\Carbon;
+use function response;
+
 class AdminPanelApiController extends Controller
 {
     public function getInformations()

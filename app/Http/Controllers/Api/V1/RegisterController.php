@@ -1,19 +1,20 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterUserRequest;
-use Illuminate\Http\Request;
-use Auth,Hash;
-use App\Models\{
-    User,
-    UserProfile,
-    UserPayment,
-    Admin
-};
-use Validator,Str,Notification;
+use App\Models\{Admin, User, UserPayment, UserProfile};
 use App\Notifications\UserRegistration;
 use App\Traits\uploads;
+use Auth;
+use Hash;
+use Notification;
+use Str;
+use Validator;
+use function env;
+use function response;
+use function url;
 
 class RegisterController extends Controller
 {

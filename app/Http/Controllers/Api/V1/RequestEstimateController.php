@@ -1,13 +1,20 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\Exception;
 use App\Http\Requests\InsertRequestEstimateRequest;
 use App\Models\{Product, RequestEstimate, RequestEstimateImage, User};
-use Illuminate\Http\Request;
-use Auth,Validator,Notification;
-use App\Traits\uploads;
 use App\Notifications\NoReplayNotification;
+use App\Traits\uploads;
+use Auth;
+use Illuminate\Http\Request;
+use Notification;
+use Validator;
+use function env;
+use function response;
+
 class RequestEstimateController extends Controller
 {
     use uploads;

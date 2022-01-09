@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
-use App\Http\Requests\UpdateCheckbookRequest;
-use App\Models\Checkbook;
+use App\Http\Controllers\Controller;
+use App\Models\ProductFavorite;
 use Illuminate\Http\Request;
 
-class CheckbookController extends Controller
+class ProductFavoriteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,7 @@ class CheckbookController extends Controller
      */
     public function index()
     {
-        $checkbook = Checkbook::first();
-        return response($checkbook,200);
+        //
     }
 
     /**
@@ -43,10 +42,10 @@ class CheckbookController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Checkbook  $checkbook
+     * @param  \App\Models\ProductFavorite  $productFavorite
      * @return \Illuminate\Http\Response
      */
-    public function show(Checkbook $checkbook)
+    public function show(ProductFavorite $productFavorite)
     {
         //
     }
@@ -54,10 +53,10 @@ class CheckbookController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Checkbook  $checkbook
+     * @param  \App\Models\ProductFavorite  $productFavorite
      * @return \Illuminate\Http\Response
      */
-    public function edit(Checkbook $checkbook)
+    public function edit(ProductFavorite $productFavorite)
     {
         //
     }
@@ -66,29 +65,21 @@ class CheckbookController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Checkbook  $checkbook
+     * @param  \App\Models\ProductFavorite  $productFavorite
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCheckbookRequest $request, Checkbook $checkbook)
+    public function update(Request $request, ProductFavorite $productFavorite)
     {
-        if($request->validated())
-        {
-            $updated = $checkbook->update($request->validated());
-            if($updated)
-            {
-                return response(['success' => true],200);
-            }
-            return response(['success' => false],200);
-        }
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Checkbook  $checkbook
+     * @param  \App\Models\ProductFavorite  $productFavorite
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Checkbook $checkbook)
+    public function destroy(ProductFavorite $productFavorite)
     {
         //
     }

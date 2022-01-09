@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Models\ProductRating;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use function response;
 
 class RatingController extends Controller
 {

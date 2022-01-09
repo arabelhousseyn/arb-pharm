@@ -1,13 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\InsertProductRequest;
-use App\Models\{Product, ProductImages, User,RequestEstimate};
-use Illuminate\Http\Request;
-use App\Traits\uploads;
-use Auth,Validator,Notification;
+use App\Models\{Product, ProductImages, RequestEstimate, User};
 use App\Notifications\NoReplayNotification;
+use App\Traits\uploads;
+use Auth;
+use Illuminate\Http\Request;
+use Notification;
+use Validator;
+use function env;
+use function response;
+
 class ProductController extends Controller
 {
     use uploads;
