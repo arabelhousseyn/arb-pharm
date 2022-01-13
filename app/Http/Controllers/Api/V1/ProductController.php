@@ -58,6 +58,7 @@ class ProductController extends Controller
                 'description' => $request->description,
                 'technical_sheet_pdf' => $pdf
             ]);
+
             if($product)
             {
                 $images = explode(';',$request->images);
@@ -80,8 +81,7 @@ class ProductController extends Controller
                     {
                         $ids[] = $user_id_request;
                         $user = User::find($user_id_request);
-                        $product = Product::find($product->id)
-                            ->only(['id', 'description', 'technical_sheet_pdf','rating','published_by','product_images','is_favorits','phone']);
+                        $product = Product::find($product->id);
 
                         $data = [
                             'name' => 'Nouvelle demande devis',
