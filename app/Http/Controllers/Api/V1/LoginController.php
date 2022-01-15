@@ -24,6 +24,11 @@ class LoginController extends Controller
 
          if($valiadator->validated())
          {
+             $message = [
+                 'message' => 'The given data was invalid.',
+                 'errors' => ['Un de vos information incorrect.']
+             ];
+
              if($request->has_phone)
              {
                  $rules = [
@@ -32,8 +37,7 @@ class LoginController extends Controller
                  ];
                  $credinalts = $request->validate($rules);
 
-
-                 return (Auth::attempt($credinalts)) ? response(Auth::user(),200) : response(['success' => false],403);
+                 return (Auth::attempt($credinalts)) ? response(Auth::user(),200) : response($message,403);
              }else{
                  $rules = [
                      'email' => 'required|email:rfc,dns,filter',
@@ -42,7 +46,7 @@ class LoginController extends Controller
                  $credinalts = $request->validate($rules);
 
 
-                 return (Auth::attempt($credinalts)) ? response(Auth::user(),200) : response(['success' => false],403);
+                 return (Auth::attempt($credinalts)) ? response(Auth::user(),200) : response($message,403);
              }
 
          }

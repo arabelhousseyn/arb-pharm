@@ -39,10 +39,10 @@ class RegisterController extends Controller
             UserProfile::insert([
                 'user_id' => $user->id,
                 'commercial_name' => $request->commercial_name,
-                'num_rc' => $request->num_rc,
-                'nif' => $request->nif,
-                'nis' => $request->nis,
-                'num_ar' => $request->num_ar,
+                'num_rc' => (strlen($request->num_rc) == 0) ? null : $request->num_rc,
+                'nif' => (strlen($request->nif) == 0) ? null : $request->nif,
+                'nis' => (strlen($request->nis) == 0) ? null : $request->nis,
+                'num_ar' => (strlen($request->num_ar) == 0) ? null : $request->num_ar,
                 'pro_card' => $request->pro_card,
                 'adress' => $request->adress
             ]);

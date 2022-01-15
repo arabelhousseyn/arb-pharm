@@ -17,10 +17,10 @@ class CreateUserProfilesTable extends Migration
             $table->id();
             $table->foreignId('user_id')->unique()->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->string('commercial_name');
-            $table->string('num_rc');
-            $table->string('nif');
-            $table->string('nis');
-            $table->string('num_ar');
+            $table->string('num_rc')->nullable();
+            $table->string('nif')->nullable();
+            $table->string('nis')->nullable();
+            $table->string('num_ar')->nullable();
             $table->string('pro_card');
             $table->string('adress');
             $table->softDeletes();

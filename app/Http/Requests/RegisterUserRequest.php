@@ -28,10 +28,6 @@ class RegisterUserRequest extends FormRequest
             'email' => 'required|unique:users|email:rfc,dns,filter',
             'password' => 'required',
             'commercial_name' => 'required',
-            'num_rc' => 'required',
-            'nif' => 'required',
-            'nis' => 'required',
-            'num_ar' => 'required',
             'pro_card' => 'required',
             'adress' => 'required'
         ];
@@ -48,10 +44,6 @@ class RegisterUserRequest extends FormRequest
             'email.email' => 'E-mail doit être réel requis.',
             'password.required' => 'Mote de passe requis.',
             'commercial_name.required' => 'Document commercial requis.',
-            'num_rc.required' => 'Numéro RC requis.',
-            'nif.required' => 'Nif requis.',
-            'nis.required' => 'Nis requis.',
-            'num_ar.required' => 'Numéro AR requis.',
             'pro_card.required' => 'PRO CARD requis.',
             'adress.required' => 'Adresse requis.',
         ];
