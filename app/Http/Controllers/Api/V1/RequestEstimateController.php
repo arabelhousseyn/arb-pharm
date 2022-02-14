@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Exception;
 use App\Http\Requests\InsertRequestEstimateRequest;
+use App\Http\Requests\StoreOfferRequest;
 use App\Models\{Product, RequestEstimate, RequestEstimateImage, User};
 use App\Notifications\NoReplayNotification;
 use App\Traits\uploads;
@@ -148,6 +149,19 @@ class RequestEstimateController extends Controller
     {
         $data = RequestEstimate::with('images')->latest('id')->paginate(9);
         return response($data,200);
+    }
+
+    public function store_offer(StoreOfferRequest $request)
+    {
+        if($request->validated())
+        {
+
+        }
+    }
+
+    public function get_offers(RequestEstimate $requestEstimate)
+    {
+
     }
 
 }

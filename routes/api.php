@@ -54,6 +54,11 @@ Route::prefix('mobile')->group(function(){
             Route::post('rate',RatingController::class);
         });
 
+        Route::prefix('request_estimate')->group(function (){
+            Route::post('store_offer',[RequestEstimateController::class,'store_offer']);
+            Route::get('get_offers/{RequestEstimate}',[RequestEstimateController::class,'get_offers'])->whereNumber('RequestEstimate');
+        });
+
         Route::get('search',SearchController::class);
 
         Route::get('/insertCode/{code?}',[UserProfileController::class,'insertCode'])->whereNumber('code');
