@@ -6,10 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\Exception;
 use App\Http\Requests\InsertRequestEstimateRequest;
 use App\Http\Requests\StoreOfferRequest;
-use App\Models\{Product, RequestEstimate, RequestEstimateImage, User};
+use App\Models\{Product, RequestEstimate, RequestEstimateImage, User, UserOffer, UserOfferImage};
 use App\Notifications\NoReplayNotification;
 use App\Traits\uploads;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Notification;
 use Validator;
@@ -155,7 +155,25 @@ class RequestEstimateController extends Controller
     {
         if($request->validated())
         {
+            $offer = UserOffer::create([
+                'user_id' => Auth::id(),
+                'request_estimate_id' => $request->request_estimate_id,
+                'product_name' => $request->product_name,
+                'amount' => $request->amount,
+                'mark' => $request->mark,
+                'price' => $request->price
+            ]);
 
+            $images = explode(';',$request->images);
+            foreach ($images as $image) {
+                $path = $this->upload($image,'offers','.jpg');
+                $path = env('PATH_STORAGE') .'offers/'.$path;
+                UserOfferImage::create([
+                    'user_offer_id' => $offer->id,
+                    'path' => $path
+                ]);
+            }
+            return response(['success' => true],200);
         }
     }
 

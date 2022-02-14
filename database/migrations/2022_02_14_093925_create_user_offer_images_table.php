@@ -17,6 +17,7 @@ class CreateUserOfferImagesTable extends Migration
             $table->foreignId('user_offer_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->string('path');
             $table->softDeletes();
+            $table->timestamps();
         });
     }
 

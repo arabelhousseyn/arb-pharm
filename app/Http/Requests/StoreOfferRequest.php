@@ -24,8 +24,7 @@ class StoreOfferRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => 'required',
-            'request_estimate_id' => 'required',
+            'request_estimate_id' => 'required|exists:request_estimates,id',
             'product_name' => 'required',
             'amount' => 'required',
             'mark' => 'required',
@@ -37,8 +36,8 @@ class StoreOfferRequest extends FormRequest
     public function messages()
     {
         return [
-            'user_id.required' => 'Erreur veuillez réessayer.',
             'request_estimate_id.required' => 'Erreur veuillez réessayer.',
+            'request_estimate_id.exists' => 'Erreur veuillez réessayer.',
             'product_name.required' => 'Produit requis.',
             'amount.required' => 'Quantité requis.',
             'mark.required' => 'Marque requis.',
