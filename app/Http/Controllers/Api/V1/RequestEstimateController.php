@@ -177,8 +177,21 @@ class RequestEstimateController extends Controller
         }
     }
 
-    public function get_offers(RequestEstimate $requestEstimate)
+    public function get_offers($request_estimate_id)
     {
+
+        try {
+            $request_estimate = RequestEstimate::with('offers.images')->findOrFail($request_estimate_id);
+            return response($request_estimate->offers,200);
+        }catch (\Exception $e)
+        {
+            $message = [
+                "error" => [
+                    'pas trouvé.'
+                ]
+            ];
+            return response($message,404);
+        }
 
     }
 

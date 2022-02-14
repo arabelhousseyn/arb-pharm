@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Models\{User, UserActivityCode};
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Validator;
 use function response;
 
@@ -70,17 +70,45 @@ class UserProfileController extends Controller
     {
         if($user_id == 0)
         {
-            $data = User::with('requests')->where('id',Auth::id())->first();
+            $final = [];
+            $data = User::with('requests.offers')->where('id',Auth::id())->first();
             $subset = $data->requests->map(function($req){
-                return $req->only(['id','product_name','amount','image','publishedBy']);
+                return $req->only(['id','product_name','amount','image','publishedBy','offers']);
             });
-            return response($subset,200);
+
+            foreach ($subset as $item) {
+                $count_offer = count($item['offers']);
+                $data = [
+                    'id' => $item['id'],
+                    'product_name' => $item['product_name'],
+                    'amount' => $item['amount'],
+                    'image' => $item['image'],
+                    'publishedBy' => $item['publishedBy'],
+                    'count_offers' => $count_offer
+                ];
+                $final[] = $data;
+            }
+            return response($final,200);
         }else{
-            $data = User::with('requests')->where('id',$user_id)->first();
+            $final = [];
+            $data = User::with('requests.offers')->where('id',$user_id)->first();
             $subset = $data->requests->map(function($req){
-                return $req->only(['id','product_name','amount','image','publishedBy']);
+                return $req->only(['id','product_name','amount','image','publishedBy','offers']);
             });
-            return response($subset,200);
+
+            foreach ($subset as $item) {
+                $count_offer = count($item['offers']);
+                $data = [
+                    'id' => $item['id'],
+                    'product_name' => $item['product_name'],
+                    'amount' => $item['amount'],
+                    'image' => $item['image'],
+                    'publishedBy' => $item['publishedBy'],
+                    'count_offers' => $count_offer
+                ];
+                $final[] = $data;
+            }
+            return response($final,200);
         }
     }
 }

@@ -51,7 +51,7 @@ class RequestEstimate extends Model
         return $this->hasMany(RequestEstimateImage::class);
     }
 
-    public function offer()
+    public function offers()
     {
         return $this->hasMany(UserOffer::class);
     }

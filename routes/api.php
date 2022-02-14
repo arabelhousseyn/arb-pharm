@@ -56,7 +56,7 @@ Route::prefix('mobile')->group(function(){
 
         Route::prefix('request_estimate')->group(function (){
             Route::post('store_offer',[RequestEstimateController::class,'store_offer']);
-            Route::get('get_offers/{RequestEstimate}',[RequestEstimateController::class,'get_offers'])->whereNumber('RequestEstimate');
+            Route::get('get_offers/{request_estimate_id}',[RequestEstimateController::class,'get_offers'])->whereNumber('request_estimate_id');
         });
 
         Route::get('search',SearchController::class);
