@@ -11,7 +11,7 @@ use App\Http\Controllers\{Api\V1\AdminController,
     Api\V1\RequestEstimateController,
     Api\V1\SearchController,
     Api\V1\UserController,
-    Api\V1\UserProfileController};
+    Api\V1\UserProfileController,Api\V1\ForgetPasswordController};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -39,6 +39,8 @@ Route::prefix('mobile')->group(function(){
     Route::post('/register',[RegisterController::class,'register']);
     /// login
     Route::post('/login',[LoginController::class,'auth']);
+    // forget password
+    Route::post('forget_password',ForgetPasswordController::class);
 
     Route::apiResource('checkbook',CheckbookController::class);
 

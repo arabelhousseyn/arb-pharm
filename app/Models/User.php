@@ -44,7 +44,8 @@ class User extends Authenticatable
         'email_verified_at',
         'codeActivity',
         'profile',
-        'activated_at'
+        'activated_at',
+        'code_verification'
     ];
 
     /**

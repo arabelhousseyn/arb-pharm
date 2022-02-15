@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('activated_at')->nullable();
             $table->date('expired_at')->nullable();
             $table->enum('type',['A','R','B'])->nullable();
+            $table->string('code_verification')->nullable();
             $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();
