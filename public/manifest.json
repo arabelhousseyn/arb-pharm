@@ -1,0 +1,19 @@
+{
+    "name": "ARB DASHBOARD",
+    "short_name": "ARB DASHBOARD",
+    "icons": [
+        {
+            "src": "/assets/pharm192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        }
+    ],
+    "start_url": "/",
+    "scope": ".",
+    "display": "standalone",
+    "background_color": "#fff",
+    "theme_color": "#000",
+    "description": "ARB DASHBOARD",
+    "dir": "ltr",
+    "lang": "en-US"
+}
