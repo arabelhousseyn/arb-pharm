@@ -13,7 +13,6 @@ use Notification;
 use Validator;
 use function env;
 use function response;
-use Illuminate\Support\Str;
 class ProductController extends Controller
 {
     use uploads;
@@ -24,37 +23,50 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $final = [];
-        $product = Product::with(['user' => function($query){
-            $query->when(Auth::user()->type == Product::clientA,function ($query){
+        $ids = [];
 
-                return $query->where('type','A');
+        $products = Product::select('id','description','user_id')->with('user')->latest('created_at')->get();
 
-            })->when(Auth::user()->type == Product::clientR,function ($query){
+                if(Auth::user()->type == Product::clientA)
+                {
+                    foreach ($products as $product1) {
+                        if($product1->user->type == Product::clientA)
+                        {
+                            $ids[] = $product1->id;
+                        }
+                    }
+                }
 
-                return $query->where('type',Product::clientA);
+                if(Auth::user()->type == Product::clientR)
+                {
+                    foreach ($products as $product1) {
+                        if($product1->user->type == Product::clientA)
+                        {
+                            $ids[] = $product1->id;
+                        }
+                    }
+                }
 
-            })->when(Auth::user()->type == Product::clientB,function ($query){
+                if(Auth::user()->type == Product::clientB)
+                {
+                    foreach ($products as $product1) {
+                        if($product1->user->type == Product::clientR)
+                        {
+                            $ids[] = $product1->id;
+                        }
+                    }
+                }
 
-                return $query->where('type',Product::clientR);
 
-            });
-        }])->
-        select('id','description','user_id')
+        $data = Product::whereIn('id',$ids)->select('id','description','user_id')
             ->with('images:path,product_id','ratings:value,product_id','user.profile')
             ->latest('created_at')->paginate(7);
-        $subset = $product->map(function($prod){
+        $subset = $data->map(function($prod){
             return $prod->only(['id','description','rating','image','published_by']);
         });
-        return $product;
-        foreach ($subset as $item) {
-            if(Str::length($item["published_by"]) !== 0)
-            {
-                $final[] = $item;
-            }
-        }
-        $product->setCollection(collect($final));
-        return response($product,200);
+
+        $data->setCollection($subset);
+        return response($data,200);
     }
 
 
