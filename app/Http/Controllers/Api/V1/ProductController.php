@@ -7,13 +7,13 @@ use App\Http\Requests\InsertProductRequest;
 use App\Models\{Product, ProductImages, RequestEstimate, User};
 use App\Notifications\NoReplayNotification;
 use App\Traits\uploads;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Notification;
 use Validator;
 use function env;
 use function response;
-
+use Illuminate\Support\Str;
 class ProductController extends Controller
 {
     use uploads;
@@ -24,13 +24,36 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $product = Product::select('id','description','user_id')
-            ->with('images:path,product_id','ratings:value,product_id','user.profile:id,commercial_name,user_id')
-            ->orderBy('created_at', 'desc')->paginate(7);
+        $final = [];
+        $product = Product::with(['user' => function($query){
+            $query->when(Auth::user()->type == Product::clientA,function ($query){
+
+                return $query->where('type','A');
+
+            })->when(Auth::user()->type == Product::clientR,function ($query){
+
+                return $query->where('type',Product::clientA);
+
+            })->when(Auth::user()->type == Product::clientB,function ($query){
+
+                return $query->where('type',Product::clientR);
+
+            });
+        }])->
+        select('id','description','user_id')
+            ->with('images:path,product_id','ratings:value,product_id','user.profile')
+            ->latest('created_at')->paginate(7);
         $subset = $product->map(function($prod){
             return $prod->only(['id','description','rating','image','published_by']);
         });
-        $product->setCollection($subset);
+        return $product;
+        foreach ($subset as $item) {
+            if(Str::length($item["published_by"]) !== 0)
+            {
+                $final[] = $item;
+            }
+        }
+        $product->setCollection(collect($final));
         return response($product,200);
     }
 

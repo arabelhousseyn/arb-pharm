@@ -71,7 +71,7 @@ class User extends Authenticatable
 
     public function getProfileNameAttribute()
     {
-        return $this->profile->commercial_name;
+        return (@$this->profile->commercial_name !== null) ? $this->profile->commercial_name : null;
     }
 
     public function payments()

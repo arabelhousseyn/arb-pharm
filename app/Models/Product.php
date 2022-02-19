@@ -27,7 +27,6 @@ class Product extends Model
         'updated_at',
         'deleted_at',
         'ratings',
-        'user',
         'user_id',
         'favorites'
     ];
@@ -87,7 +86,7 @@ class Product extends Model
 
     public function getPublishedByAttribute()
     {
-        return ($this->user->profile != null) ? $this->user->profile->commercial_name : '';
+        return (@$this->user->profile->commercial_name !== null) ? $this->user->profile->commercial_name : '';
     }
 
     public function getPhoneAttribute()

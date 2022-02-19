@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\Exception;
 use App\Http\Requests\InsertRequestEstimateRequest;
 use App\Http\Requests\StoreOfferRequest;
+use Illuminate\Support\Facades\Log;
 use App\Models\{Product, RequestEstimate, RequestEstimateImage, User, UserOffer, UserOfferImage};
 use App\Notifications\NoReplayNotification;
 use App\Traits\uploads;
@@ -27,28 +28,48 @@ class RequestEstimateController extends Controller
     public function index()
     {
         $final = [];
-        $data = RequestEstimate::with(['user' => function($query){
-             $query->when(Auth::user()->type == RequestEstimate::clientA,function ($query){
-                return $query->where('type',RequestEstimate::clientR);
-
-            })->when(Auth::user()->type == RequestEstimate::clientR,function ($query){
-                return $query->where('type',RequestEstimate::clientB);
-
-            })->when(Auth::user()->type == RequestEstimate::clientB,function ($query){
-                return $query->where('type',RequestEstimate::clientB);
-            });
-        }])->latest('created_at')
+        $data = RequestEstimate::with('user.profile')->latest('created_at')
             ->get();
-        $subset = $data->map(function($req){
+        foreach ($data as $item) {
+            if(Auth::user()->type == RequestEstimate::clientA)
+            {
+                foreach ($data as $datum) {
+                    if($datum->user->type == RequestEstimate::clientR)
+                    {
+                        $final[] = $datum;
+                    }
+                }
+            }
+
+            if(Auth::user()->type == RequestEstimate::clientR)
+            {
+                foreach ($data as $datum) {
+                    if($datum->user->type == RequestEstimate::clientB)
+                    {
+                        $final[] = $datum;
+                    }
+                }
+            }
+
+            if(Auth::user()->type == RequestEstimate::clientB)
+            {
+                foreach ($data as $datum) {
+                    if($datum->user->type == Auth::user()->type)
+                    {
+                        $final[] = $datum;
+                    }
+                }
+            }
+
+
+        }
+
+        $final = collect($final);
+        $subset = $final->map(function($req){
             return $req->only(['id','product_name','amount','image','publishedBy']);
         });
-        foreach ($subset as $item) {
-            if(Str::length($item["publishedBy"]) !== 0)
-            {
-                $final[] = $item;
-            }
-        }
-        return response($final,200);
+
+        return response($subset,200);
     }
 
 
