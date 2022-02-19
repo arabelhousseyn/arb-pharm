@@ -11,7 +11,7 @@ class RequestEstimate extends Model
 {
     use HasFactory,SoftDeletes;
 
-    const clinetA = 'A';
+    const clientA = 'A';
     const clientB = 'B';
     const clientR = 'R';
 

@@ -12,6 +12,10 @@ class Product extends Model
 {
     use HasFactory,SoftDeletes;
 
+    const clientA = 'A';
+    const clientB = 'B';
+    const clientR = 'R';
+
     protected $fillable = [
         'description',
         'technical_sheet_pdf',

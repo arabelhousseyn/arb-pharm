@@ -28,7 +28,7 @@ class RequestEstimateController extends Controller
     {
         $final = [];
         $data = RequestEstimate::with(['user' => function($query){
-             $query->when(Auth::user()->type == RequestEstimate::clinetA,function ($query){
+             $query->when(Auth::user()->type == RequestEstimate::clientA,function ($query){
                 return $query->where('type',RequestEstimate::clientR);
 
             })->when(Auth::user()->type == RequestEstimate::clientR,function ($query){
