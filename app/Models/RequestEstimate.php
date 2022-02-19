@@ -11,6 +11,10 @@ class RequestEstimate extends Model
 {
     use HasFactory,SoftDeletes;
 
+    const clinetA = 'A';
+    const clientB = 'B';
+    const clientR = 'R';
+
     protected $fillable = [
         'user_id',
         'product_name',

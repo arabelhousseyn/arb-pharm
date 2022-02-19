@@ -15,7 +15,7 @@ use Notification;
 use Validator;
 use function env;
 use function response;
-
+use Illuminate\Support\Str;
 class RequestEstimateController extends Controller
 {
     use uploads;
@@ -26,12 +26,21 @@ class RequestEstimateController extends Controller
      */
     public function index()
     {
-        $data = RequestEstimate::select('id','product_name','amount','user_id')->orderBy('created_at','desc')
+        $final = [];
+        $data = RequestEstimate::with(['user' => function($query){
+            return $query->where('type',RequestEstimate::clientR);
+        }])->latest('created_at')
             ->get();
         $subset = $data->map(function($req){
             return $req->only(['id','product_name','amount','image','publishedBy']);
         });
-        return response($subset,200);
+        foreach ($subset as $item) {
+            if(Str::length($item["publishedBy"]) !== 0)
+            {
+                $final[] = $item;
+            }
+        }
+        return response($final,200);
     }
 
 
