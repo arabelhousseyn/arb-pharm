@@ -146,7 +146,7 @@ class RequestEstimateController extends Controller
 
     public function getRequestEstimateByUser(User $user)
     {
-        $data = RequestEstimate::with('images')->latest()->whereUserId($user->id)->paginate(9);
+        $data = RequestEstimate::with('images')->latest('created_at')->whereUserId($user->id)->paginate(9);
         $subset = $data->map(function($value){
             return $value->only('id','amount','images_request','is_available','mark','product_name','creation_date');
         });
@@ -156,7 +156,7 @@ class RequestEstimateController extends Controller
 
     public function getAllRequestsEstimate()
     {
-        $data = RequestEstimate::with('images')->latest('id')->paginate(9);
+        $data = RequestEstimate::with('images')->latest('created_at')->paginate(9);
         return response($data,200);
     }
 
