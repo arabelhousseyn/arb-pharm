@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use App\Models\{Product, UserProfile};
+use App\Models\{Product, RequestEstimate, User, UserProfile};
 use Illuminate\Http\Request;
 use function response;
 
@@ -24,22 +24,103 @@ class SearchController extends Controller
         $validate = $request->validate($rules);
         if($validate)
         {
-
+            $data1 = [];
+            $data2 = [];
+            $data3 = [];
             $filter = $request->filter;
-
-            $users = UserProfile::where('commercial_name','LIKE',"%$filter%")->select('id','commercial_name')->get();
-            foreach ($users as $user)
+            if(Auth::user()->type == User::clientA)
             {
-                $user['is_client'] = true;
-            }
-            $products = Product::where('description','LIKE',"%$filter%")->get();
-            foreach ($products as $product)
-            {
-                $product['is_client'] = false;
+
+                $users = UserProfile::with('user')->where('commercial_name','LIKE',"%$filter%")->select('id','commercial_name')->get();
+                foreach ($users as $user)
+                {
+                    $user['type'] = 'CLIENT';
+                    if($user->user->type == User::clientR)
+                    {
+                        $data1[] = $user;
+                    }
+                }
+                $requests = RequestEstimate::with('user')->where('product_name','LIKE',"%$filter%")->get();
+                foreach ($requests as $request)
+                {
+                    $request['type'] = 'REQUEST';
+                    if($request->user->type == User::clientR)
+                    {
+                        $data2[] = $request;
+                    }
+                }
+
+                $data1 = collect($data1);
+                $data2 = collect($data2);
+                $result = $data1->merge($data2);
+                return response($result,200);
             }
 
-            $result = $users->merge($products);
-            return response($result,200);
+            if(Auth::user()->type == User::clientR)
+            {
+
+                $users = UserProfile::with('user')->where('commercial_name','LIKE',"%$filter%")->select('id','commercial_name')->get();
+                foreach ($users as $user)
+                {
+                    $user['type'] = 'CLIENT';
+                    if($user->user->type == User::clientB || $user->user->type == User::clientA)
+                    {
+                        $data1[] = $user;
+                    }
+                }
+                $requests = RequestEstimate::with('user')->where('product_name','LIKE',"%$filter%")->get();
+                foreach ($requests as $request)
+                {
+                    $request['type'] = 'REQUEST';
+                    if($request->user->type == User::clientB)
+                    {
+                        $data2[] = $request;
+                    }
+                }
+
+                $products = Product::with('user')->where('description','LIKE',"%$filter%")->get();
+                foreach ($products as $product) {
+                    $product['type'] = 'PRODUCT';
+                    if($product->user->type == User::clientA)
+                    {
+                        $data3[] = $product;
+                    }
+                }
+
+                $data1 = collect($data1);
+                $data2 = collect($data2);
+                $result1 = $data1->merge($data2);
+                $result2 = $result1->merge($data3);
+                return response($result2,200);
+            }
+
+            if(Auth::user()->type == User::clientB)
+            {
+
+                $users = UserProfile::with('user')->where('commercial_name','LIKE',"%$filter%")->select('id','commercial_name')->get();
+                foreach ($users as $user)
+                {
+                    $user['type'] = 'CLIENT';
+                    if($user->user->type == User::clientR)
+                    {
+                        $data1[] = $user;
+                    }
+                }
+                $products = Product::with('user')->where('description','LIKE',"%$filter%")->get();
+                foreach ($products as $product)
+                {
+                    $product['type'] = 'PRODUCT';
+                    if($product->user->type == User::clientR)
+                    {
+                        $data2[] = $product;
+                    }
+                }
+
+                $data1 = collect($data1);
+                $data2 = collect($data2);
+                $result = $data1->merge($data2);
+                return response($result,200);
+            }
         }else{
             return response(['success' => false],403);
         }
