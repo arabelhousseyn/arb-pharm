@@ -73,6 +73,10 @@ export default {
     },
     created()
     {
+        if(navigator.userAgent.includes('Android'))
+        {
+            this.valid = false
+        }
         this.data.csrf = document.head.querySelector('meta[name="csrf-token"]').content
     }
 }
