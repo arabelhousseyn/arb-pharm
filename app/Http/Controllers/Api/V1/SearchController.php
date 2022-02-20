@@ -115,7 +115,7 @@ class SearchController extends Controller
                         $data2[] = $product;
                     }
                 }
-
+                return $data2;
                 $data1 = collect($data1);
                 $data2 = collect($data2);
                 $result = $data1->merge($data2);
