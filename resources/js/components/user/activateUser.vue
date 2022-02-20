@@ -59,7 +59,8 @@
                     :disabled="disable"
                     @click="activate"
                 >
-                    Activé <v-icon>mdi-power</v-icon>
+                    <v-progress-circular indeterminate color="primary" v-if="isloading"></v-progress-circular>
+                    <span v-else>Activé <v-icon>mdi-power</v-icon></span>
                 </v-btn>
             </v-card-actions>
         </v-card>
@@ -73,6 +74,7 @@ export default {
         return {
             disable : true,
             type : null,
+            isloading : false,
             date: (new Date()).toISOString().substr(0, 10),
             menu2: false,
             select2: [
@@ -94,6 +96,7 @@ export default {
         },
         activate()
         {
+            this.isloading = true
             let data = {
                 date : this.date,
                 type : this.type
@@ -103,6 +106,7 @@ export default {
             req.then(e=>{
                 this.$emit('active',true)
                 this.disable = true
+                this.isloading = false
             })
             req.catch(err => {
                 console.log(err)

@@ -2027,12 +2027,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['dialog', 'selected'],
   data: function data() {
     return {
       disable: true,
       type: null,
+      isloading: false,
       date: new Date().toISOString().substr(0, 10),
       menu2: false,
       select2: [{
@@ -2055,6 +2057,7 @@ __webpack_require__.r(__webpack_exports__);
     activate: function activate() {
       var _this = this;
 
+      this.isloading = true;
       var data = {
         date: this.date,
         type: this.type
@@ -2069,6 +2072,7 @@ __webpack_require__.r(__webpack_exports__);
         _this.$emit('active', true);
 
         _this.disable = true;
+        _this.isloading = false;
       });
       req["catch"](function (err) {
         console.log(err);
@@ -2157,10 +2161,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['dialog', 'selected'],
   data: function data() {
-    return {};
+    return {
+      isloading: false
+    };
   },
   methods: {
     close: function close() {
@@ -2169,6 +2176,7 @@ __webpack_require__.r(__webpack_exports__);
     deactivate: function deactivate() {
       var _this = this;
 
+      this.isloading = true;
       var data = {};
       var req = axios.put("/api/dashboard/user/deactivateUser/".concat(this.selected[0].id), data, {
         headers: {
@@ -2176,6 +2184,8 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
       req.then(function (e) {
+        _this.isloading = false;
+
         _this.$emit('deactive', true);
       });
       req["catch"](function (err) {
@@ -4068,6 +4078,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
             dessert.activation = 'Non activé';
             dessert.activation_date = '';
             dessert.type = '';
+            dessert.expired_at = '';
             dessert.is_active = false;
           }
         }
@@ -47238,8 +47249,18 @@ var render = function () {
                   on: { click: _vm.activate },
                 },
                 [
-                  _vm._v("\n                Activé "),
-                  _c("v-icon", [_vm._v("mdi-power")]),
+                  _vm.isloading
+                    ? _c("v-progress-circular", {
+                        attrs: { indeterminate: "", color: "primary" },
+                      })
+                    : _c(
+                        "span",
+                        [
+                          _vm._v("Activé "),
+                          _c("v-icon", [_vm._v("mdi-power")]),
+                        ],
+                        1
+                      ),
                 ],
                 1
               ),
@@ -47380,8 +47401,18 @@ var render = function () {
                   on: { click: _vm.deactivate },
                 },
                 [
-                  _vm._v("\n                désactivé "),
-                  _c("v-icon", [_vm._v("mdi-minus")]),
+                  _vm.isloading
+                    ? _c("v-progress-circular", {
+                        attrs: { indeterminate: "", color: "primary" },
+                      })
+                    : _c(
+                        "span",
+                        [
+                          _vm._v("désactivé "),
+                          _c("v-icon", [_vm._v("mdi-minus")]),
+                        ],
+                        1
+                      ),
                 ],
                 1
               ),

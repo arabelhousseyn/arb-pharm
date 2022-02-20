@@ -25,7 +25,8 @@
                     text
                     @click="deactivate"
                 >
-                    désactivé <v-icon>mdi-minus</v-icon>
+                    <v-progress-circular indeterminate color="primary" v-if="isloading"></v-progress-circular>
+                    <span v-else>désactivé <v-icon>mdi-minus</v-icon></span>
                 </v-btn>
             </v-card-actions>
         </v-card>
@@ -37,7 +38,7 @@ export default {
     props : ['dialog','selected'],
     data () {
         return {
-
+            isloading : false,
         }
     },
     methods : {
@@ -47,9 +48,11 @@ export default {
         },
         deactivate()
         {
+            this.isloading = true
             let data = {}
             let req  = axios.put(`/api/dashboard/user/deactivateUser/${this.selected[0].id}`,data,{headers : { 'Authorization' : 'Bearer ' + this.$store.state.token }})
             req.then(e=>{
+                this.isloading = false
                 this.$emit('deactive',true)
             })
             req.catch(err => {

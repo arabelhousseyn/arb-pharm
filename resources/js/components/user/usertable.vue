@@ -170,6 +170,7 @@ export default {
                     dessert.activation = 'Non activé'
                     dessert.activation_date = ''
                     dessert.type = ''
+                    dessert.expired_at = ''
                     dessert.is_active = false
                 }
             }

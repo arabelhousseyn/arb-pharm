@@ -164,7 +164,7 @@ class UserController extends Controller
     {
         $user->update([
             'activated_at' => null,
-            'days' => null,
+            'expired_at' => null,
             'type' => null,
         ]);
         return response(['success' => true],200);

@@ -81,7 +81,7 @@ Route::prefix('mobile')->group(function(){
 /// dasbhaord api
 
 Route::prefix('dashboard')->group(function(){
-
+Route::apiResource('admin', AdminController::class);
     Route::group(['middleware' => 'auth:sanctum'],function(){
         //
         Route::get('/getInformations',[AdminPanelApiController::class,'getInformations']);
@@ -112,7 +112,6 @@ Route::prefix('dashboard')->group(function(){
             Route::get('/getAllRequestsEstimate',[RequestEstimateController::class,'getAllRequestsEstimate']);
         });
         Route::apiResources([
-            'admin' => AdminController::class,
             'user' => UserController::class,
             'product' => ProductController::class,
             'request' => RequestEstimateController::class,
