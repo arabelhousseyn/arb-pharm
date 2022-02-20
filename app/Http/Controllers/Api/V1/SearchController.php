@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Models\{Product, UserProfile};
 use Illuminate\Http\Request;
 use function response;
@@ -23,6 +24,7 @@ class SearchController extends Controller
         $validate = $request->validate($rules);
         if($validate)
         {
+
             $filter = $request->filter;
 
             $users = UserProfile::where('commercial_name','LIKE',"%$filter%")->select('id','commercial_name')->get();
