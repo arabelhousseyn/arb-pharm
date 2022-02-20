@@ -21,7 +21,7 @@ import io from 'socket.io-client'
         }
     },
      created() {
-        this.socket = io('https://arbpharm.com/arbnode/')
+        this.socket = io('https://frozen-coast-82543.herokuapp.com/')
          let req  = axios.get('/api/dashboard/admin/notification',{headers : { 'Authorization' : 'Bearer ' + this.$store.state.token }})
          req.then(e=>{
              this.notifications = e.data.notifications
