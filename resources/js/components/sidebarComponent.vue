@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-navigation-drawer v-model="drawer" :clipped="$vuetify.breakpoint.lgAndUp" app>
+        <v-navigation-drawer v-model="drawer">
             <v-list dense nav>
                 <router-link to="/acceuil">
                     <v-list-item link>

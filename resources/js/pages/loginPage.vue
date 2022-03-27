@@ -6,7 +6,7 @@
         <v-row align="center" justify="center" dense>
           <v-col cols="12" sm="8" md="4" lg="4">
             <v-card elevation="0">
-              <a href="#" name="Eurl ARB PHARM" title="Eurl ARB PHARM" target="_blank">
+              <a href="/" title="Eurl ARB PHARM">
                 <v-img src="assets/pharm.png" alt="Eurl ARB PHARM" contain height="100"></v-img>
               </a>
               <v-card-text>
@@ -40,11 +40,11 @@ export default {
             },
             rules : {
                 emailRules : [
-                   v => !!v || 'e-mail est requis',
+                   v => !!v || 'E-mail est requis.',
                    v => /.+@.+\..+/.test(v) || 'L\'email doit être valide',
                 ],
                 passwordRules : [
-                   v => !!v || 'mot de passe est requis',
+                   v => !!v || 'Mot de passe est requis.',
                    v => /.+\..+/.test(v) || 'le mot de passe doit être valide',
                 ]
             }
