@@ -36,8 +36,16 @@ class RegisterController extends Controller
                 'token' => $token
             ]);
 
+            if($request->has('profile_pic'))
+            {
+                $path = $this->upload($request->profile_pic,'profiles','.jpg');
+                $path = env('PATH_STORAGE') .'profiles/'. $path;
+            }
+
+
             UserProfile::insert([
                 'user_id' => $user->id,
+                'profile_pic' => ($request->has('profile_pic')) ? $path : null,
                 'social_name' => $request->social_name,
                 'social_place' => (strlen($request->social_place) == 0) ? null : $request->social_place,
                 'commercial_name' => $request->commercial_name,
@@ -58,6 +66,9 @@ class RegisterController extends Controller
                     'path' => $path
                 ]);
             }
+
+
+
             $usr = User::whereId($user->id)->first();
             $data = [
                 'name' => 'Nouveaux utilisateur',
