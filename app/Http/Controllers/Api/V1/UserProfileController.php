@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreProfilePicRequest;
 use App\Models\{User, UserActivityCode};
 use Illuminate\Support\Facades\Auth;
 use Validator;
@@ -11,9 +12,16 @@ use function response;
 class UserProfileController extends Controller
 {
 
-    public function storeProfilePic()
+    public function storeProfilePic(StoreProfilePicRequest $request)
     {
+        if($request->validated())
+        {
+            $path = $this->upload($request->profile_pic,'profiles','.jpg');
+            $path = env('PATH_STORAGE') .'profiles/'. $path;
+            Auth::user()->update(['profile_pic' => $path]);
 
+            return response()->noContent();
+        }
     }
 
     public function favoritesProducts()
