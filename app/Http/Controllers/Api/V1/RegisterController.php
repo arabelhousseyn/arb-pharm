@@ -38,13 +38,14 @@ class RegisterController extends Controller
 
             UserProfile::insert([
                 'user_id' => $user->id,
+                'social_name' => $request->social_name,
+                'social_place' => (strlen($request->social_place) == 0) ? null : $request->social_place,
                 'commercial_name' => $request->commercial_name,
-                'num_rc' => (strlen($request->num_rc) == 0) ? null : $request->num_rc,
-                'nif' => (strlen($request->nif) == 0) ? null : $request->nif,
+                'num_rc' => $request->num_rc,
+                'nif' => $request->nif,
                 'nis' => (strlen($request->nis) == 0) ? null : $request->nis,
                 'num_ar' => (strlen($request->num_ar) == 0) ? null : $request->num_ar,
-                'pro_card' => $request->pro_card,
-                'adress' => $request->adress
+                'activity_code' => $request->activity_code,
             ]);
 
             $images = explode(';',$request->images);

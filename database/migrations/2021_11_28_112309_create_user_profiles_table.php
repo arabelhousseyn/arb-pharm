@@ -17,7 +17,7 @@ class CreateUserProfilesTable extends Migration
             $table->id();
             $table->foreignId('user_id')->unique()->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->string('social_name');
-            $table->string('social_place');
+            $table->string('social_place')->nullable();
             $table->string('commercial_name');
             $table->string('num_rc')->nullable();//
             $table->string('nif')->nullable();//
