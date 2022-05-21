@@ -2900,42 +2900,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['info', 'code'],
-  data: function data() {
-    return {
-      desserts: [{
-        name: 'Frozen Yogurt',
-        calories: 159
-      }, {
-        name: 'Ice cream sandwich',
-        calories: 237
-      }, {
-        name: 'Eclair',
-        calories: 262
-      }, {
-        name: 'Cupcake',
-        calories: 305
-      }, {
-        name: 'Gingerbread',
-        calories: 356
-      }, {
-        name: 'Jelly bean',
-        calories: 375
-      }, {
-        name: 'Lollipop',
-        calories: 392
-      }, {
-        name: 'Honeycomb',
-        calories: 408
-      }, {
-        name: 'Donut',
-        calories: 452
-      }, {
-        name: 'KitKat',
-        calories: 518
-      }]
-    };
-  }
+  props: ['info']
 });
 
 /***/ }),
@@ -48214,21 +48179,21 @@ var render = function () {
                   ]),
                   _vm._v(" "),
                   _c("tr", [
-                    _c("td", [_vm._v("Carte professionelle")]),
+                    _c("td", [_vm._v("Nom sociale")]),
                     _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(_vm.info.pro_card))]),
+                    _c("td", [_vm._v(_vm._s(_vm.info.social_name))]),
                   ]),
                   _vm._v(" "),
                   _c("tr", [
-                    _c("td", [_vm._v("Adresse")]),
+                    _c("td", [_vm._v("Siege social")]),
                     _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(_vm.info.adress))]),
+                    _c("td", [_vm._v(_vm._s(_vm.info.social_place))]),
                   ]),
                   _vm._v(" "),
                   _c("tr", [
                     _c("td", [_vm._v("Code d'activité")]),
                     _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(_vm.code))]),
+                    _c("td", [_vm._v(_vm._s(_vm.info.activity_code))]),
                   ]),
                   _vm._v(" "),
                   _c("tr", [
@@ -50723,10 +50688,7 @@ var render = function () {
                         [
                           !_vm.overlay
                             ? _c("info-table-user", {
-                                attrs: {
-                                  code: _vm.data.code,
-                                  info: _vm.data.get_profile,
-                                },
+                                attrs: { info: _vm.data.get_profile },
                               })
                             : _vm._e(),
                         ],

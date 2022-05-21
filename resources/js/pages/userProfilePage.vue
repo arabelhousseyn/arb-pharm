@@ -15,7 +15,7 @@
 
                     <v-col cols="12" md="8">
                         <v-card>
-                            <info-table-user :code="data.code" :info="data.get_profile" v-if="!overlay" />
+                            <info-table-user :info="data.get_profile" v-if="!overlay" />
                         </v-card>
                     </v-col>
 

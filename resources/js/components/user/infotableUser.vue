@@ -20,16 +20,16 @@
                     <td>{{ info.num_ar }}</td>
                 </tr>
                 <tr>
-                    <td>Carte professionelle</td>
-                    <td>{{ info.pro_card }}</td>
+                    <td>Nom sociale</td>
+                    <td>{{ info.social_name }}</td>
                 </tr>
                 <tr>
-                    <td>Adresse</td>
-                    <td>{{ info.adress }}</td>
+                    <td>Siege social</td>
+                    <td>{{ info.social_place }}</td>
                 </tr>
                 <tr>
                     <td>Code d'activité</td>
-                    <td>{{ code }}</td>
+                    <td>{{ info.activity_code }}</td>
                 </tr>
                 <tr>
                     <td>Numéro de RC</td>
@@ -43,52 +43,6 @@
 
 <script>
 export default {
-    props : ['info','code'],
-    data () {
-        return {
-            desserts: [
-                {
-                    name: 'Frozen Yogurt',
-                    calories: 159,
-                },
-                {
-                    name: 'Ice cream sandwich',
-                    calories: 237,
-                },
-                {
-                    name: 'Eclair',
-                    calories: 262,
-                },
-                {
-                    name: 'Cupcake',
-                    calories: 305,
-                },
-                {
-                    name: 'Gingerbread',
-                    calories: 356,
-                },
-                {
-                    name: 'Jelly bean',
-                    calories: 375,
-                },
-                {
-                    name: 'Lollipop',
-                    calories: 392,
-                },
-                {
-                    name: 'Honeycomb',
-                    calories: 408,
-                },
-                {
-                    name: 'Donut',
-                    calories: 452,
-                },
-                {
-                    name: 'KitKat',
-                    calories: 518,
-                },
-            ],
-        }
-    },
+    props : ['info'],
 }
 </script>

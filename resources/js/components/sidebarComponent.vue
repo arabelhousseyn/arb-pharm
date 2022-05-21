@@ -1,6 +1,7 @@
 <template>
     <div>
-        <v-navigation-drawer v-model="drawer">
+        <appbar-component @toggle="toggle" />
+        <v-navigation-drawer v-model="drawer" app fixed>
             <v-list dense nav>
                 <router-link to="/acceuil">
                     <v-list-item link>
@@ -75,7 +76,6 @@
                 </router-link>
             </v-list>
         </v-navigation-drawer>
-        <appbar-component @toggle="toggle" />
         <v-overlay :value="overlay" opacity="1" color="white">
             <v-progress-circular indeterminate size="50" color="primary" width="8"></v-progress-circular>
         </v-overlay>
