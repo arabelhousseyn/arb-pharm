@@ -46,7 +46,6 @@ class User extends Authenticatable
         'updated_at',
         'deleted_at',
         'email_verified_at',
-        'codeActivity',
         'profile',
         'activated_at',
         'code_verification'

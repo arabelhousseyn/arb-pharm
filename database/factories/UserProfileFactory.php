@@ -20,8 +20,9 @@ class UserProfileFactory extends Factory
             'nif' => $this->faker->text(5),
             'nis' => $this->faker->text(5),
             'num_ar' => $this->faker->numberBetween(100,1000),
-            'pro_card' => $this->faker->text(5),
-            'adress' => $this->faker->address,
+            'social_name' => $this->faker->name,
+            'social_place' => $this->faker->name,
+            'activity_code' => $this->faker->postcode
         ];
     }
 }

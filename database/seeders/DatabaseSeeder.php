@@ -23,7 +23,6 @@ class DatabaseSeeder extends Seeder
         RequestEstimateImage::factory(30)->create();
         ProductUser::factory(10)->create();
         ProductRating::factory(10)->create();
-        UserActivityCode::factory(10)->create();
         UserPayment::factory(10)->create();
     }
 }
