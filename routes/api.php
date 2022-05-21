@@ -64,7 +64,7 @@ Route::prefix('mobile')->group(function(){
         });
 
         Route::get('search',SearchController::class);
-
+        Route::post('store-profile-pic',[UserProfileController::class,'storeProfilePic']);
         Route::get('/favoritesProducts',[UserProfileController::class,'favoritesProducts']);
         Route::get('/profile/{user_id?}',[UserProfileController::class,'profile'])->whereNumber('user_id');
         Route::get('/getMyProducts/{user_id?}',[UserProfileController::class,'getMyProducts'])->whereNumber('user_id');
