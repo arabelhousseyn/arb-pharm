@@ -28,10 +28,10 @@ class User extends Authenticatable
         'email',
         'password',
         'token',
-        'days',
+        'code_verification',
         'type',
         'activated_at',
-        'expired_at'
+        'expired_at',
     ];
 
     /**
