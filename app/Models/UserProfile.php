@@ -12,13 +12,14 @@ class UserProfile extends Model
 
     protected $fillable = [
         'user_id',
+        'social_name',
+        'social_place',
         'commercial_name',
         'num_rc',
         'nif',
         'nis',
         'num_ar',
-        'pro_card',
-        'adress',
+        'activity_code'
     ];
 
     protected $hidden = [

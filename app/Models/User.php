@@ -61,16 +61,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    protected $appends = ['is_active','profile_name','date_creation','activation','activation_date','get_profile','code'];
+    protected $appends = ['is_active','profile_name','date_creation','activation','activation_date','get_profile'];
 
     public function profile()
     {
         return $this->hasOne(UserProfile::class);
-    }
-
-    public function codeActivity()
-    {
-        return $this->hasOne(UserActivityCode::class);
     }
 
     public function getProfileNameAttribute()
@@ -108,10 +103,6 @@ class User extends Authenticatable
         self::deleting(function($user) {
             $user->profile()->each(function($profile) {
                 $profile->delete();
-            });
-
-            $user->codeActivity()->each(function($codeActivity) {
-                $codeActivity->delete();
             });
 
             $user->payments()->each(function($payment) {
@@ -183,16 +174,6 @@ class User extends Authenticatable
     public function getGetProfileAttribute()
     {
         return $this->profile;
-    }
-
-    public function getCodeAttribute()
-    {
-        if($this->codeActivity)
-        {
-            return $this->codeActivity->code;
-        }else{
-            return '';
-        }
     }
 
 }
