@@ -10,19 +10,6 @@ use function response;
 
 class UserProfileController extends Controller
 {
-    public function insertCode($code)
-    {
-        $code = UserActivityCode::create([
-            'user_id' => Auth::id(),
-            'code' => $code
-        ]);
-        if($code)
-        {
-            return response(['success' => true],200);
-        }else{
-            return response(['success' => false],403);
-        }
-    }
 
     public function favoritesProducts()
     {
