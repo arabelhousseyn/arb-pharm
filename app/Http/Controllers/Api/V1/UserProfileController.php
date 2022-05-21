@@ -11,6 +11,11 @@ use function response;
 class UserProfileController extends Controller
 {
 
+    public function storeProfilePic()
+    {
+
+    }
+
     public function favoritesProducts()
     {
         $data = User::with('favorites.product','favorites.product.images:path,product_id')->whereId(Auth::id())->first();
