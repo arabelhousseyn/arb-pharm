@@ -46562,9 +46562,9 @@ var render = function () {
                             _vm._v(" "),
                             _c("v-card-subtitle", [
                               _vm._v(
-                                "\n                            " +
+                                "\r\n                            " +
                                   _vm._s(product.description) +
-                                  "\n                        "
+                                  "\r\n                        "
                               ),
                             ]),
                             _vm._v(" "),
