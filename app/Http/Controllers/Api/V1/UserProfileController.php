@@ -166,7 +166,11 @@ class UserProfileController extends Controller
     {
         if($request->validated())
         {
+            $path = $this->upload($request->profile_pic,'profiles','.jpg');
+            $path = env('PATH_STORAGE') .'profiles/'. $path;
+            UserProfile::where('user_id',Auth::id())->update(['profile_pic' => $path]);
 
+            return response()->noContent();
         }
     }
 

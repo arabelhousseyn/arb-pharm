@@ -24,14 +24,14 @@ class updateProfilePicRequest extends FormRequest
     public function rules()
     {
         return [
-            'picture' => 'required'
+            'profile_pic' => 'required'
         ];
     }
 
     public function messages()
     {
         return [
-            'picture.required' => 'Image requis.'
+            'profile_pic.required' => 'Image requis.'
         ];
     }
 }
