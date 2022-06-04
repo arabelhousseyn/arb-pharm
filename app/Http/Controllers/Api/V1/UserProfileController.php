@@ -141,7 +141,9 @@ class UserProfileController extends Controller
             }else{
                 $errors = [
                     'errors' => [
-                        'password' => __('messages.old_password')
+                        'password' => [
+                            __('messages.old_password')
+                        ]
                     ]
                 ];
                 return response($errors,422);
