@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProfilePicRequest;
 use App\Http\Requests\UpdatePasswordRequest;
+use App\Http\Requests\updateProfileRequest;
+use App\Http\Requests\UpdateProfileUserRequest;
 use App\Traits\uploads;
 use Illuminate\Support\Facades\Hash;
 use App\Models\{User, UserProfile};
@@ -121,9 +123,15 @@ class UserProfileController extends Controller
         }
     }
 
-    public function updateProfile()
+    public function updateProfile(updateProfileRequest $request)
     {
-
+        if($request->validated())
+        {
+            Auth::user()->update($request->only('phone','email'));
+            $user = User::find(Auth::id());
+            $user->profile()->update($request->except('phone','email'));
+            return response()->noContent();
+        }
     }
 
     public function changePassword(UpdatePasswordRequest $request)

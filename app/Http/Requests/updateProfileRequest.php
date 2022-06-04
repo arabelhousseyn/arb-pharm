@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rules\Password;
 
-class UpdatePasswordRequest extends FormRequest
+class updateProfileRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,17 +24,17 @@ class UpdatePasswordRequest extends FormRequest
     public function rules()
     {
         return [
-            'old_password' => ['required',Password::default()],
-            'new_password' => ['required','confirmed',Password::default()],
+            'phone'  => 'digits:10',
+            'email' => 'email:rfc,dns,filter',
+
         ];
     }
 
     public function messages()
     {
         return [
-            'old_password.required' => 'Ancien mot de passe requis.',
-            'new_password.required' => 'Nouveau mot de passe requis.',
-            'new_password.confirmed' => 'Nouveau mot de passe ne correspondent pas .',
+            'phone.digits' => 'Téléphone doit avoir 10 chiffres.',
+            'phone.email' => 'Email doit être valide.'
         ];
     }
 }
