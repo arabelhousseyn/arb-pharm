@@ -70,6 +70,7 @@ Route::prefix('mobile')->group(function(){
         Route::get('/profile-details',[UserProfileController::class,'ProfileDetails']);
         Route::put('/change-password',[UserProfileController::class,'changePassword']);
         Route::put('/update-profile',[UserProfileController::class,'updateProfile']);
+        Route::put('/update-profile-pic',[UserProfileController::class,'updateProfilePic']);
         Route::get('/getMyProducts/{user_id?}',[UserProfileController::class,'getMyProducts'])->whereNumber('user_id');
         Route::get('/getMyRequest/{user_id?}',[UserProfileController::class,'getMyRequest'])->whereNumber('user_id');
         Route::apiResources([

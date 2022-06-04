@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProfilePicRequest;
 use App\Http\Requests\UpdatePasswordRequest;
+use App\Http\Requests\updateProfilePicRequest;
 use App\Http\Requests\updateProfileRequest;
 use App\Http\Requests\UpdateProfileUserRequest;
 use App\Traits\uploads;
@@ -156,6 +157,15 @@ class UserProfileController extends Controller
                 ];
                 return response($errors,422);
             }
+
+        }
+    }
+
+
+    public function updateProfilePic(updateProfilePicRequest $request)
+    {
+        if($request->validated())
+        {
 
         }
     }
