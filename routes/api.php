@@ -67,6 +67,7 @@ Route::prefix('mobile')->group(function(){
         Route::post('store-profile-pic',[UserProfileController::class,'storeProfilePic']);
         Route::get('/favoritesProducts',[UserProfileController::class,'favoritesProducts']);
         Route::get('/profile/{user_id?}',[UserProfileController::class,'profile'])->whereNumber('user_id');
+        Route::get('/profile-details',[UserProfileController::class,'ProfileDetails']);
         Route::get('/getMyProducts/{user_id?}',[UserProfileController::class,'getMyProducts'])->whereNumber('user_id');
         Route::get('/getMyRequest/{user_id?}',[UserProfileController::class,'getMyRequest'])->whereNumber('user_id');
         Route::apiResources([

@@ -49,6 +49,12 @@ class UserProfileController extends Controller
         }
     }
 
+    public function ProfileDetails()
+    {
+        $data = User::with('profile')->find(Auth::id());
+        return response(['data' => $data],200);
+    }
+
     public function getMyProducts($user_id)
     {
         if($user_id == 0)
