@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProfilePicRequest;
+use App\Http\Requests\UpdatePasswordRequest;
 use App\Traits\uploads;
+use Illuminate\Support\Facades\Hash;
 use App\Models\{User, UserProfile};
 use Illuminate\Support\Facades\Auth;
 use Validator;
@@ -118,4 +120,35 @@ class UserProfileController extends Controller
             return response($final,200);
         }
     }
+
+    public function updateProfile()
+    {
+
+    }
+
+    public function changePassword(UpdatePasswordRequest $request)
+    {
+        if($request->validated())
+        {
+            if(Hash::check($request->old_password,Auth::user()->password))
+            {
+                $hashed_new_password = Hash::make($request->new_password_confirmation);
+
+                Auth::user()->update([
+                    'password' => $hashed_new_password
+                ]);
+                return response()->noContent();
+            }else{
+                $errors = [
+                    'errors' => [
+                        'password' => __('messages.old_password')
+                    ]
+                ];
+                return response($errors,422);
+            }
+
+        }
+    }
+
+
 }
