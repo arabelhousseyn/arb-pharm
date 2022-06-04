@@ -34,7 +34,7 @@ class updateProfileRequest extends FormRequest
     {
         return [
             'phone.digits' => 'Téléphone doit avoir 10 chiffres.',
-            'phone.email' => 'Email doit être valide.'
+            'email.email' => 'Email doit être valide.'
         ];
     }
 }
