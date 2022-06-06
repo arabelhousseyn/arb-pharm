@@ -48,16 +48,17 @@ Route::prefix('mobile')->group(function(){
 
 
     Route::group(['middleware' => 'auth:sanctum'],function(){
-
+        // users
         Route::prefix('user')->group(function(){
             Route::get('notification',[UserController::class,'notifications']);
             Route::get('count_notification',[UserController::class,'count_notification']);
+            Route::get('check-user',[UserController::class,'isActive']);
         });
-
+        // products
         Route::prefix('product')->group(function(){
             Route::post('rate',RatingController::class);
         });
-
+        // request estimates
         Route::prefix('request_estimate')->group(function (){
             Route::post('store_offer',[RequestEstimateController::class,'store_offer']);
             Route::get('get_offers/{request_estimate_id}',[RequestEstimateController::class,'get_offers'])->whereNumber('request_estimate_id');
@@ -73,6 +74,7 @@ Route::prefix('mobile')->group(function(){
         Route::put('/update-profile-pic',[UserProfileController::class,'updateProfilePic']);
         Route::get('/getMyProducts/{user_id?}',[UserProfileController::class,'getMyProducts'])->whereNumber('user_id');
         Route::get('/getMyRequest/{user_id?}',[UserProfileController::class,'getMyRequest'])->whereNumber('user_id');
+
         Route::apiResources([
             'user'=>UserProfileController::class,
             'product'=>ProductController::class,

@@ -246,4 +246,10 @@ class UserController extends Controller
         $data = User::with('notifications')->find(Auth::id());
         return response(count($data->notifications),200);
     }
+
+    public function isActive()
+    {
+        return (Auth::user()->activated_at == null) ? ['success' => true ,'is_active' => false] :
+            ['success' => true ,'is_active' => true];
+    }
 }
