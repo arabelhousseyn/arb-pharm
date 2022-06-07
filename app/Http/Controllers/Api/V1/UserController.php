@@ -250,6 +250,6 @@ class UserController extends Controller
     public function isActive()
     {
         return (Auth::user()->activated_at == null) ? ['success' => true ,'is_active' => false] :
-            ['success' => true ,'is_active' => true];
+            ['success' => true ,'is_active' => true, 'type' => Auth::user()->type];
     }
 }
