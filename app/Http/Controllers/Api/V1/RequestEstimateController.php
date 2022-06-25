@@ -26,7 +26,7 @@ class RequestEstimateController extends Controller
      */
     public function index()
     {
-        $final = [];
+        $ids = [];
         $data = RequestEstimate::with('user.profile')->latest('created_at')
             ->get();
 
@@ -35,7 +35,7 @@ class RequestEstimateController extends Controller
                 foreach ($data as $datum) {
                     if($datum->user->type == RequestEstimate::clientR)
                     {
-                        $final[] = $datum;
+                        $ids[] = $datum->id;
                     }
                 }
             }
@@ -45,7 +45,7 @@ class RequestEstimateController extends Controller
                 foreach ($data as $datum) {
                     if($datum->user->type == RequestEstimate::clientB)
                     {
-                        $final[] = $datum;
+                        $ids[] = $datum->id;
                     }
                 }
             }
@@ -55,17 +55,17 @@ class RequestEstimateController extends Controller
                 foreach ($data as $datum) {
                     if($datum->user->type == RequestEstimate::clientB)
                     {
-                        $final[] = $datum;
+                        $ids[] = $datum->id;
                     }
                 }
             }
 
-        $final = collect($final);
-        $subset = $final->map(function($req){
-            return $req->only(['id','product_name','amount','image','publishedBy']);
-        });
+        $requests = RequestEstimate::with('user.profile')->latest('created_at')->whereIn('id',$ids)
+            ->paginate(10);
 
-        return response($subset,200);
+
+
+        return response($requests,200);
     }
 
 
