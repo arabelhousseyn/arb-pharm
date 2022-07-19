@@ -62,7 +62,7 @@ class ProductController extends Controller
             ->with('images:path,product_id','ratings:value,product_id','user.profile')
             ->latest('created_at')->paginate(7);
         $subset = $data->map(function($prod){
-            return $prod->only(['id','description','rating','image','published_by']);
+            return $prod->only(['id','description','rating','image','published_by','is_favorits']);
         });
 
         $data->setCollection($subset);
