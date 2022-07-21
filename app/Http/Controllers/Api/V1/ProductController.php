@@ -129,7 +129,7 @@ class ProductController extends Controller
                     }
                 }
 
-                return response(['success' => true,'notified_ids' => $ids],200);
+                return response(['success' => true,'notified_ids' => $ids,'data' => $product],200);
             }
             return response(['success' => false],403);
         }

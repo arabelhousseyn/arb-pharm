@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreFavoritProductRequest;
 use App\Models\ProductFavorite;
+use App\Models\ProductUser;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ProductFavoriteController extends Controller
 {
@@ -34,9 +38,21 @@ class ProductFavoriteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreFavoritProductRequest $request)
     {
-        //
+        $check= ProductUser::where([['user_id','=',Auth::id()],['product_id','=',$request->product_id]])->first();
+        if($check)
+        {
+            return response(['message' => 'already exists'],403);
+        }
+
+        ProductUser::create([
+            'user_id'=> Auth::id(),
+            'product_id' => $request->product_id
+        ]);
+
+        return response(['success' => true],200);
+
     }
 
     /**
