@@ -11,7 +11,7 @@ use App\Http\Controllers\{Api\V1\AdminController,
     Api\V1\RequestEstimateController,
     Api\V1\SearchController,
     Api\V1\UserController,
-    Api\V1\UserProfileController,Api\V1\ForgetPasswordController,Api\V1\ResetPasswordController};
+    Api\V1\UserProfileController,Api\V1\ForgetPasswordController,Api\V1\ResetPasswordController, ProductFavoriteController};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -121,6 +121,7 @@ Route::apiResource('admin', AdminController::class);
             'product' => ProductController::class,
             'request' => RequestEstimateController::class,
             'checkbook' => CheckbookController::class,
+            'favorits-product' => ProductFavoriteController::class
         ]);
     });
 });
