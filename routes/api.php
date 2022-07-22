@@ -78,7 +78,8 @@ Route::prefix('mobile')->group(function(){
         Route::apiResources([
             'user'=>UserProfileController::class,
             'product'=>ProductController::class,
-            'request_estimate' => RequestEstimateController::class
+            'request_estimate' => RequestEstimateController::class,
+            'favorits-product' => ProductFavoriteController::class
         ]);
     });
 });
@@ -120,8 +121,7 @@ Route::apiResource('admin', AdminController::class);
             'user' => UserController::class,
             'product' => ProductController::class,
             'request' => RequestEstimateController::class,
-            'checkbook' => CheckbookController::class,
-            'favorits-product' => ProductFavoriteController::class
+            'checkbook' => CheckbookController::class
         ]);
     });
 });
