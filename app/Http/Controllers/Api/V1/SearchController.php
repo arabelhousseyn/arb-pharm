@@ -121,6 +121,7 @@ class SearchController extends Controller
                 $result = $data1->merge($data2);
                 return response($result,200);
             }
+            return response()->noContent();
         }else{
             return response(['success' => false],403);
         }
