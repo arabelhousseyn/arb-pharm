@@ -31,7 +31,7 @@ class Product extends Model
         'favorites'
     ];
 
-    protected $appends = ['rating','image','published_by','product_images','is_favorits','phone','my_favorits','creation_date','publisher_pic','publisher_category'];
+    protected $appends = ['rating','image','publisher_info','product_images','is_favorits','phone','my_favorits','creation_date'];
 
     public function images()
     {
@@ -84,19 +84,11 @@ class Product extends Model
         return $this->images;
     }
 
-    public function getPublishedByAttribute()
-    {
-        return (@$this->user->profile->commercial_name !== null) ? $this->user->profile->commercial_name : '';
-    }
 
-    public function getPublisherPicAttribute()
-    {
-        return $this->user->profile->profile_pic;
-    }
 
-    public function getPublisherCategoryAttribute()
+    public function getPublisherInfoAttribute()
     {
-        return (@$this->user->type !== null) ? $this->user->type : '';
+        return $this->user;
     }
 
     public function getPhoneAttribute()

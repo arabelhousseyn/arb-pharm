@@ -143,7 +143,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        $subset = $product->only(['id', 'description', 'technical_sheet_pdf','rating','published_by','product_images','is_favorits','phone','publisher_pic','publisher_category']);
+        $subset = $product->only(['id', 'description', 'technical_sheet_pdf','rating','publisher_info','product_images','is_favorits','phone']);
 
         return response($subset,200);
     }
