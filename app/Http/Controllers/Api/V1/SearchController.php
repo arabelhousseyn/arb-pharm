@@ -60,9 +60,12 @@ class SearchController extends Controller
                 }
 
 
-                $data1 = collect($data1);
-                $data2 = collect($data2);
-                $result = $data1->merge($data2);
+                $result = [
+                    'clients' => $data1,
+                    'requests'=> $data2,
+                    'products' => $data3
+                ];
+
                 return response($result,200);
             }
 
@@ -97,11 +100,13 @@ class SearchController extends Controller
                     }
                 }
 
-                $data1 = collect($data1);
-                $data2 = collect($data2);
-                $result1 = $data1->merge($data2);
-                $result2 = $result1->merge($data3);
-                return response($result2,200);
+                $result = [
+                    'clients' => $data1,
+                    'requests' => $data2,
+                    'products' => $data3
+                ];
+
+                return response($result,200);
             }
 
             if(Auth::user()->type == User::clientB)
@@ -125,10 +130,12 @@ class SearchController extends Controller
                         $data2[] = $product;
                     }
                 }
-                return $data2;
-                $data1 = collect($data1);
-                $data2 = collect($data2);
-                $result = $data1->merge($data2);
+
+                $result = [
+                    'clients' => $data1,
+                    'products' => $data2
+                ];
+
                 return response($result,200);
             }
             return response()->noContent();
