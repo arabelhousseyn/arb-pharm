@@ -31,7 +31,7 @@ class Product extends Model
         'favorites'
     ];
 
-    protected $appends = ['rating','image','publisher_info','product_images','is_favorits','phone','my_favorits','creation_date'];
+    protected $appends = ['rating','image','publisher_info','published_by','product_images','is_favorits','phone','my_favorits','creation_date'];
 
     public function images()
     {
@@ -89,6 +89,11 @@ class Product extends Model
     public function getPublisherInfoAttribute()
     {
         return $this->user;
+    }
+
+    public function getPublishedByAttribute()
+    {
+        return (@$this->user->profile) ? $this->user->profile->social_name : '';
     }
 
     public function getPhoneAttribute()

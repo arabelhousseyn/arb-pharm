@@ -50,6 +50,16 @@ class SearchController extends Controller
                     }
                 }
 
+                $products = Product::with('user')->where('description','LIKE',"%$filter%")->get();
+                foreach ($products as $product) {
+                    $product['type'] = 'PRODUCT';
+                    if($product->user->type == User::clientA)
+                    {
+                        $data3[] = $product;
+                    }
+                }
+
+
                 $data1 = collect($data1);
                 $data2 = collect($data2);
                 $result = $data1->merge($data2);
