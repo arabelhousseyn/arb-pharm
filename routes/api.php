@@ -67,6 +67,7 @@ Route::prefix('mobile')->group(function(){
         Route::get('search',SearchController::class);
         Route::post('store-profile-pic',[UserProfileController::class,'storeProfilePic']);
         Route::get('/favoritesProducts',[UserProfileController::class,'favoritesProducts']);
+        Route::post('/store-favorit-product',[UserProfileController::class,'storeFavoritProduct']);
         Route::get('/profile/{user_id?}',[UserProfileController::class,'profile'])->whereNumber('user_id');
         Route::get('/profile-details',[UserProfileController::class,'ProfileDetails']);
         Route::put('/change-password',[UserProfileController::class,'changePassword']);
@@ -78,8 +79,7 @@ Route::prefix('mobile')->group(function(){
         Route::apiResources([
             'user'=>UserProfileController::class,
             'product'=>ProductController::class,
-            'request_estimate' => RequestEstimateController::class,
-            'favorits-product' => ProductFavoriteController::class
+            'request_estimate' => RequestEstimateController::class
         ]);
     });
 });

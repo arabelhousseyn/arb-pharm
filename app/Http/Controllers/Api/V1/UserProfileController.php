@@ -3,14 +3,16 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreFavoritProductRequest;
 use App\Http\Requests\StoreProfilePicRequest;
 use App\Http\Requests\UpdatePasswordRequest;
 use App\Http\Requests\updateProfilePicRequest;
 use App\Http\Requests\updateProfileRequest;
 use App\Http\Requests\UpdateProfileUserRequest;
 use App\Traits\uploads;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use App\Models\{User, UserProfile};
+use App\Models\{Product, User, UserProfile};
 use Illuminate\Support\Facades\Auth;
 use Validator;
 use function response;
@@ -32,12 +34,29 @@ class UserProfileController extends Controller
 
     public function favoritesProducts()
     {
-        $data = User::with('favorites.product','favorites.product.images:path,product_id')->whereId(Auth::id())->first();
-        $products = $data->favorites;
-        $subset = $products->map(function($prod){
-            return $prod->product->only(['id','description','rating','image','published_by']);
-        });
-        return response($subset,200);
+        $product_ids = [];
+        $data = DB::table('product_users')->where('user_id',Auth::id())->get();
+        foreach ($data as $datum) {
+            $product_ids[] = $datum->product_id;
+        }
+        $products = Product::whereIn('id',$product_ids)->get();
+        return response($products,200);
+    }
+
+    public function storeFavoritProduct(StoreFavoritProductRequest $request)
+    {
+        $check = DB::table('product_users')->where([['user_id','=',Auth::id()],['product_id','=',$request->product_id]])->first();
+        if($check)
+        {
+            return response(['message' => 'already exists'],403);
+        }
+
+        DB::table('product_users')->insert([
+            'user_id'=> Auth::id(),
+            'product_id' => $request->product_id
+        ]);
+
+        return response(['success' => true],200);
     }
 
     public function profile($user_id)
